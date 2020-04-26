@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Ubuntu20.04 安装提示 Executing &#39;grub-install /dev/sda1&#39; faild - Liut</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Ubuntu20.04 安装提示 Executing &#39;grub-install /dev/sda1&#39; faild" />
+<meta property="og:description" content="ubuntu 20.04 安装遇到的坑" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.liut.xyz/posts/os/ubuntu20.04-install/" />
+<meta property="article:published_time" content="2020-04-25T07:13:42+08:00" />
+<meta property="article:modified_time" content="2020-04-25T07:13:42+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ubuntu20.04 安装提示 Executing &#39;grub-install /dev/sda1&#39; faild"/>
+<meta name="twitter:description" content="ubuntu 20.04 安装遇到的坑"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/main.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://www.liut.xyz/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="https://www.liut.xyz/">Liut</a></h1>
+	<div class="site-description"><h2>liut.xyz</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/lt-123/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Ubuntu20.04 安装提示 Executing &#39;grub-install /dev/sda1&#39; faild</h1>
+			<div class="meta">Posted at &mdash; Apr 25, 2020</div>
+		</div>
+
+		<div class="markdown">
+			<p>Ubuntu 20.04 发布之后第一时间下载体验，无奈安装最后阶段 grub 安装失败，导致无法正常引导启动到系统。提示错误如下：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Executing &#39;grub-install /dev/sda1&#39; faild
+
+设置中文提示是
+执行 &#39;grub-install /dev/sda1&#39; 失败。
+这是一个致命错误。
+</code></pre></div><p>启动模式是 efi + gpt，已关闭 secure-boot, 使用 U 盘安装，目标盘是固态硬盘。主要硬件配置如下：</p>
+<ul>
+<li>Intel Core i5-3210m</li>
+<li>Navidia GT645M</li>
+<li>Toshiba Q300 SSD 240G</li>
+<li>Sansung 机械硬盘 500G</li>
+</ul>
+<p>作了一些尝试，都是提示这个错误，比如</p>
+<ul>
+<li>使用 rufus 刻录镜像</li>
+<li>使用 dd 命令刻录镜像</li>
+<li>使用安装程序自动分区设置</li>
+<li>手动进行分区设置</li>
+<li>安装前连接网络，并勾选更新</li>
+<li>安装失败后，尝试手动 chroot 到系统修复 grub 引导</li>
+<li>抽出机械硬盘</li>
+</ul>
+<p>期间通过网络搜索相关问题，大多说法是 /dev/sda1 分区不是 efi，这个我也怀疑过，但我再三确认，它就是我所选定的 efi 分区，绝对没错，sda2是目标系统分区（挂载点是 /）， u盘是/dev/sdb。</p>
+<p>最后差点滚回 bios + mbr 试试，想到之前一个经历，大概前几年用ubuntu16时，有一次把引导稿坏了，开机进不了系统，是通过使用U盘刻录live-cd，使用一个引导修复工具修复的， 然后我就找到了她 boot-repair</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-add-repository ppa:yannubuntu/boot-repair
+sudo apt-get update
+sudo apt-get install boot-repair
+boot-repair
+</code></pre></div><p>然后根据提示修复引导，重启成功进入了系统，这个东西真好用啊。</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/ubuntu">ubuntu</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146893441-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script>feather.replace()</script>
+</body>
+</html>

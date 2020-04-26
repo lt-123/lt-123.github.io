@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>markdown on Liut</title>
+    <link>https://www.liut.xyz/tags/markdown/</link>
+    <description>Recent content in markdown on Liut</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 20 May 2017 11:58:06 +0200</lastBuildDate>
+    
+	<atom:link href="https://www.liut.xyz/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>markdown 语法</title>
+      <link>https://www.liut.xyz/posts/markdown%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate>
+      
+      <guid>https://www.liut.xyz/posts/markdown%E8%AF%AD%E6%B3%95/</guid>
+      <description>markdown 语法 导航  部分 markdown 风格不支持导航
+ 语法： [TOC]
+效果演示：
+[TOC]
+分割线： * * * *** ***** - - - --- ---------------------------------------  效果演示：
+      有些 markdown 风格 *** 是粗分割线， --- 是细分割线。
+标题： # 这是一级标题	字最大 ## 这是二级标题	二级标题下会有条细线 ### 这是三级标题 #### 这是四级标题 ##### 这是五级标题 ###### 这是六级标题	标题就不演示了  区块引用： 语法： &amp;gt; 这是区块引用 行首加上 &amp;gt; 即可. &amp;gt; &amp;gt; 区块引用是可以嵌套的，就像这样. &amp;gt; &amp;gt; 区块引用内也可以有一些其它 markdown 语法 &amp;gt; &amp;gt; ### 这是标题</description>
+    </item>
+    
+  </channel>
+</rss>

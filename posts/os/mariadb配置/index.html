@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>MariaDB 配置 - Liut</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="MariaDB 配置" />
+<meta property="og:description" content="MariaDB 安装、配置" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.liut.xyz/posts/os/mariadb%E9%85%8D%E7%BD%AE/" />
+<meta property="article:published_time" content="2019-01-14T10:23:03+08:00" />
+<meta property="article:modified_time" content="2019-01-14T10:23:03+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MariaDB 配置"/>
+<meta name="twitter:description" content="MariaDB 安装、配置"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/main.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://www.liut.xyz/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="https://www.liut.xyz/">Liut</a></h1>
+	<div class="site-description"><h2>liut.xyz</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/lt-123/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">MariaDB 配置</h1>
+			<div class="meta">Posted at &mdash; Jan 14, 2019</div>
+		</div>
+
+		<div class="markdown">
+			<h2 id="安装">安装</h2>
+<p><code>sudo apt install mariadb-server</code></p>
+<h2 id="查看状态">查看状态</h2>
+<p><code>sudo systemctl status mariadb</code></p>
+<h2 id="查看版本">查看版本</h2>
+<p>一定要sudo</p>
+<p><code>sudo mysql -V</code></p>
+<h2 id="登录数据库">登录数据库</h2>
+<p><code>sudo sql</code></p>
+<p>可选参数 <code>-u</code> 指定用户</p>
+<h2 id="显示所有数据库">显示所有数据库</h2>
+<p><code>SHOW DATABASES;</code></p>
+<h2 id="进入数据库">进入数据库</h2>
+<p><code>use 'databaseName';</code></p>
+<h2 id="查看所有表">查看所有表</h2>
+<p><code>show tables;</code></p>
+<h2 id="删除数据库">删除数据库</h2>
+<p><code>DROP DATABASE 'name';</code></p>
+<h2 id="新建数据库">新建数据库</h2>
+<p><code>CREATE DATABASE students;</code></p>
+<h2 id="显示端口">显示端口</h2>
+<p><code>show variables like 'port';</code></p>
+<h2 id="开启远程访问">开启远程访问</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">grant all privileges on *.* to <span style="color:#a31515">&#39;root&#39;</span>@<span style="color:#a31515">&#39;192.168.248.248&#39;</span> identified by password<span style="">&#39;</span>;
+flush privileges;
+
+</code></pre></div><p>去除MariaDB默认绑定的本地IP
+/etc/mysql/my.cnf/mariadb.conf.d/50-server.cnf
+把bind-address = 127.0.0.1这一行注释掉。</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/mariadb">MariaDB</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146893441-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script>feather.replace()</script>
+</body>
+</html>

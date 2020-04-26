@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gradle on Liut</title>
+    <link>https://www.liut.xyz/tags/gradle/</link>
+    <description>Recent content in gradle on Liut</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Aug 2019 21:24:25 +0800</lastBuildDate>
+    
+	<atom:link href="https://www.liut.xyz/tags/gradle/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Gradle Android 打包插件</title>
+      <link>https://www.liut.xyz/posts/code/androidreleaseplugin/</link>
+      <pubDate>Thu, 29 Aug 2019 21:24:25 +0800</pubDate>
+      
+      <guid>https://www.liut.xyz/posts/code/androidreleaseplugin/</guid>
+      <description>工作中写的一些 Gradle Task, 整理成了一个 plugin, 已发布到 Gradle 社区仓库， 源码： https://github.com/lt-123/AndroidReleasePlugin
+功能说明  打包指定变种 apk 输出到指定的文件夹并重命名 对指定变种 apk 进行加固（仅支持360加固）  使用 引入   添加 classpath
+buildscript { repositories { google() jcenter() // 添加仓库  maven { url &amp;#34;https://plugins.gradle.org/m2/&amp;#34; } } dependencies { classpath &amp;#39;com.android.tools.build:gradle:3.4.2&amp;#39; // 添加 classpath  classpath &amp;#34;gradle.plugin.xyz.liut.gradleplugin:buildSrc:版本号&amp;#34; // NOTE: Do not place your application dependencies here; they belong  // in the individual module build.gradle files  } }   在 app 模块中添加 plugin</description>
+    </item>
+    
+  </channel>
+</rss>

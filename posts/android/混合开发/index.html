@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>基于 Html&#43;css&#43;js 的混合开发 - Liut</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="基于 Html&#43;css&#43;js 的混合开发" />
+<meta property="og:description" content="如题" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.liut.xyz/posts/android/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/" />
+<meta property="article:published_time" content="2017-05-20T11:58:06+02:00" />
+<meta property="article:modified_time" content="2017-05-20T11:58:06+02:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="基于 Html&#43;css&#43;js 的混合开发"/>
+<meta name="twitter:description" content="如题"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/main.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://www.liut.xyz/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="https://www.liut.xyz/">Liut</a></h1>
+	<div class="site-description"><h2>liut.xyz</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/lt-123/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">基于 Html&#43;css&#43;js 的混合开发</h1>
+			<div class="meta">Posted at &mdash; May 20, 2017</div>
+		</div>
+
+		<div class="markdown">
+			<p>[TOC]</p>
+<h2 id="关于混合开发">关于混合开发</h2>
+<p>混合开发有多种实现方式，最简单的就是 web 网页加壳， 不过这种方式体验较差；
+另外比较高级点的就是采用一些混合开发框架， 如 ionic 等；
+还有就是 react native,weex 这种框架，同样是用前端代码，却能构建出 native application，极大提高了性能、兼容性。</p>
+<h2 id="现代的混合开发框架的选择">现代的混合开发框架的选择</h2>
+<p>经过了解，现在比较流行的框架有 react native、 ionic、cordova 以及国内的 weex、wex5、mui 等，就百度、知乎以及请教前端工作的朋友等途径对它们进行了了解，初步选定了React Native，weex，ionic 以及 Mobile Angular UI。</p>
+<p>相关数据：</p>
+<table>
+<thead>
+<tr>
+<th align="center">items</th>
+<th align="center">javascript 框架</th>
+<th align="center">界面</th>
+<th align="center">发布者</th>
+<th align="center">github star</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="https://facebook.github.io/react-native/">React Native</a></td>
+<td align="center">react</td>
+<td align="center">native</td>
+<td align="center">facebook</td>
+<td align="center">49k</td>
+</tr>
+<tr>
+<td align="center"><a href="https://weex.apache.org/cn/">weex</a></td>
+<td align="center">vue.js</td>
+<td align="center">native</td>
+<td align="center">alibaba</td>
+<td align="center">14k</td>
+</tr>
+<tr>
+<td align="center"><a href="https://ionicframework.com/">ionic</a></td>
+<td align="center">AngularJS</td>
+<td align="center">html</td>
+<td align="center">ionic-team</td>
+<td align="center">29k</td>
+</tr>
+<tr>
+<td align="center"><a href="http://mobileangularui.com/">Mobile Angular UI</a></td>
+<td align="center">AngularJS</td>
+<td align="center">html</td>
+<td align="center">mcasimir</td>
+<td align="center">2k</td>
+</tr>
+</tbody>
+</table>
+<p>从 github star 来看，无疑， react native 是最火爆的，百度指数（截止05.26）也说明了这一点。</p>
+<p><img src="../../img/hybridapp/hybrid2.png" alt=""></p>
+<p>混合开发框架，多种多样，以下从各方面进行比较。</p>
+<h2 id="简介">简介</h2>
+<h3 id="react-native">React Native</h3>
+<ul>
+<li>不用Webview，彻底摆脱了Webview让人不爽的交互和性能问题</li>
+<li>React Native应用程序是一个真正的移动应用程序</li>
+<li>使用React Native，您不会构建“mobile web app”，“HTML5应用”或“混合应用”。您构建一个真正的移动应用程序，与使用Objective-C或Java构建的应用程序无法区分。React Native使用与常规iOS和Android应用程序相同的基本UI构建块。您只需将这些构建块放在一起使用JavaScript和React。</li>
+</ul>
+<h3 id="weex">weex</h3>
+<p>一套高性能、可扩展的原生应用跨平台开发方案！</p>
+<ul>
+<li>与 Web App、HTML5 App 或 hybrid App 不同，您可以使用 Weex 构建一个真正的原生应用。更贴心的是你的代码只需使用 HTML、CSS、JavaScript 可以构建原生应用，上手非常简单。但实际上，应用的底层是 Objective-C 或 Java， 同时，Weex 提供很多 native 组件或模块供开发人员使用。</li>
+<li>Weex 是一套简单易用的跨平台开发方案，能以 web 的开发体验构建高性能、可扩展的 native 应用，为了做到这些，Weex 与 Vue 合作，使用 Vue 作为上层框架，并遵循 W3C 标准实现了统一的 JSEngine 和 DOM API，这样一来，你甚至可以使用其他框架驱动 Weex，打造三端一致的 native 应用。</li>
+</ul>
+<h3 id="ionic">ionic</h3>
+<p>ionic 与上面两个区别挺大，因为它是纯粹的前端框架，没有摆脱 webView.</p>
+<ul>
+<li>The top open source framework for building amazing mobile apps.</li>
+<li>ionic 是一个强大的 HTML5 应用程序开发框架(HTML5 Hybrid Mobile App Framework )。 可以帮助您使用 Web 技术，比如 HTML、CSS 和 Javascript 构建接近原生体验的移动应用程序。</li>
+<li>ionic 主要关注外观和体验，以及和你的应用程序的 UI 交互，特别适合用于基于 Hybird 模式的 HTML5 移动应用程序开发。</li>
+<li>ionic是一个轻量的手机UI库，具有速度快，界面现代化、美观等特点。为了解决其他一些UI库在手机上运行缓慢的问题，它直接放弃了IOS6和Android4.1以下的版本支持，来获取更好的使用体验。</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>我个人比较倾向于 ReactNative 和 Weex，理由是同样以前端技能却能构建出原生app，性能和效率同时得到了保证。两者是很相似的，主要差别在于前者使用的是 reactjs，后者为 vue.js,  而两者之间，我更看好 react native，第一，比起 weex 更加 成熟，也更加热门，遇坑能更方便的解决，第二，相比 阿里，我选择 facebook。</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/android">Android</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146893441-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script>feather.replace()</script>
+</body>
+</html>

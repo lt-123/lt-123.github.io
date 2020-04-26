@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>常用ADB命令 - Liut</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="常用ADB命令" />
+<meta property="og:description" content="adb 常用命令收藏" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.liut.xyz/posts/android/%E5%B8%B8%E7%94%A8adb%E5%91%BD%E4%BB%A4/" />
+<meta property="article:published_time" content="2017-10-27T16:17:36+08:00" />
+<meta property="article:modified_time" content="2017-10-27T16:17:36+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="常用ADB命令"/>
+<meta name="twitter:description" content="adb 常用命令收藏"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/main.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://www.liut.xyz/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="https://www.liut.xyz/">Liut</a></h1>
+	<div class="site-description"><h2>liut.xyz</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/lt-123/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">常用ADB命令</h1>
+			<div class="meta">Posted at &mdash; Oct 27, 2017</div>
+		</div>
+
+		<div class="markdown">
+			<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># 显示已连接的设备</span>
+adb devices
+<span style="color:#008000"># 显示结果如下所示：</span>
+<span style="color:#008000"># List of devices attached</span>
+<span style="color:#008000"># 6e070d91        device</span>
+<span style="color:#008000"># 其中6e070d91是设备的id，device是设备的状态。</span>
+<span style="color:#008000"># 设备状态有3种：offline表示设备离线，device表示设备连接正常，no device表示没有设备连接</span>
+<span style="color:#008000"># 如果有多台手机连接到电脑，则需要用 -s 指定adb调用的手机，如</span>
+<span style="color:#008000"># adb -s 6e070d91 install helloWorld.apk</span>
+
+<span style="color:#008000"># 获取手机序列号</span>
+adb get-serialno
+
+<span style="color:#008000"># 获取手机连接的状态即offline、device和no device</span>
+adb get-state
+
+<span style="color:#008000"># 在手机状态变成device后执行install helloWorld.apk</span>
+adb wait-for-device install helloWorld.apk
+
+<span style="color:#008000"># 安装helloWorld.apk到手机上，如果手机里已经安装该应用，可加 -r 重新安装并保留应用的数据</span>
+adb install helloWorld.apk
+
+<span style="color:#008000"># 卸载包名为com.example.test的应用，可加 -k 在卸载时保留配置和缓存文件</span>
+adb uninstall com.example.test
+
+<span style="color:#008000"># 显示logcat，可使用grep过滤log，如adb logcat | grep debug</span>
+adb logcat
+
+<span style="color:#008000"># 复制手机的/sdcard/foo.txt文件到本地并命名为foo.txt</span>
+adb pull /sdcard/foo.txt foo.txt
+
+<span style="color:#008000"># 将foo.txt文件复制到手机的/sdcard/文件夹并命名为foo.txt</span>
+adb push foo.txt /sdcard/foo.txt
+
+<span style="color:#008000"># 开启adb服务</span>
+adb start-server
+
+<span style="color:#008000"># 结束adb服务</span>
+adb kill-server
+
+<span style="color:#008000"># 进入shell模式，可在手机里执行shell命令</span>
+adb shell
+
+<span style="color:#008000"># 不进入shell模式，直接执行shellCommand指令，如adb shell ls</span>
+adb shell shellCommand
+
+<span style="color:#008000"># 启动包名为com.example.test的应用入口activity即com.example.test.Helloworld</span>
+adb shell am start -n com.example.test/.Helloworld
+
+<span style="color:#008000"># 强制关闭包名为com.example.test的应用</span>
+adb shell am force-stop com.example.test
+
+<span style="color:#008000"># 杀死包名为com.example.test的应用进程</span>
+adb shell am kill com.example.test
+
+<span style="color:#008000"># 杀死所有的后台进程</span>
+adb shell am kill-all
+
+<span style="color:#008000"># 列出设备上安装的所有应用的包名</span>
+<span style="color:#008000"># -f 可显示应用对应的文件</span>
+<span style="color:#008000"># -d 只显示被禁用的应用</span>
+<span style="color:#008000"># -e 只显示启用的应用</span>
+<span style="color:#008000"># -s 只显示系统应用</span>
+<span style="color:#008000"># -3 只显示第三方应用</span>
+<span style="color:#008000"># -i 显示应用安装的方式</span>
+adb shell pm list packages
+
+<span style="color:#008000"># 列出系统所支持的功能，如蓝牙、相机、定位等</span>
+adb shell pm list features
+
+<span style="color:#008000"># 显示com.example.test的apk路径</span>
+adb shell pm path com.example.test
+
+<span style="color:#008000"># 删除和com.example.test相关的数据</span>
+adb shell pm clear com.example.test
+
+<span style="color:#008000"># 启用应用com.example.test</span>
+adb shell pm enable com.example.test
+
+<span style="color:#008000"># 禁用应用com.example.test</span>
+adb shell pm disable com.example.test
+
+<span style="color:#008000"># 查看系统默认的安装方式，0 [auto]是系统自动决定安装位置，1 [internal]是安装在系统内部存储空间，2 [external]是安装在外置存储卡上</span>
+adb shell pm get-install-location
+
+<span style="color:#008000"># 录制屏幕并保存为demo.mp4。该功能只能在Android 4.4(API level 19)或更高的版本运行。按Ctrl-C停止录制，否则在3分钟后自动停止录制。可通过--time-limit 30设置录制时间为30秒。</span>
+adb shell screenrecord /sdcard/demo.mp4
+
+<span style="color:#008000"># 启动 Activity</span>
+adb shell am start -n com.test.test/.test.MainActivity
+
+<span style="color:#008000"># run-as 进入 可调试应用的/data/data目录</span>
+adb shell run-as com.test.test
+</code></pre></div>
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/android">Android</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146893441-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script>feather.replace()</script>
+</body>
+</html>

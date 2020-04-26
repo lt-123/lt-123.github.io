@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cli on Liut</title>
+    <link>https://www.liut.xyz/tags/cli/</link>
+    <description>Recent content in cli on Liut</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 02 Sep 2019 11:15:29 +0800</lastBuildDate>
+    
+	<atom:link href="https://www.liut.xyz/tags/cli/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cli 程序收藏</title>
+      <link>https://www.liut.xyz/posts/cli/cli-%E7%A8%8B%E5%BA%8F%E6%94%B6%E8%97%8F/</link>
+      <pubDate>Mon, 02 Sep 2019 11:15:29 +0800</pubDate>
+      
+      <guid>https://www.liut.xyz/posts/cli/cli-%E7%A8%8B%E5%BA%8F%E6%94%B6%E8%97%8F/</guid>
+      <description>命令行程序收藏
+*nix 通用 辅助程序  zsh/oh-my-zsh bash 的升级版， 后者是 zsh 的配置  系统增强  tree 以树状显示当前文件夹以及子文件夹所有问题 -L 选项可指定最大层级， 如三层 tree -L 3 bat 支持代码代码高亮的 less lsd/exa 高级的 ls 命令 fzf 高级的 find 命令 ripgrep 高级的 grep 命令， 命令是 rg nnn 一个终端文件管理器 tldr 在线的 shell 命令文档 mdr 一个命令行的 Markdown 文件阅读器  其他  curl icanhazip.com 查看本机公网 IP screenFetch/neofetch 打印系统信息, 后者更漂亮 sl 打印一个火车  Linux 程序  guake gnome 桌面上的下拉式终端， 在部分发行版中， 不安装 gnome 也能用  macOS 程序   item2 一个好用的终端, guake 窗口配置参考这里</description>
+    </item>
+    
+    <item>
+      <title>Mac Iterm 配置</title>
+      <link>https://www.liut.xyz/posts/os/mac-iterm-%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Tue, 26 Mar 2019 20:30:05 +0800</pubDate>
+      
+      <guid>https://www.liut.xyz/posts/os/mac-iterm-%E9%85%8D%E7%BD%AE/</guid>
+      <description>  配置全局呼入呼出快捷键
+ Preferences &amp;gt; keys &amp;gt; HotKey (Show/hide all windows with &amp;hellip;)    设置 guake 模式
+ Preferences &amp;gt; Profiles &amp;gt; 左下角 + 号  Window Apperarance Transparency (透明) window &amp;gt; style &amp;gt; Top of Screen (屏幕上方) Settings for New windows (高宽)   左下角 Other Actions &amp;gt; set as Default    隐藏 Dock 并设置开机自启
+ Preferences &amp;gt; Appearance &amp;gt; Exclude form dock&amp;hellip;    </description>
+    </item>
+    
+    <item>
+      <title>Shell命令一般格式</title>
+      <link>https://www.liut.xyz/posts/cli/shell%E5%91%BD%E4%BB%A4%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F/</link>
+      <pubDate>Fri, 27 Oct 2017 16:35:26 +0800</pubDate>
+      
+      <guid>https://www.liut.xyz/posts/cli/shell%E5%91%BD%E4%BB%A4%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F/</guid>
+      <description>尽管一些命令可以通过简单地输入一个字来输入，但其它命令使用标志和参数。每个命令都具有语法，指定要求的和可选的标志和参数。命令的一般格式如下：
+CommandName flag(s) parameter(s)  以下是有关命令的一些一般规则：
+* 命令、标志和参数间的空格是有意义的。 * 通过用分号（;）分隔命令，两个命令可在同一行上输入。例如： $ CommandOne;CommandTwo shell 顺序地运行命令。 * 命令是区分大小写的。shell 区别大写字母和小写字母。对于 shell，print 不同于 PRINT 或 Print。 * 很长的命令可以通过使用反斜杠 (\) 字符在不止一行上输入。反斜杠向 shell 标识行继续。以下示例是一个跨两行的命令： $ ls Mail info temp \ (按 Enter 键) &amp;gt; diary （出现 &amp;gt; 提示符） &amp;gt; 字符是次提示符（$ 是非 root 用户的缺省主提示符），表示当前行是前一行的继续。请注意 csh（C shell）不给出次提示符，并且断行必须在字边界，且其主提示符是 %。    命令名
+每个命令的第一个字是命令名。一些命令只有命令名。
+  命令标志
+命令名后可能有很多标志。标志修改命令的操作，并且有时称为选项。标志由空格或制表符分开，并且通常以破折号（-）开始。例外为 ps、tar 和 ar，这些命令在一些标志前不要求破折号。例如，在以下命令中：
+ ls -a -F ls 是命令名，-a -F 是标志。 当命令使用标志时，标志直接跟在命令名后。命令中的单字符标志可与一个破折号组合。例如，前一命令还可写成如下： ls -aF 存在参数实际上以破折号（-）开始的一些情况。在此情况下，请在参数前使用定界符破折号（--）。-- 告诉命令后面跟的不是标志，而是参数。 例如，如果想要创建名为 -tmp 的目录，并输入以下命令： mkdir -tmp 系统显示类似于以下的错误消息： mkdir：非识别的标志：t 用法：mkdir [-p] [-m mode] Directory .</description>
+    </item>
+    
+    <item>
+      <title>在 win10 中使用 zsh、fish </title>
+      <link>https://www.liut.xyz/posts/os/%E5%9C%A8-win10-%E4%B8%AD%E4%BD%BF%E7%94%A8-zsh/</link>
+      <pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate>
+      
+      <guid>https://www.liut.xyz/posts/os/%E5%9C%A8-win10-%E4%B8%AD%E4%BD%BF%E7%94%A8-zsh/</guid>
+      <description>如今 win10 可启用 Linux（ubuntu） 子系统，带来的极大的方便，但 zsh 用户只能通过 bash 命令进入bash，还要再手动 zsh 才能进入 zsh ，这确实有点不太方便，以下步鄹可使直接进入 zsh。
+   安装 zsh （废话），可选装 oh-my-zsh ,大牛亦可自行调教。
+  修改 ~/.bashrc ，改为以下：
+# Launch Zsh if [ -t 1 ]; then exec zsh fi   为 bash 设置别名为zsh：
+powershell 请：
+Set-Alias -Name bash -Value zsh cmd 请参考为 CMD 设置别名 ，甚至可以做到打开 cmd 即进入 zsh 。
+  好，输入 zsh 试试看？
+fish 等也同理。</description>
+    </item>
+    
+  </channel>
+</rss>

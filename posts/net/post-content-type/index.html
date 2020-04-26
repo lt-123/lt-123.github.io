@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>POST-content-type - Liut</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="POST-content-type" />
+<meta property="og:description" content="欲知详情，请点击标题" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.liut.xyz/posts/net/post-content-type/" />
+<meta property="article:published_time" content="2017-09-23T15:15:15+08:00" />
+<meta property="article:modified_time" content="2017-09-23T15:15:15+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="POST-content-type"/>
+<meta name="twitter:description" content="欲知详情，请点击标题"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/main.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://www.liut.xyz/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="https://www.liut.xyz/">Liut</a></h1>
+	<div class="site-description"><h2>liut.xyz</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/lt-123/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">POST-content-type</h1>
+			<div class="meta">Posted at &mdash; Sep 23, 2017</div>
+		</div>
+
+		<div class="markdown">
+			<ul>
+<li><code>application/x-www-form-urlencoded</code> 常用键值对post方式,为默认的content-type</li>
+</ul>
+<p>这应该是最常见的 POST 提交数据的方式了。浏览器的原生 <!-- raw HTML omitted --> 表单，如果不设置 enctype属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这样（无关的请求头在本文中都省略掉了）：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">POST http://www.example.com HTTP/1.1
+Content-Type: application/x-www-form-urlencoded;charset=utf-8
+
+title=test<span style="">&amp;</span>sub%5B%5D=1<span style="">&amp;</span>sub%5B%5D=2<span style="">&amp;</span>sub%5B%5D=3
+</code></pre></div><ul>
+<li><code>multipart/form-data</code></li>
+</ul>
+<p>这又是一个常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 <!-- raw HTML omitted --> 表单的 enctype等于 multipart/form-data。直接来看一个请求示例：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">POST http://www.example.com HTTP/1.1
+Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA
+
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA
+Content-Disposition: form-data; name=&#34;text&#34;
+
+title
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA
+Content-Disposition: form-data; name=&#34;file&#34;; filename=&#34;chrome.png&#34;
+Content-Type: image/png
+
+PNG ... content of chrome.png ...
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA--
+
+</code></pre></div><p>这个例子稍微复杂点。首先生成了一个 boundary 用于分割不同的字段，为了避免与正文内容重复，boundary 很长很复杂。然后 Content-Type 里指明了数据是以 multipart/form-data 来编码，本次请求的 boundary 是什么内容。消息主体里按照字段个数又分为多个结构类似的部分，每部分都是以 &ndash;boundary 开始，紧接着是内容描述信息，然后是回车，最后是字段具体内容（文本或二进制）。如果传输的是文件，还要包含文件名和文件类型信息。消息主体最后以 &ndash;boundary&ndash; 标示结束。关于 multipart/form-data 的详细定义，请前往 <a href="http://www.ietf.org/rfc/rfc1867.txt">rfc1867</a>查看。
+这种方式一般用来上传文件，各大服务端语言对它也有着良好的支持。
+上面提到的这两种 POST 数据的方式，都是浏览器原生支持的，而且现阶段标准中原生 <!-- raw HTML omitted --> 表单也<a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4">只支持这两种方式</a>（通过 <!-- raw HTML omitted --> 元素的 enctype 属性指定，默认为 application/x-www-form-urlencoded
+。其实 enctype 还支持 text/plain，不过用得非常少）。随着越来越多的 Web 站点，尤其是 WebApp，全部使用 Ajax 进行数据交互之后，我们完全可以定义新的数据提交方式，给开发带来更多便利。</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/net">net</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146893441-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script>feather.replace()</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>shadowsocks-配置 - Liut</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="shadowsocks-配置" />
+<meta property="og:description" content="欲知详情，请点击标题" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.liut.xyz/posts/net/shadowsocks-%E9%85%8D%E7%BD%AE/" />
+<meta property="article:published_time" content="2017-09-23T15:15:15+08:00" />
+<meta property="article:modified_time" content="2017-09-23T15:15:15+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="shadowsocks-配置"/>
+<meta name="twitter:description" content="欲知详情，请点击标题"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/main.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://www.liut.xyz/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="https://www.liut.xyz/">Liut</a></h1>
+	<div class="site-description"><h2>liut.xyz</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/lt-123/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">shadowsocks-配置</h1>
+			<div class="meta">Posted at &mdash; Sep 23, 2017</div>
+		</div>
+
+		<div class="markdown">
+			<h2 id="shadowsocks-手动启动命令">shadowsocks 手动启动命令</h2>
+<ul>
+<li>
+<p><strong>server</strong>
+config</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  &#34;server&#34;: <span style="color:#a31515">&#34;1.1.1.1&#34;</span>,
+  &#34;server_port&#34;: 1111,
+  &#34;local_port&#34;: 1123,
+  &#34;password&#34;: <span style="color:#a31515">&#34;1111111111&#34;</span>,
+  &#34;timeout&#34;: 600,
+  &#34;method&#34;: <span style="color:#a31515">&#34;aes-256-cfb&#34;</span>
+}
+</code></pre></div><p>command
+<code>ssserver -c /etc/shadowsocks.json -d start</code></p>
+</li>
+<li>
+<p><strong>client</strong>
+config</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  &#34;server&#34;: <span style="color:#a31515">&#34;1.1.1.1&#34;</span>,
+  &#34;server_port&#34;: 1111,
+  &#34;local_address&#34;: <span style="color:#a31515">&#34;127.0.0.1&#34;</span>,
+  &#34;local_port&#34;: 1123,
+  &#34;password&#34;: <span style="color:#a31515">&#34;1111111111&#34;</span>,
+  &#34;timeout&#34;: 600,
+  &#34;method&#34;: <span style="color:#a31515">&#34;aes-256-cfb&#34;</span>,
+  &#34;fast_open&#34;: <span style="color:#00f">false</span>,
+  &#34;workers&#34;: 1
+}
+</code></pre></div><p>command
+<code>sslocal -c /etc/ssConfig.json</code></p>
+<p>​</p>
+</li>
+</ul>
+<h2 id="附shadowsocks-go版-服务端一键安装脚本">附：shadowsocks go版 服务端一键安装脚本</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-go.sh
+chmod +x shadowsocks-go.sh
+./shadowsocks-go.sh 2&gt;&amp;1 | tee shadowsocks-go.log
+</code></pre></div>
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/net">net</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146893441-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script>feather.replace()</script>
+</body>
+</html>

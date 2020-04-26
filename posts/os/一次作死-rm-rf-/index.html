@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>一次作死-rm -rf  / - Liut</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="一次作死-rm -rf  /" />
+<meta property="og:description" content="欲知详情，请点击标题" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.liut.xyz/posts/os/%E4%B8%80%E6%AC%A1%E4%BD%9C%E6%AD%BB-rm-rf-/" />
+<meta property="article:published_time" content="2017-09-23T15:15:15+08:00" />
+<meta property="article:modified_time" content="2017-09-23T15:15:15+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一次作死-rm -rf  /"/>
+<meta name="twitter:description" content="欲知详情，请点击标题"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/main.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://www.liut.xyz/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="https://www.liut.xyz/">Liut</a></h1>
+	<div class="site-description"><h2>liut.xyz</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/lt-123/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">一次作死-rm -rf  /</h1>
+			<div class="meta">Posted at &mdash; Sep 23, 2017</div>
+		</div>
+
+		<div class="markdown">
+			<blockquote>
+<p>前段时间在bandwagon租个低配vps,年费19刀,用以shadowsocks服务器,折腾了段时间最终是弄上了,而且网速尚可,我这大约十兆小水管能四五百K的样子,但后来又发现一个免费的ss,虽然延时高点,但速度还是可以的,而后就申请退货了,既然用不到也就没必要一直养着它,而bandwagon特良心支持一月内无条件退货.</p>
+</blockquote>
+<p>既然要退货了, 就测(zuo)试(si)下 著名的 <code>rm -rf /</code> 命令.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/702375-726796c257270566.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="深度截图20160907151324.png"></p>
+<p>直接裸敲是又提示的,linux现在越来越智能了,如图,但也是可以强制执行滴.</p>
+<p>执行之后打印出好多cannot remove,难道这样也不行??</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/702375-3a02c938d09a32d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="深度截图20160907151356.png"></p>
+<p>然后执行下<code>ls</code>就明白了,特么没有这条命令&hellip;</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/702375-cf87c47e2addb2cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="深度截图20160907151537.png"></p>
+<p>然后 <code>cd</code> 接两下TAB建 就是只剩下这几个文件夹了,貌似是内存的吧?我也不懂.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/702375-0fc3ebe81932912c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="深度截图20160907151619.png"></p>
+<p>然后登出ssh之后,就再也登不上了.</p>
+<p>去后台看一下,状态还在运行,点击reboot 就彻底gg了,开不开机了.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/702375-d500332faa61db87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="深度截图20160907151822.png"></p>
+<p>还能查看下文件</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/702375-bb2c18f76487c206.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="深度截图20160907151857.png"></p>
+<p><strong>作死完结</strong></p>
+<p>感谢bandwagon
+系统ubuntu 14.04 x86 minimal openvz架构.</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/os">os</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146893441-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script>feather.replace()</script>
+</body>
+</html>

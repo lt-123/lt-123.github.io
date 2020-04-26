@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>resume.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="android%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%98%E9%80%9A"><strong>Android工程师_刘通</strong></h1>
+<!-- [下载pdf格式简历](https://www.liut.xyz/static/resume.pdf) -->
+<h2 id="%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF">个人信息</h2>
+<ul>
+<li>刘通 / 男 / 1993</li>
+<li>工作年限：4 年</li>
+<li>技术博客：<a href="https://www.liut.xyz/">https://www.liut.xyz/</a></li>
+<li>期望职位：Android 工程师</li>
+<li>Email：<a href="mailto://liut@liut.xyz">liut@liut.xyz</a></li>
+<li>手机：<a href="tel://17630761976">17630761976</a></li>
+</ul>
+<h2 id="%E4%B8%93%E4%B8%9A%E6%8A%80%E8%83%BD">专业技能</h2>
+<ul>
+<li>熟练使用 Java、Kotlin，熟悉 Groovy、Python、C、JavaScript、SQL</li>
+<li>熟练使用安卓的 MVC、MVP、MVVM 架构，熟悉组件化开发</li>
+<li>熟练使用常用三方开源库，如 RxJava、OkHttp、Picasso 等，熟悉 Jetpack 架构组件</li>
+<li>熟悉自定义 View、屏幕适配、Android 事件分发机制、App 性能优化</li>
+<li>熟悉 JVM 平台内存模型、自动内存管理机制、类加载机制</li>
+<li>熟练使用 Gradle, 有 Gradle 插件开发和发布经验</li>
+<li>熟悉 HTTP 通信协议、OSI 七层网络模型、熟悉 socket（TCP、UDP）通信</li>
+<li>熟练使用 Git、SVN, 熟悉 GitFlow</li>
+<li>熟练使用 Linux、Mac 操作系统，常年使用命令行，熟悉 Bash Shell 脚本语言</li>
+<li>拥有良好的编码、阅读能力与代码规范，有轻度代码洁癖</li>
+</ul>
+<h2 id="%E5%B7%A5%E4%BD%9C%E7%BB%8F%E5%8E%86">工作经历</h2>
+<h3 id="%E6%90%9C%E8%82%A1%E4%B8%8A%E6%B5%B7%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-201903-%E8%87%B3%E4%BB%8A"><strong><a href="http://www.sogukj.com/">搜股(上海)科技有限公司</a> （2019.03-至今)</strong></h3>
+<h4 id="kindlelaw-%E5%BE%8B%E5%B8%88%E7%89%88-android%E5%AE%A2%E6%88%B7%E7%AB%AF"><strong>KindleLaw 律师版 Android客户端</strong></h4>
+<p>KindleLaw 律师版是一款数字化法律服务系统，系统中包含检索、协作、合同库等功能，有效提高律师工作效率；业务、财务、行政等可视化 OA 管理，有助于律所提升组织运行效率；权益功能使对律师权益进行公开透明的合理分配，使律师与律所间的权益即时流通。</p>
+<ul>
+<li>MVP 架构，RxJava、Okhttp、Retrofit、GreenDao 等</li>
+<li>负责 Android 端的版本发布, 搭建 Jenkins 自动构建平台</li>
+<li>负责工作计时、大数据、文档等多个模块的开发工作</li>
+<li>参与架构优化、设计方案、技术选型、技术预研等</li>
+</ul>
+<h4 id="kindlelaw-%E4%BC%81%E4%B8%9A%E7%89%88-android%E5%AE%A2%E6%88%B7%E7%AB%AF"><strong>KindleLaw 企业版 Android客户端</strong></h4>
+<p>KindleLaw 企业版 企业版本更注重于团队协作功能，较律师版有着完整的审批功能，提供合同管理、电子签约、团队激励、风险防控等一站式新型法律服务。产品特点：直观便捷的律师服务与团队管理，支持文件数据查阅、编辑、交互、审查与存储，即时安全。</p>
+<ul>
+<li>主持 App 的架构搭建</li>
+<li>MVVM 架构，Kotlin、RxJava、Okhttp、Retrofit、ViewModel、Livedata 等</li>
+<li>负责审批、征信、我的等模块的开发工作</li>
+<li>负责 Android 端的任务分配、技术选型、技术预研等工作</li>
+</ul>
+<h3 id="%E6%9D%AD%E5%B7%9E%E9%A1%B6%E7%9B%BE%E6%8A%95%E8%B5%84%E7%AE%A1%E7%90%86%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-201808-201901"><strong><a href="http://www.skyline.trade/">杭州顶盾投资管理有限公司</a> （2018.08-2019.01)</strong></h3>
+<h4 id="skyline-android%E5%AE%A2%E6%88%B7%E7%AB%AF"><strong>SkyLine Android客户端</strong></h4>
+<p><a href="http://www.skyline.trade/">SkyLine(天链量化)</a> 是一款专注于服务区块链市场的量化交易平台，接入了全球十几家主流的交易所。支持全网行情、手动交易。量化策略齐全，覆盖网格交易、跨期套利、期现套利、高频交易、CTA 策略、价值投资策略等。我负责其 Android 客户端的开发和维护。</p>
+<ul>
+<li>MVC 架构，Kotlin、RxJava、Okhttp、Retrofit 等</li>
+<li>独立负责Android 客户端的全部开发工作</li>
+<li>参与部分前后端通信api接口设计，负责与后台开发人员接口对接， 反馈接口中存在的问题等</li>
+</ul>
+<h3 id="%E5%98%89%E5%85%B4%E5%98%89%E8%B5%9B%E4%BF%A1%E6%81%AF%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-201601-201807"><strong><a href="http://www.justsafe.com/">嘉兴嘉赛信息科技有限公司</a> （2016.01-2018.07)</strong></h3>
+<h4 id="%E7%A7%BB%E5%8A%A8%E8%87%AA%E5%8A%A9%E5%8A%A9%E6%89%8B"><strong>移动自助助手</strong></h4>
+<p>移动自助助手是一款 EMM（<a href="https://en.wikipedia.org/wiki/Enterprise_mobility_management">企业移动管理</a>）应用。可实现对设备的安全、应用、内容的统一管控，客户多为政府机构，如公安、军队、监狱、银行，以及大型企业或教育机构。</p>
+<p>功能要点：使用 Android 系统权限（和手机厂商合作）、手机厂商 SDK、设备管理器权限等，实现对设备的管控功能，包括设备管控、安全隐私管控如设备密码和定位等、应用黑白名单、网络黑白名单、应用及应用四大组件的限制使用、系统功能如 WIFI、相机、蓝牙等的限制使用等。</p>
+<ul>
+<li>公司自研架构，公司自研技术</li>
+<li>参与客户端多个分支（项目）的功能开发，并完成设计文档、功能导图等</li>
+<li>参与相关技术预研（反编译系统寻找 API、技术选型等），以备项目使用</li>
+<li>参与新设备或新 ROM 的测试，判定是非符合项目需求，并将存在的问题反馈给手机厂商处理</li>
+<li>参与公司内部的应用编译打包平台的维护，方便版本归档，问题定位等</li>
+</ul>
+<h4 id="%E7%A7%BB%E5%8A%A8%E8%AD%A6%E5%8A%A1%E9%97%A8%E6%88%B7"><strong>移动警务门户</strong></h4>
+<p>主要面对公安行业，是移动自助助手的扩展，以及第二方第三方警务应用的管理平台。</p>
+<p>功能要点：为第二方第三方警务应用提供统一推送、单点登录、PKI 安全认证等平台；作为门户应用，也提供如天气、限行等便民信息，提供安全应用商店功能，供用户自助安装应用和管理白名单应用功能，并集成特定第三方 IM、警务资讯功能。</p>
+<p><strong>职责描述：</strong></p>
+<ul>
+<li>公司自研架构，公司自研技术</li>
+<li>负责Android客户端的功能开发和维护，并完成设计文档、功能导图等</li>
+<li>参与平台的接口设计，提供接入文档以及 DEMO</li>
+<li>为第二方第三方接入方技术人员提供接入指导</li>
+<li>与第三方SDK开发商对接，反馈bug、共同商议问题解决方案等</li>
+</ul>
+<h2 id="%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE">开源项目</h2>
+<h3 id="androidreleaseplugin">AndroidReleasePlugin</h3>
+<p><a href="https://github.com/lt-123/AndroidReleasePlugin">AndroidReleasePlugin</a> 是一个 Gradle 插件， 用于更方便的打包安卓 apk。它可根据当前项目变种自动生成对应的打包或加固的 task， 执行相关 task 可以完成打包或加固， 并按照模板重命名，输出到指定文件夹等，详情请点击<a href="https://github.com/lt-123/AndroidReleasePlugin">https://github.com/lt-123/AndroidReleasePlugin</a></p>
+<!--
+## 自我评价
+
+​	对计算机非常感兴趣，自从初中时期开始接触计算机和手机以来，就沉迷其中不可自拔，手机方面，斯凯mrp、Java、到塞班和安卓的破解、刷机和硬件拆卸，折腾不止。电脑方面，熟练各种方式安装各种系统、硬件清灰、更换等。
+
+​	另外，本人来自于农村，秉承了家乡人吃苦耐劳、诚实守信的品格，勤快、不惧吃苦，独立性强。性格和蔼，平时和同事关系融洽，具有强烈的团队协作能力，平时有同事需要帮忙的都是积极帮助，从不推脱。
+-->
+<h2 id="%E6%95%99%E8%82%B2%E7%BB%8F%E5%8E%86">教育经历</h2>
+<table>
+<thead>
+<tr>
+<th>学校</th>
+<th>专业</th>
+<th>学历</th>
+<th>状态</th>
+<th>时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>漯河职业技术学院</td>
+<td>计算机网络</td>
+<td>专科（全日制）</td>
+<td>已毕业</td>
+<td>2013-2016</td>
+</tr>
+<tr>
+<td>上海应用技术大学</td>
+<td>计算机科学与技术</td>
+<td>本科（成本）</td>
+<td>在读</td>
+<td>2020-2023</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
