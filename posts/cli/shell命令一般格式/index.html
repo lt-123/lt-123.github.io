@@ -1,70 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Shell命令一般格式 - Liut</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="Shell命令一般格式" />
-<meta property="og:description" content="了解格式方便看懂 man 命令输出" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.liut.xyz/posts/cli/shell%E5%91%BD%E4%BB%A4%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F/" />
-<meta property="article:published_time" content="2017-10-27T16:35:26+08:00" />
-<meta property="article:modified_time" content="2017-10-27T16:35:26+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Shell命令一般格式"/>
-<meta name="twitter:description" content="了解格式方便看懂 man 命令输出"/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
-
-	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/main.css" />
-
-	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<script src="https://www.liut.xyz/js/main.js"></script>
-</head>
-
-<body>
-	<div class="container wrapper post">
-		<div class="header">
-	<h1 class="site-title"><a href="https://www.liut.xyz/">Liut</a></h1>
-	<div class="site-description"><h2>liut.xyz</h2><nav class="nav social">
-			<ul class="flat"><a href="https://github.com/lt-123/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
-		</nav>
-	</div>
-
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/">Home</a>
-			</li>
-			
-			<li>
-				<a href="/posts">All posts</a>
-			</li>
-			
-			<li>
-				<a href="/about">About</a>
-			</li>
-			
-			<li>
-				<a href="/tags">Tags</a>
-			</li>
-			
-		</ul>
-	</nav>
-</div>
-
-
-		<div class="post-header">
-			<h1 class="title">Shell命令一般格式</h1>
-			<div class="meta">Posted at &mdash; Oct 27, 2017</div>
-		</div>
-
-		<div class="markdown">
-			<p>尽管一些命令可以通过简单地输入一个字来输入，但其它命令使用标志和参数。每个命令都具有语法，指定要求的和可选的标志和参数。命令的一般格式如下：</p>
-<pre><code>CommandName flag(s) parameter(s)
-</code></pre>
-<p>以下是有关命令的一些一般规则：</p>
-<pre><code>* 命令、标志和参数间的空格是有意义的。
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Shell命令一般格式 - liut</title><link rel=icon type=image/png href=icons/myicon.png><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:title" content="Shell命令一般格式"><meta property="og:description" content="了解格式方便看懂 man 命令输出"><meta property="og:type" content="article"><meta property="og:url" content="https://www.liut.xyz/posts/cli/shell%E5%91%BD%E4%BB%A4%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F/"><meta property="article:published_time" content="2017-10-27T16:35:26+08:00"><meta property="article:modified_time" content="2017-10-27T16:35:26+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Shell命令一般格式"><meta name=twitter:description content="了解格式方便看懂 man 命令输出"><link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link rel=stylesheet type=text/css media=screen href=https://www.liut.xyz/css/normalize.css><link rel=stylesheet type=text/css media=screen href=https://www.liut.xyz/css/main.css><link rel=stylesheet type=text/css href=https://www.liut.xyz/css/dark.css media="(prefers-color-scheme: dark)"><script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script><script src=https://www.liut.xyz/js/main.js></script></head><body><div class="container wrapper post"><div class=header><base href=https://www.liut.xyz/><h1 class=site-title><a href=https://www.liut.xyz/>liut</a></h1><div class=site-description><h2>liut.xyz</h2><nav class="nav social"><ul class=flat><a href=https://github.com/lt-123/ title=Github><i data-feather=github></i></a><a href=/index.xml title=RSS><i data-feather=rss></i></a></ul></nav></div><nav class=nav><ul class=flat><li><a href=/>Home</a></li><li><a href=/posts>All posts</a></li><li><a href=/about>About</a></li><li><a href=/tags>Tags</a></li></ul></nav></div><div class=post-header><h1 class=title>Shell命令一般格式</h1><div class=meta>Posted at &mdash; Oct 27, 2017</div></div><div class=markdown><p>尽管一些命令可以通过简单地输入一个字来输入，但其它命令使用标志和参数。每个命令都具有语法，指定要求的和可选的标志和参数。命令的一般格式如下：</p><pre><code>CommandName flag(s) parameter(s)
+</code></pre><p>以下是有关命令的一些一般规则：</p><pre><code>* 命令、标志和参数间的空格是有意义的。
 * 通过用分号（;）分隔命令，两个命令可在同一行上输入。例如：
   $ CommandOne;CommandTwo
   shell 顺序地运行命令。
@@ -73,16 +8,7 @@
   $ ls Mail info temp \ (按 Enter 键) &gt; diary
   （出现 &gt; 提示符）
   &gt; 字符是次提示符（$ 是非 root 用户的缺省主提示符），表示当前行是前一行的继续。请注意 csh（C shell）不给出次提示符，并且断行必须在字边界，且其主提示符是 %。
-</code></pre>
-<ol>
-<li>
-<p>命令名</p>
-<p>每个命令的第一个字是命令名。一些命令只有命令名。</p>
-</li>
-<li>
-<p>命令标志</p>
-<p>命令名后可能有很多标志。标志修改命令的操作，并且有时称为选项。标志由空格或制表符分开，并且通常以破折号（-）开始。例外为 ps、tar 和 ar，这些命令在一些标志前不要求破折号。例如，在以下命令中：</p>
-<pre><code>     ls -a -F
+</code></pre><ol><li><p>命令名</p><p>每个命令的第一个字是命令名。一些命令只有命令名。</p></li><li><p>命令标志</p><p>命令名后可能有很多标志。标志修改命令的操作，并且有时称为选项。标志由空格或制表符分开，并且通常以破折号（-）开始。例外为 ps、tar 和 ar，这些命令在一些标志前不要求破折号。例如，在以下命令中：</p><pre><code>     ls -a -F
 
  ls 是命令名，-a -F 是标志。
 当命令使用标志时，标志直接跟在命令名后。命令中的单字符标志可与一个破折号组合。例如，前一命令还可写成如下：
@@ -102,14 +28,9 @@ mkdir：非识别的标志：t
      mkdir -- -tmp
 
  新目录 -tmp 现在已创建。
-</code></pre>
-</li>
-<li>
-<p>命令参数</p>
-<p>在命令名后，可能有很多后跟参数的标志。参数有时称为自变量或操作数。参数指定命令要运行所需要的信息。如果未指定参数，则命令可能假定缺省值。例如，在以下命令中：
+</code></pre></li><li><p>命令参数</p><p>在命令名后，可能有很多后跟参数的标志。参数有时称为自变量或操作数。参数指定命令要运行所需要的信息。如果未指定参数，则命令可能假定缺省值。例如，在以下命令中：
 ​
-ls -a temp</p>
-<pre><code> ls 是命令名，-a 是标志，temp 是参数。此命令显示目录 temp 中的所有（-a）文件。在以下示例中：
+ls -a temp</p><pre><code> ls 是命令名，-a 是标志，temp 是参数。此命令显示目录 temp 中的所有（-a）文件。在以下示例中：
 
      ls -a
 
@@ -120,61 +41,9 @@ ls -a temp</p>
  未给出标志，temp 和 mail 是参数。在这种情况下，temp 和 mail 是两个不同的目录名。ls 命令显示这些目录中除隐藏文件外的所有文件。
 当参数或选项自变量是（或包含）数值时，数字解释为十进制整数，除非另有指定。0 到 INT_MAX（在 /usr/include/sys/limits.h 文件中定义）范围内的数字在句法上识别为数值。
 如果想要使用的命令接受负数作为参数或选项自变量，则可以使用 INT_MIN 到 INT_MAX（都在 /usr/include/sys/limits.h 文件中定义）范围内的数字。这并不一定意味着在该范围内的所有数字都在语义上是正确的。一些命令具有内置规范，允许较小范围的数字，例如一些打印命令。如果生成错误，错误消息让您知道值超出支持的范围，而不是命令在句法上是不正确的。
-</code></pre>
-</li>
-<li>
-<p>读用法语句</p>
-<p>用法语句是表示命令语法的方式，它由诸如方括号 ([ ])、大括号 ({ }) 和竖线 (|) 之类的符号组成。
-以下是 unget 命令的用法语句的一个样本：unget [ -rSID ] [ -s ] [ -n ]  File &hellip;
-在命令用法语句中使用以下约定：</p>
-<ul>
-<li>必须在命令行上逐字输入的项为粗体。这些项包括命令名、标志和文字字符。</li>
-<li>代表必须由名称替换的变量的项为斜体。这些项包括命令读取的跟在标志和参数后的参数，如文件和目录。</li>
-<li>用方括号圈起的参数是可选的。</li>
-<li>用大括号圈起的参数是必需的。</li>
-<li>未由方括号或大括号圈起的参数是必需的。</li>
-<li>竖线标识只选择一个参数。例如, [ a | b ] 表示可以选择 a、b 或不选择。类似地，{ a | b } 表明您必须选择 a 或 b。</li>
-<li>省略号（ &hellip; ）表示参数可在命令行上重复。    * 破折号（ - ）表示标准输入。
-把上面的东西弄清楚了，这回我们来看man显示出来的帮助信息就不会有什么问题了！</li>
-</ul>
-</li>
-</ol>
-
-		</div>
-
-		<div class="post-tags">
-			
-				
-					<nav class="nav tags">
-							<ul class="flat">
-								
-								<li><a href="/tags/cli">cli</a></li>
-								
-							</ul>
-					</nav>
-				
-			
-		</div>
-		</div>
-	<div class="footer wrapper">
-	<nav class="nav">
-		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
-	</nav>
-</div>
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-146893441-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-<script>feather.replace()</script>
-</body>
-</html>
+</code></pre></li><li><p>读用法语句</p><p>用法语句是表示命令语法的方式，它由诸如方括号 ([ ])、大括号 ({ }) 和竖线 (|) 之类的符号组成。
+以下是 unget 命令的用法语句的一个样本：unget [ -rSID ] [ -s ] [ -n ] File &mldr;
+在命令用法语句中使用以下约定：</p><ul><li>必须在命令行上逐字输入的项为粗体。这些项包括命令名、标志和文字字符。</li><li>代表必须由名称替换的变量的项为斜体。这些项包括命令读取的跟在标志和参数后的参数，如文件和目录。</li><li>用方括号圈起的参数是可选的。</li><li>用大括号圈起的参数是必需的。</li><li>未由方括号或大括号圈起的参数是必需的。</li><li>竖线标识只选择一个参数。例如, [ a | b ] 表示可以选择 a、b 或不选择。类似地，{ a | b } 表明您必须选择 a 或 b。</li><li>省略号（ &mldr; ）表示参数可在命令行上重复。 * 破折号（ - ）表示标准输入。
+把上面的东西弄清楚了，这回我们来看man显示出来的帮助信息就不会有什么问题了！</li></ul></li></ol></div><div class=post-tags><nav class="nav tags"><ul class=flat><li><a href=/tags/cli>cli</a></li></ul></nav></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
+return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='liut-2017';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="footer wrapper"><nav class=nav><div>© Copyright notice | <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146893441-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><script>feather.replace()</script></body></html>

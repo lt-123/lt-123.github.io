@@ -1,36 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>MariaDB on Liut</title>
-    <link>https://www.liut.xyz/tags/mariadb/</link>
-    <description>Recent content in MariaDB on Liut</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 14 Jan 2019 10:23:03 +0800</lastBuildDate>
-    
-	<atom:link href="https://www.liut.xyz/tags/mariadb/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>MariaDB 配置</title>
-      <link>https://www.liut.xyz/posts/os/mariadb%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Mon, 14 Jan 2019 10:23:03 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/mariadb%E9%85%8D%E7%BD%AE/</guid>
-      <description>安装 sudo apt install mariadb-server
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MariaDB on liut</title><link>https://www.liut.xyz/tags/mariadb/</link><description>Recent content in MariaDB on liut</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>© Copyright notice</copyright><lastBuildDate>Mon, 14 Jan 2019 10:23:03 +0800</lastBuildDate><atom:link href="https://www.liut.xyz/tags/mariadb/index.xml" rel="self" type="application/rss+xml"/><item><title>MariaDB 配置</title><link>https://www.liut.xyz/posts/os/mariadb%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 14 Jan 2019 10:23:03 +0800</pubDate><guid>https://www.liut.xyz/posts/os/mariadb%E9%85%8D%E7%BD%AE/</guid><description>安装 sudo apt install mariadb-server
 查看状态 sudo systemctl status mariadb
 查看版本 一定要sudo
 sudo mysql -V
 登录数据库 sudo sql
-可选参数 -u 指定用户
-显示所有数据库 SHOW DATABASES;
-进入数据库 use &#39;databaseName&#39;;
-查看所有表 show tables;
-删除数据库 DROP DATABASE &#39;name&#39;;
-新建数据库 CREATE DATABASE students;
-显示端口 show variables like &#39;port&#39;;
-开启远程访问 grant all privileges on *.* to &amp;#39;root&amp;#39;@&amp;#39;192.168.248.248&amp;#39; identified by password&amp;#39;; flush privileges; 去除MariaDB默认绑定的本地IP /etc/mysql/my.cnf/mariadb.conf.d/50-server.cnf 把bind-address = 127.0.0.1这一行注释掉。</description>
-    </item>
-    
-  </channel>
-</rss>
+可选参数 -u 指定用户</description></item></channel></rss>

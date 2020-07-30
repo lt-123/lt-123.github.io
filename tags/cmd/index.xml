@@ -1,29 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>cmd on Liut</title>
-    <link>https://www.liut.xyz/tags/cmd/</link>
-    <description>Recent content in cmd on Liut</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 20 May 2017 11:58:06 +0200</lastBuildDate>
-    
-	<atom:link href="https://www.liut.xyz/tags/cmd/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>为 CMD 设置别名</title>
-      <link>https://www.liut.xyz/posts/os/win%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D/</link>
-      <pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/win%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D/</guid>
-      <description>最近，在工作上，经常使用 cmd 来执行某些命令，有些命令很长很固定，就想，win 的 cmd 能不能像 Linux 终端一样去设置别名（alias）呢？在网上搜下，果然可以！就整理一下贴出来，以备查阅。
- win 下有个 doskey 命令，就相当于Linux中的alias，可以用来设置别名：
-# 设置 ls = dir doskey ls=dir # ls = dir $*表示后面可以接参数 doskey d=dir $* 嗯，别以为这么简单，因为这些命令仅对当前窗口有效，也就是说，关掉 cmd 窗口，下次打开就没了。
-使别名永久有效 若要永久有效，那只能让 cmd 在启动的时候去执行一些命令（doskey），修改注册表可以实现这一功能。以下是实现 win 设置别名的具体步鄹：
-建立命令映射文件 新建文件，文件名随意，这里我们叫 alias.ini ,内容如下：
-ls=dir /ONE $* cat=type $* rm=del $* cd=cd /d $* pwd=cd mkdir=md $* lt=dir /OD $* py=python $* dev=adb devices adbstop=adb kill-server adbstart=adb start-server ins=adb install $* un=adb uninstall $* topa=adb shell dumpsys activity | findstr &amp;#34;mFocusedActivity&amp;#34; 上面即是需要设置的别名列表，可根据需要自行修改。</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>cmd on liut</title><link>https://www.liut.xyz/tags/cmd/</link><description>Recent content in cmd on liut</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>© Copyright notice</copyright><lastBuildDate>Sat, 20 May 2017 11:58:06 +0200</lastBuildDate><atom:link href="https://www.liut.xyz/tags/cmd/index.xml" rel="self" type="application/rss+xml"/><item><title>为 CMD 设置别名</title><link>https://www.liut.xyz/posts/os/win%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D/</link><pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate><guid>https://www.liut.xyz/posts/os/win%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D/</guid><description>最近，在工作上，经常使用 cmd 来执行某些命令，有些命令很长很固定，就想，win 的 cmd 能不能像 Linux 终端一样去设置别名（alias）呢？在网上搜下，果然可以！就整理一下贴出来，以备查阅。
+win 下有个 doskey 命令，就相当于Linux中的alias，可以用来设置别名：
+# 设置 ls = dir doskey ls=dir # ls = dir $*表示后面可以接参数 doskey d=dir $* 嗯，别以为这么简单，因为这些命令仅对当前窗口有效，也就是说，关掉 cmd 窗口，下次打开就没了。</description></item></channel></rss>

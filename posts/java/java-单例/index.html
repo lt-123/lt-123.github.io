@@ -1,221 +1,83 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>从 Java 类的初始化看待饿汉单例 - Liut</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="从 Java 类的初始化看待饿汉单例" />
-<meta property="og:description" content="Java 单例相关" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.liut.xyz/posts/java/java-%E5%8D%95%E4%BE%8B/" />
-<meta property="article:published_time" content="2019-08-01T20:27:36+08:00" />
-<meta property="article:modified_time" content="2019-08-01T20:27:36+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="从 Java 类的初始化看待饿汉单例"/>
-<meta name="twitter:description" content="Java 单例相关"/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>从 Java 类的初始化看待饿汉单例 - liut</title><link rel=icon type=image/png href=icons/myicon.png><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:title" content="从 Java 类的初始化看待饿汉单例"><meta property="og:description" content="Java 单例相关"><meta property="og:type" content="article"><meta property="og:url" content="https://www.liut.xyz/posts/java/java-%E5%8D%95%E4%BE%8B/"><meta property="article:published_time" content="2019-08-01T20:27:36+08:00"><meta property="article:modified_time" content="2019-08-01T20:27:36+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="从 Java 类的初始化看待饿汉单例"><meta name=twitter:description content="Java 单例相关"><link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link rel=stylesheet type=text/css media=screen href=https://www.liut.xyz/css/normalize.css><link rel=stylesheet type=text/css media=screen href=https://www.liut.xyz/css/main.css><link rel=stylesheet type=text/css href=https://www.liut.xyz/css/dark.css media="(prefers-color-scheme: dark)"><script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script><script src=https://www.liut.xyz/js/main.js></script></head><body><div class="container wrapper post"><div class=header><base href=https://www.liut.xyz/><h1 class=site-title><a href=https://www.liut.xyz/>liut</a></h1><div class=site-description><h2>liut.xyz</h2><nav class="nav social"><ul class=flat><a href=https://github.com/lt-123/ title=Github><i data-feather=github></i></a><a href=/index.xml title=RSS><i data-feather=rss></i></a></ul></nav></div><nav class=nav><ul class=flat><li><a href=/>Home</a></li><li><a href=/posts>All posts</a></li><li><a href=/about>About</a></li><li><a href=/tags>Tags</a></li></ul></nav></div><div class=post-header><h1 class=title>从 Java 类的初始化看待饿汉单例</h1><div class=meta>Posted at &mdash; Aug 1, 2019</div></div><div class=markdown><p><strong>先说观点： 在一般情况下， 饿汉式单例也不一定是立即加载的， 没必要特意使用写法复杂并且可能效率不高的懒汉模式。</strong></p><h2 id=单例模式>单例模式</h2><p>Java中单例 (Singleton) 模式是一种广泛使用的设计模式。单例模式的主要作用是保证在Java程序中，某个类只有一个实例存在。</p><h2 id=分类以及常见写法>分类以及常见写法</h2><p>根据单例的初始化时机， <code>java</code> 单例可分为两大类别， <strong>懒汉式</strong>和<strong>饿汉式</strong>。 （此外， 还有<strong>登记式</strong>， 不在本文讨论范围内）</p><h3 id=饿汉式>饿汉式</h3><p>饿汉式是在类加载器初始化该单例类时进行实例化。 常见方式如下：</p><ul><li>静态工厂方法式饿汉<div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>EagerSingleton</span> <span style=color:#719e07>{</span>
 
-	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/main.css" />
+    <span style=color:#268bd2>private</span> <span style=color:#268bd2>static</span> <span style=color:#268bd2>final</span> EagerSingleton INSTANCE <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> EagerSingleton<span style=color:#719e07>();</span>
 
-	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<script src="https://www.liut.xyz/js/main.js"></script>
-</head>
+    <span style=color:#268bd2>private</span> <span style=color:#268bd2>EagerSingleton</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;EagerSingleTon&#34;</span><span style=color:#719e07>);</span>
+    <span style=color:#719e07>}</span>
 
-<body>
-	<div class="container wrapper post">
-		<div class="header">
-	<h1 class="site-title"><a href="https://www.liut.xyz/">Liut</a></h1>
-	<div class="site-description"><h2>liut.xyz</h2><nav class="nav social">
-			<ul class="flat"><a href="https://github.com/lt-123/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
-		</nav>
-	</div>
+    <span style=color:#268bd2>public</span> <span style=color:#268bd2>static</span> EagerSingleton <span style=color:#268bd2>getINSTANCE</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+        <span style=color:#719e07>return</span> INSTANCE<span style=color:#719e07>;</span>
+    <span style=color:#719e07>}</span>
+<span style=color:#719e07>}</span>
+</code></pre></div></li><li>枚举单例<div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>public</span> <span style=color:#268bd2>enum</span> EnumSingleton <span style=color:#719e07>{</span>
+    INSTANCE<span style=color:#719e07>;</span>
 
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/">Home</a>
-			</li>
-			
-			<li>
-				<a href="/posts">All posts</a>
-			</li>
-			
-			<li>
-				<a href="/about">About</a>
-			</li>
-			
-			<li>
-				<a href="/tags">Tags</a>
-			</li>
-			
-		</ul>
-	</nav>
-</div>
+    EnumSingleton<span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;EnumSingleton&#34;</span><span style=color:#719e07>);</span>
+    <span style=color:#719e07>}</span>
+<span style=color:#719e07>}</span>
+</code></pre></div></li></ul><h3 id=懒汉式>懒汉式</h3><ul><li><p>DCL(双重校验锁定)单例</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>DoubleCheckLockSingleton</span> <span style=color:#719e07>{</span>
 
+    <span style=color:#268bd2>private</span> <span style=color:#268bd2>static</span> <span style=color:#268bd2>volatile</span> DoubleCheckLockSingleton instance<span style=color:#719e07>;</span>
 
-		<div class="post-header">
-			<h1 class="title">从 Java 类的初始化看待饿汉单例</h1>
-			<div class="meta">Posted at &mdash; Aug 1, 2019</div>
-		</div>
+    <span style=color:#268bd2>private</span> <span style=color:#268bd2>DoubleCheckLockSingleton</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;DoubleCheckLockSingleton&#34;</span><span style=color:#719e07>);</span>
+    <span style=color:#719e07>}</span>
 
-		<div class="markdown">
-			<p><strong>先说观点： 在一般情况下， 饿汉式单例也不一定是立即加载的， 没必要特意使用写法复杂并且可能效率不高的懒汉模式。</strong></p>
-<h2 id="单例模式">单例模式</h2>
-<p>Java中单例 (Singleton) 模式是一种广泛使用的设计模式。单例模式的主要作用是保证在Java程序中，某个类只有一个实例存在。</p>
-<h2 id="分类以及常见写法">分类以及常见写法</h2>
-<p>根据单例的初始化时机， <code>java</code> 单例可分为两大类别， <strong>懒汉式</strong>和<strong>饿汉式</strong>。 （此外， 还有<strong>登记式</strong>， 不在本文讨论范围内）</p>
-<h3 id="饿汉式">饿汉式</h3>
-<p>饿汉式是在类加载器初始化该单例类时进行实例化。 常见方式如下：</p>
-<ul>
-<li>静态工厂方法式饿汉
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">EagerSingleton</span> {
+    <span style=color:#268bd2>public</span> <span style=color:#268bd2>static</span> DoubleCheckLockSingleton <span style=color:#268bd2>getInstance</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+        <span style=color:#719e07>if</span> <span style=color:#719e07>(</span>instance <span style=color:#719e07>==</span> <span style=color:#cb4b16>null</span><span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+            <span style=color:#268bd2>synchronized</span> <span style=color:#719e07>(</span>DoubleCheckLockSingleton<span style=color:#719e07>.</span>class<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+                <span style=color:#719e07>if</span> <span style=color:#719e07>(</span>instance <span style=color:#719e07>==</span> <span style=color:#cb4b16>null</span><span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+                    instance <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> DoubleCheckLockSingleton<span style=color:#719e07>();</span>
+                <span style=color:#719e07>}</span>
+            <span style=color:#719e07>}</span>
+        <span style=color:#719e07>}</span>
+        <span style=color:#719e07>return</span> instance<span style=color:#719e07>;</span>
+    <span style=color:#719e07>}</span>
+<span style=color:#719e07>}</span>
+</code></pre></div></li><li><p>静态内部类式单例</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>HolderSingleton</span> <span style=color:#719e07>{</span>
 
-    <span style="color:#00f">private</span> <span style="color:#00f">static</span> <span style="color:#00f">final</span> EagerSingleton INSTANCE = <span style="color:#00f">new</span> EagerSingleton();
+    <span style=color:#268bd2>private</span> <span style=color:#268bd2>HolderSingleton</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;HolderSingleton&#34;</span><span style=color:#719e07>);</span>
+    <span style=color:#719e07>}</span>
 
-    <span style="color:#00f">private</span> EagerSingleton() {
-        System.out.println(<span style="color:#a31515">&#34;EagerSingleTon&#34;</span>);
-    }
+    <span style=color:#268bd2>private</span> HolderSingleton <span style=color:#268bd2>getInstance</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+        <span style=color:#719e07>return</span> Holder<span style=color:#719e07>.</span>INSTANCE<span style=color:#719e07>;</span>
+    <span style=color:#719e07>}</span>
 
-    <span style="color:#00f">public</span> <span style="color:#00f">static</span> EagerSingleton getINSTANCE() {
-        <span style="color:#00f">return</span> INSTANCE;
-    }
-}
-</code></pre></div></li>
-<li>枚举单例
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">public</span> <span style="color:#00f">enum</span> EnumSingleton {
-    INSTANCE;
-
-    EnumSingleton() {
-        System.out.println(<span style="color:#a31515">&#34;EnumSingleton&#34;</span>);
-    }
-}
-</code></pre></div></li>
-</ul>
-<h3 id="懒汉式">懒汉式</h3>
-<ul>
-<li>
-<p>DCL(双重校验锁定)单例</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">DoubleCheckLockSingleton</span> {
-
-    <span style="color:#00f">private</span> <span style="color:#00f">static</span> <span style="color:#00f">volatile</span> DoubleCheckLockSingleton instance;
-
-    <span style="color:#00f">private</span> DoubleCheckLockSingleton() {
-        System.out.println(<span style="color:#a31515">&#34;DoubleCheckLockSingleton&#34;</span>);
-    }
-
-    <span style="color:#00f">public</span> <span style="color:#00f">static</span> DoubleCheckLockSingleton getInstance() {
-        <span style="color:#00f">if</span> (instance == <span style="color:#00f">null</span>) {
-            <span style="color:#00f">synchronized</span> (DoubleCheckLockSingleton.class) {
-                <span style="color:#00f">if</span> (instance == <span style="color:#00f">null</span>) {
-                    instance = <span style="color:#00f">new</span> DoubleCheckLockSingleton();
-                }
-            }
-        }
-        <span style="color:#00f">return</span> instance;
-    }
-}
-</code></pre></div></li>
-<li>
-<p>静态内部类式单例</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">HolderSingleton</span> {
-
-    <span style="color:#00f">private</span> HolderSingleton() {
-        System.out.println(<span style="color:#a31515">&#34;HolderSingleton&#34;</span>);
-    }
-
-    <span style="color:#00f">private</span> HolderSingleton getInstance() {
-        <span style="color:#00f">return</span> Holder.INSTANCE;
-    }
-
-    <span style="color:#00f">private</span> <span style="color:#00f">static</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Holder</span> {
-        <span style="color:#00f">private</span> <span style="color:#00f">static</span> <span style="color:#00f">final</span> HolderSingleton INSTANCE = <span style="color:#00f">new</span> HolderSingleton();
-    }
-}
-</code></pre></div></li>
-</ul>
-<h2 id="从-java-类的初始化看待饿汉单例">从 Java 类的初始化看待饿汉单例</h2>
-<p>在Java中， 静态的属性以及静态代码块， 是在类的初始化时进行加载的。 类被类加载器加载后， 并不会立即执行初始化的， 而是在特定时机才会去初始化， 具体的时机， jvm有相关规范， 大致如下：</p>
-<ul>
-<li>为一个类型创建一个新的对象实例时（比如new、反射、序列化）</li>
-<li>调用一个类型的静态方法时（即在字节码中执行invokestatic指令）</li>
-<li>调用一个类型或接口的静态字段，或者对这些静态字段执行赋值操作时（即在字节码中，执行getstatic或者putstatic指令），不过用final修饰的静态字段除外，它被初始化为一个编译时常量表达式</li>
-<li>调用JavaAPI中的反射方法时（比如调用java.lang.Class中的方法，或者java.lang.reflect包中其他类的方法）</li>
-<li>初始化一个类的派生类时（Java虚拟机规范明确要求初始化一个类时，它的超类必须提前完成初始化操作，接口例外）</li>
-<li>JVM启动包含main方法的启动类时。</li>
-</ul>
-<p>从以上几点， 可以得出， 一个类， 在真正用到它时才会进行初始化， 才会去初始化（实例化）其静态属性和执行其静态代码快。 也就是说， 在一般情况下， 饿汉模式（本文中的静态工厂方法式饿汉和模具式单例）， 对象的实例化的时候， 一般是在首次用到它的时候！ 也就是说， <strong>它是懒加载的</strong>。</p>
-<p>当然， 只是一般情况下是如此， 也有例外， 如果项目中有骚操作会反射该单例类， 也会引起初始化。 另外不要在该类中定义其它静态属性（不包括基础数据类型常量和String类型常量， 它们不会引起类的初始化）和方法， 避免首次使用该类时是使用它们导致的初始化。</p>
-<h2 id="kotlin-对象声明">kotlin 对象声明</h2>
-<p>kotlin 官方文档推荐的单例模式：<a href="https://www.kotlincn.net/docs/reference/object-declarations.html#%E5%AF%B9%E8%B1%A1%E5%A3%B0%E6%98%8E">对象声明</a>本质上也是常规的饿汉模式</p>
-<p>一个对象声明式单例</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#00f">object</span> <span style="color:#2b91af">ObjClassTest</span> {
+    <span style=color:#268bd2>private</span> <span style=color:#268bd2>static</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>Holder</span> <span style=color:#719e07>{</span>
+        <span style=color:#268bd2>private</span> <span style=color:#268bd2>static</span> <span style=color:#268bd2>final</span> HolderSingleton INSTANCE <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> HolderSingleton<span style=color:#719e07>();</span>
+    <span style=color:#719e07>}</span>
+<span style=color:#719e07>}</span>
+</code></pre></div></li></ul><h2 id=从-java-类的初始化看待饿汉单例>从 Java 类的初始化看待饿汉单例</h2><p>在Java中， 静态的属性以及静态代码块， 是在类的初始化时进行加载的。 类被类加载器加载后， 并不会立即执行初始化的， 而是在特定时机才会去初始化， 具体的时机， jvm有相关规范， 大致如下：</p><ul><li>为一个类型创建一个新的对象实例时（比如new、反射、序列化）</li><li>调用一个类型的静态方法时（即在字节码中执行invokestatic指令）</li><li>调用一个类型或接口的静态字段，或者对这些静态字段执行赋值操作时（即在字节码中，执行getstatic或者putstatic指令），不过用final修饰的静态字段除外，它被初始化为一个编译时常量表达式</li><li>调用JavaAPI中的反射方法时（比如调用java.lang.Class中的方法，或者java.lang.reflect包中其他类的方法）</li><li>初始化一个类的派生类时（Java虚拟机规范明确要求初始化一个类时，它的超类必须提前完成初始化操作，接口例外）</li><li>JVM启动包含main方法的启动类时。</li></ul><p>从以上几点， 可以得出， 一个类， 在真正用到它时才会进行初始化， 才会去初始化（实例化）其静态属性和执行其静态代码快。 也就是说， 在一般情况下， 饿汉模式（本文中的静态工厂方法式饿汉和模具式单例）， 对象的实例化的时候， 一般是在首次用到它的时候！ 也就是说， <strong>它是懒加载的</strong>。</p><p>当然， 只是一般情况下是如此， 也有例外， 如果项目中有骚操作会反射该单例类， 也会引起初始化。 另外不要在该类中定义其它静态属性（不包括基础数据类型常量和String类型常量， 它们不会引起类的初始化）和方法， 避免首次使用该类时是使用它们导致的初始化。</p><h2 id=kotlin-对象声明>kotlin 对象声明</h2><p>kotlin 官方文档推荐的单例模式：<a href=https://www.kotlincn.net/docs/reference/object-declarations.html#%E5%AF%B9%E8%B1%A1%E5%A3%B0%E6%98%8E>对象声明</a>本质上也是常规的饿汉模式</p><p>一个对象声明式单例</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#719e07>object</span> <span style=color:#268bd2>ObjClassTest</span> {
 
     init {
-        println(<span style="color:#a31515">&#34;haha init&#34;</span>)
+        println(<span style=color:#2aa198>&#34;haha init&#34;</span>)
     }
 
 
-    <span style="color:#00f">fun</span> test() {
-        println(<span style="color:#a31515">&#34;hehe test&#34;</span>)
+    <span style=color:#719e07>fun</span> <span style=color:#268bd2>test</span>() {
+        println(<span style=color:#2aa198>&#34;hehe test&#34;</span>)
     }
 
 }
-</code></pre></div><p>编译再反编译成Java代码</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">@Metadata(bv = {1, 0, 3}, d1 = {<span style="color:#a31515">&#34;\u0000\u0012\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0002\n\u0002\u0010\u0002\n\u0000\bÆ\u0002\u0018\u00002\u00020\u0001B\u0007\b\u0002¢\u0006\u0002\u0010\u0002J\u0006\u0010\u0003\u001a\u00020\u0004¨\u0006\u0005&#34;</span>}, d2 = {<span style="color:#a31515">&#34;Lxyz/liut/kotlin/lang/kt1_object_class/comm/ObjClassTest;&#34;</span>, <span style="color:#a31515">&#34;&#34;</span>, <span style="color:#a31515">&#34;()V&#34;</span>, <span style="color:#a31515">&#34;test&#34;</span>, <span style="color:#a31515">&#34;&#34;</span>, <span style="color:#a31515">&#34;JavaCode&#34;</span>}, k = 1, mv = {1, 1, 15})
-<span style="color:#008000">/* compiled from: ObjClassTest.kt */</span>
-<span style="color:#00f">public</span> <span style="color:#00f">final</span> <span style="color:#00f">class</span> <span style="color:#2b91af">ObjClassTest</span> {
-    <span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#00f">final</span> ObjClassTest INSTANCE = <span style="color:#00f">new</span> ObjClassTest();
+</code></pre></div><p>编译再反编译成Java代码</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>@Metadata</span><span style=color:#719e07>(</span>bv <span style=color:#719e07>=</span> <span style=color:#719e07>{</span>1<span style=color:#719e07>,</span> 0<span style=color:#719e07>,</span> 3<span style=color:#719e07>},</span> d1 <span style=color:#719e07>=</span> <span style=color:#719e07>{</span><span style=color:#2aa198>&#34;\u0000\u0012\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0002\n\u0002\u0010\u0002\n\u0000\bÆ\u0002\u0018\u00002\u00020\u0001B\u0007\b\u0002¢\u0006\u0002\u0010\u0002J\u0006\u0010\u0003\u001a\u00020\u0004¨\u0006\u0005&#34;</span><span style=color:#719e07>},</span> d2 <span style=color:#719e07>=</span> <span style=color:#719e07>{</span><span style=color:#2aa198>&#34;Lxyz/liut/kotlin/lang/kt1_object_class/comm/ObjClassTest;&#34;</span><span style=color:#719e07>,</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>,</span> <span style=color:#2aa198>&#34;()V&#34;</span><span style=color:#719e07>,</span> <span style=color:#2aa198>&#34;test&#34;</span><span style=color:#719e07>,</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>,</span> <span style=color:#2aa198>&#34;JavaCode&#34;</span><span style=color:#719e07>},</span> k <span style=color:#719e07>=</span> 1<span style=color:#719e07>,</span> mv <span style=color:#719e07>=</span> <span style=color:#719e07>{</span>1<span style=color:#719e07>,</span> 1<span style=color:#719e07>,</span> 15<span style=color:#719e07>})</span>
+<span style=color:#586e75>/* compiled from: ObjClassTest.kt */</span>
+<span style=color:#268bd2>public</span> <span style=color:#268bd2>final</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>ObjClassTest</span> <span style=color:#719e07>{</span>
+    <span style=color:#268bd2>public</span> <span style=color:#268bd2>static</span> <span style=color:#268bd2>final</span> ObjClassTest INSTANCE <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ObjClassTest<span style=color:#719e07>();</span>
 
-    <span style="color:#00f">static</span> {
-        System.out.println(<span style="color:#a31515">&#34;haha init&#34;</span>);
-    }
+    <span style=color:#268bd2>static</span> <span style=color:#719e07>{</span>
+        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;haha init&#34;</span><span style=color:#719e07>);</span>
+    <span style=color:#719e07>}</span>
 
-    <span style="color:#00f">private</span> ObjClassTest() {
-    }
+    <span style=color:#268bd2>private</span> <span style=color:#268bd2>ObjClassTest</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+    <span style=color:#719e07>}</span>
 
-    <span style="color:#00f">public</span> <span style="color:#00f">final</span> <span style="color:#2b91af">void</span> test() {
-        System.out.println(<span style="color:#a31515">&#34;hehe test&#34;</span>);
-    }
-}
-</code></pre></div><hr>
-<p><strong>在一般情况下， 饿汉模式是最好的单例方式， 写法简单、 性能好、 线程安全。</strong></p>
-
-		</div>
-
-		<div class="post-tags">
-			
-				
-					<nav class="nav tags">
-							<ul class="flat">
-								
-								<li><a href="/tags/java">java</a></li>
-								
-							</ul>
-					</nav>
-				
-			
-		</div>
-		</div>
-	<div class="footer wrapper">
-	<nav class="nav">
-		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
-	</nav>
-</div>
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-146893441-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-<script>feather.replace()</script>
-</body>
-</html>
+    <span style=color:#268bd2>public</span> <span style=color:#268bd2>final</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>test</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;hehe test&#34;</span><span style=color:#719e07>);</span>
+    <span style=color:#719e07>}</span>
+<span style=color:#719e07>}</span>
+</code></pre></div><hr><p><strong>在一般情况下， 饿汉模式是最好的单例方式， 写法简单、 性能好、 线程安全。</strong></p></div><div class=post-tags><nav class="nav tags"><ul class=flat><li><a href=/tags/java>java</a></li></ul></nav></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
+return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='liut-2017';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="footer wrapper"><nav class=nav><div>© Copyright notice | <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146893441-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><script>feather.replace()</script></body></html>

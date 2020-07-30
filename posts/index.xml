@@ -1,359 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on Liut</title>
-    <link>https://www.liut.xyz/posts/</link>
-    <description>Recent content in Posts on Liut</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 25 Apr 2020 07:13:42 +0800</lastBuildDate>
-    
-	<atom:link href="https://www.liut.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Ubuntu20.04 安装提示 Executing &#39;grub-install /dev/sda1&#39; faild</title>
-      <link>https://www.liut.xyz/posts/os/ubuntu20.04-install/</link>
-      <pubDate>Sat, 25 Apr 2020 07:13:42 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/ubuntu20.04-install/</guid>
-      <description>Ubuntu 20.04 发布之后第一时间下载体验，无奈安装最后阶段 grub 安装失败，导致无法正常引导启动到系统。提示错误如下：
-Executing &amp;#39;grub-install /dev/sda1&amp;#39; faild 设置中文提示是 执行 &amp;#39;grub-install /dev/sda1&amp;#39; 失败。 这是一个致命错误。 启动模式是 efi + gpt，已关闭 secure-boot, 使用 U 盘安装，目标盘是固态硬盘。主要硬件配置如下：
- Intel Core i5-3210m Navidia GT645M Toshiba Q300 SSD 240G Sansung 机械硬盘 500G  作了一些尝试，都是提示这个错误，比如
- 使用 rufus 刻录镜像 使用 dd 命令刻录镜像 使用安装程序自动分区设置 手动进行分区设置 安装前连接网络，并勾选更新 安装失败后，尝试手动 chroot 到系统修复 grub 引导 抽出机械硬盘  期间通过网络搜索相关问题，大多说法是 /dev/sda1 分区不是 efi，这个我也怀疑过，但我再三确认，它就是我所选定的 efi 分区，绝对没错，sda2是目标系统分区（挂载点是 /）， u盘是/dev/sdb。
-最后差点滚回 bios + mbr 试试，想到之前一个经历，大概前几年用ubuntu16时，有一次把引导稿坏了，开机进不了系统，是通过使用U盘刻录live-cd，使用一个引导修复工具修复的， 然后我就找到了她 boot-repair</description>
-    </item>
-    
-    <item>
-      <title>Cli 程序收藏</title>
-      <link>https://www.liut.xyz/posts/cli/cli-%E7%A8%8B%E5%BA%8F%E6%94%B6%E8%97%8F/</link>
-      <pubDate>Mon, 02 Sep 2019 11:15:29 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/cli/cli-%E7%A8%8B%E5%BA%8F%E6%94%B6%E8%97%8F/</guid>
-      <description>命令行程序收藏
-*nix 通用 辅助程序  zsh/oh-my-zsh bash 的升级版， 后者是 zsh 的配置  系统增强  tree 以树状显示当前文件夹以及子文件夹所有问题 -L 选项可指定最大层级， 如三层 tree -L 3 bat 支持代码代码高亮的 less lsd/exa 高级的 ls 命令 fzf 高级的 find 命令 ripgrep 高级的 grep 命令， 命令是 rg nnn 一个终端文件管理器 tldr 在线的 shell 命令文档 mdr 一个命令行的 Markdown 文件阅读器  其他  curl icanhazip.com 查看本机公网 IP screenFetch/neofetch 打印系统信息, 后者更漂亮 sl 打印一个火车  Linux 程序  guake gnome 桌面上的下拉式终端， 在部分发行版中， 不安装 gnome 也能用  macOS 程序   item2 一个好用的终端, guake 窗口配置参考这里</description>
-    </item>
-    
-    <item>
-      <title>Gradle Android 打包插件</title>
-      <link>https://www.liut.xyz/posts/code/androidreleaseplugin/</link>
-      <pubDate>Thu, 29 Aug 2019 21:24:25 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/code/androidreleaseplugin/</guid>
-      <description>工作中写的一些 Gradle Task, 整理成了一个 plugin, 已发布到 Gradle 社区仓库， 源码： https://github.com/lt-123/AndroidReleasePlugin
-功能说明  打包指定变种 apk 输出到指定的文件夹并重命名 对指定变种 apk 进行加固（仅支持360加固）  使用 引入   添加 classpath
-buildscript { repositories { google() jcenter() // 添加仓库  maven { url &amp;#34;https://plugins.gradle.org/m2/&amp;#34; } } dependencies { classpath &amp;#39;com.android.tools.build:gradle:3.4.2&amp;#39; // 添加 classpath  classpath &amp;#34;gradle.plugin.xyz.liut.gradleplugin:buildSrc:版本号&amp;#34; // NOTE: Do not place your application dependencies here; they belong  // in the individual module build.gradle files  } }   在 app 模块中添加 plugin</description>
-    </item>
-    
-    <item>
-      <title>从 Java 类的初始化看待饿汉单例</title>
-      <link>https://www.liut.xyz/posts/java/java-%E5%8D%95%E4%BE%8B/</link>
-      <pubDate>Thu, 01 Aug 2019 20:27:36 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/java/java-%E5%8D%95%E4%BE%8B/</guid>
-      <description>先说观点： 在一般情况下， 饿汉式单例也不一定是立即加载的， 没必要特意使用写法复杂并且可能效率不高的懒汉模式。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on liut</title><link>https://www.liut.xyz/posts/</link><description>Recent content in Posts on liut</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>© Copyright notice</copyright><lastBuildDate>Sat, 25 Apr 2020 07:13:42 +0800</lastBuildDate><atom:link href="https://www.liut.xyz/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu20.04 安装提示 Executing 'grub-install /dev/sda1' faild</title><link>https://www.liut.xyz/posts/os/ubuntu20.04-install/</link><pubDate>Sat, 25 Apr 2020 07:13:42 +0800</pubDate><guid>https://www.liut.xyz/posts/os/ubuntu20.04-install/</guid><description>Ubuntu 20.04 发布之后第一时间下载体验，无奈安装最后阶段 grub 安装失败，导致无法正常引导启动到系统。提示错误如下：
+Executing &amp;#39;grub-install /dev/sda1&amp;#39; faild 设置中文提示是 执行 &amp;#39;grub-install /dev/sda1&amp;#39; 失败。 这是一个致命错误。 启动模式是 efi + gpt，已关闭 secure-boot, 使用 U 盘安装，目标盘是固态硬盘。主要硬件配置如下：</description></item><item><title>Cli 程序收藏</title><link>https://www.liut.xyz/posts/cli/cli-%E7%A8%8B%E5%BA%8F%E6%94%B6%E8%97%8F/</link><pubDate>Mon, 02 Sep 2019 11:15:29 +0800</pubDate><guid>https://www.liut.xyz/posts/cli/cli-%E7%A8%8B%E5%BA%8F%E6%94%B6%E8%97%8F/</guid><description>命令行程序收藏
+*nix 通用 辅助程序 zsh/oh-my-zsh bash 的升级版， 后者是 zsh 的配置 系统增强 tree 以树状显示当前文件夹以及子文件夹所有问题 -L 选项可指定最大层级， 如三层 tree -L 3 bat 支持代码代码高亮的 less lsd/exa 高级的 ls 命令 fzf 高级的 find 命令 ripgrep 高级的 grep 命令， 命令是 rg nnn 一个终端文件管理器 tldr 在线的 shell 命令文档 mdr 一个命令行的 Markdown 文件阅读器 其他 curl icanhazip.</description></item><item><title>Gradle Android 打包插件</title><link>https://www.liut.xyz/posts/code/androidreleaseplugin/</link><pubDate>Thu, 29 Aug 2019 21:24:25 +0800</pubDate><guid>https://www.liut.xyz/posts/code/androidreleaseplugin/</guid><description>工作中写的一些 Gradle Task, 整理成了一个 plugin, 已发布到 Gradle 社区仓库， 源码： https://github.com/lt-123/AndroidReleasePlugin
+功能说明 打包指定变种 apk 输出到指定的文件夹并重命名 对指定变种 apk 进行加固（仅支持360加固） 使用 引入 添加 classpath</description></item><item><title>从 Java 类的初始化看待饿汉单例</title><link>https://www.liut.xyz/posts/java/java-%E5%8D%95%E4%BE%8B/</link><pubDate>Thu, 01 Aug 2019 20:27:36 +0800</pubDate><guid>https://www.liut.xyz/posts/java/java-%E5%8D%95%E4%BE%8B/</guid><description>先说观点： 在一般情况下， 饿汉式单例也不一定是立即加载的， 没必要特意使用写法复杂并且可能效率不高的懒汉模式。
 单例模式 Java中单例 (Singleton) 模式是一种广泛使用的设计模式。单例模式的主要作用是保证在Java程序中，某个类只有一个实例存在。
 分类以及常见写法 根据单例的初始化时机， java 单例可分为两大类别， 懒汉式和饿汉式。 （此外， 还有登记式， 不在本文讨论范围内）
 饿汉式 饿汉式是在类加载器初始化该单例类时进行实例化。 常见方式如下：
- 静态工厂方法式饿汉 public class EagerSingleton { private static final EagerSingleton INSTANCE = new EagerSingleton(); private EagerSingleton() { System.out.println(&amp;#34;EagerSingleTon&amp;#34;); } public static EagerSingleton getINSTANCE() { return INSTANCE; } }  枚举单例 public enum EnumSingleton { INSTANCE; EnumSingleton() { System.out.println(&amp;#34;EnumSingleton&amp;#34;); } }   懒汉式   DCL(双重校验锁定)单例
-public class DoubleCheckLockSingleton { private static volatile DoubleCheckLockSingleton instance; private DoubleCheckLockSingleton() { System.</description>
-    </item>
-    
-    <item>
-      <title>Mac Iterm 配置</title>
-      <link>https://www.liut.xyz/posts/os/mac-iterm-%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Tue, 26 Mar 2019 20:30:05 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/mac-iterm-%E9%85%8D%E7%BD%AE/</guid>
-      <description>  配置全局呼入呼出快捷键
- Preferences &amp;gt; keys &amp;gt; HotKey (Show/hide all windows with &amp;hellip;)    设置 guake 模式
- Preferences &amp;gt; Profiles &amp;gt; 左下角 + 号  Window Apperarance Transparency (透明) window &amp;gt; style &amp;gt; Top of Screen (屏幕上方) Settings for New windows (高宽)   左下角 Other Actions &amp;gt; set as Default    隐藏 Dock 并设置开机自启
- Preferences &amp;gt; Appearance &amp;gt; Exclude form dock&amp;hellip;    </description>
-    </item>
-    
-    <item>
-      <title>MariaDB 配置</title>
-      <link>https://www.liut.xyz/posts/os/mariadb%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Mon, 14 Jan 2019 10:23:03 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/mariadb%E9%85%8D%E7%BD%AE/</guid>
-      <description>安装 sudo apt install mariadb-server
+静态工厂方法式饿汉 public class EagerSingleton { private static final EagerSingleton INSTANCE = new EagerSingleton(); private EagerSingleton() { System.</description></item><item><title>Mac Iterm 配置</title><link>https://www.liut.xyz/posts/os/mac-iterm-%E9%85%8D%E7%BD%AE/</link><pubDate>Tue, 26 Mar 2019 20:30:05 +0800</pubDate><guid>https://www.liut.xyz/posts/os/mac-iterm-%E9%85%8D%E7%BD%AE/</guid><description>配置全局呼入呼出快捷键
+Preferences &amp;gt; keys &amp;gt; HotKey (Show/hide all windows with &amp;hellip;) 设置 guake 模式</description></item><item><title>MariaDB 配置</title><link>https://www.liut.xyz/posts/os/mariadb%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 14 Jan 2019 10:23:03 +0800</pubDate><guid>https://www.liut.xyz/posts/os/mariadb%E9%85%8D%E7%BD%AE/</guid><description>安装 sudo apt install mariadb-server
 查看状态 sudo systemctl status mariadb
 查看版本 一定要sudo
 sudo mysql -V
 登录数据库 sudo sql
-可选参数 -u 指定用户
-显示所有数据库 SHOW DATABASES;
-进入数据库 use &#39;databaseName&#39;;
-查看所有表 show tables;
-删除数据库 DROP DATABASE &#39;name&#39;;
-新建数据库 CREATE DATABASE students;
-显示端口 show variables like &#39;port&#39;;
-开启远程访问 grant all privileges on *.* to &amp;#39;root&amp;#39;@&amp;#39;192.168.248.248&amp;#39; identified by password&amp;#39;; flush privileges; 去除MariaDB默认绑定的本地IP /etc/mysql/my.cnf/mariadb.conf.d/50-server.cnf 把bind-address = 127.0.0.1这一行注释掉。</description>
-    </item>
-    
-    <item>
-      <title>Manjaro Xfce Tim Wechat</title>
-      <link>https://www.liut.xyz/posts/os/manjaro-xfce-tim-wechat/</link>
-      <pubDate>Tue, 21 Aug 2018 17:16:56 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/manjaro-xfce-tim-wechat/</guid>
-      <description>国内Deepin Linux提供了较可靠的wine版本Tim、QQ、微信等wine应用， 并移植到了arch； Manjaro 基于arch，所以也可以使用。 以下是manjaro xfce 版本安装Tim过程，微信等同理。
+可选参数 -u 指定用户</description></item><item><title>Manjaro Xfce Tim Wechat</title><link>https://www.liut.xyz/posts/os/manjaro-xfce-tim-wechat/</link><pubDate>Tue, 21 Aug 2018 17:16:56 +0800</pubDate><guid>https://www.liut.xyz/posts/os/manjaro-xfce-tim-wechat/</guid><description>国内Deepin Linux提供了较可靠的wine版本Tim、QQ、微信等wine应用， 并移植到了arch； Manjaro 基于arch，所以也可以使用。 以下是manjaro xfce 版本安装Tim过程，微信等同理。
 安装 sudo pacman -S deepin.com.qq.office sudo pacman -S deepin.com.wechat 使用以上命令可直接安装，并开箱即用，无需配置，但字体略模糊。
-问题 在安装WPS后，Tim等wine应用的字体特糊，简直不看入目，以下有两个解决办法：
- 安装谷歌提供的开源字体，安装后即恢复如初。  sudo pacman -S noto-fonts-cjk 安装deepin-wine  sudo pacman -S deepin-wine 在/opt/deepinwine/apps/Deepin-TIM/file.7z 中解压出所有文件，并覆盖到~/.wine 中，使用 deepin-wine 命令可以启动tim.exe, 如下：
-deepin-wine ~/.wine/drive_c/Program\ Files/Tencent/TIM/Bin/TIM.exe 启动后发现一切正常，甚至可以通过deepin-wine winecfg等命令来对wine进行配置，相比方法1更自由一点。
-关于桌面快捷方式，可按照常规操作来弄，想方便一点也可以复制原桌面图标，并更改exec，改为上述启动命令即可。</description>
-    </item>
-    
-    <item>
-      <title>xfce 桌面快捷键配置</title>
-      <link>https://www.liut.xyz/posts/os/xfce%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E9%94%AE%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Mon, 20 Aug 2018 22:23:36 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/xfce%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E9%94%AE%E9%85%8D%E7%BD%AE/</guid>
-      <description>xfce 桌面默认快捷键很多，很容易与其他软件冲突， 而且没有GUI的设置快捷键程序（manjaro xfce）, 可通过修改以下文件解决冲突，重新登录后生效。
- 配置路径 # 用户配置 ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml # 全局配置 /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml 修改说明 建议修改用户目录的配置文件，修改前先做好备份， 其中文件中是有转义的，按照原格式转义就行。
-commands custom &amp;lt;Alt&amp;gt;F1：xfce4-popup-applicationsmenu 打开右键菜单 &amp;lt;Alt&amp;gt;F2：xfrun4 打开应用程序运行窗口，同&amp;lt;Alt&amp;gt;F3差不多 &amp;lt;Alt&amp;gt;F3：xfce4-appfinder 打开应用程序查找器 &amp;lt;Alt&amp;gt;Print：xfce4-screenshooter -w 窗口截图 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Delete：xflock4 锁屏 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Escape：xkill &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;t：exo-open --launch TerminalEmulator 打开模拟终端 &amp;lt;Primary&amp;gt;Escape：xfce4-popup-whiskermenu 打开启动器菜单，类似windows的开始 Print：xfce4-screenshooter -f 屏幕截图 &amp;lt;Super&amp;gt;1：gmusicbrowser 打开音乐播放器 &amp;lt;Super&amp;gt;2：pidgin 打开pidgin即时通讯软件 &amp;lt;Super&amp;gt;4：gnumeric 打开gnumeric，xfce自带的表格软件 &amp;lt;Super&amp;gt;e：mousepad 打开文本编辑器 &amp;lt;Super&amp;gt;f：exo-open --launch FileManager 打开文件管理器 &amp;lt;Super&amp;gt;m：exo-open --launch MailReader 打开邮件客户端 &amp;lt;Super&amp;gt;p：xfce4-display-settings --minimal 打开显示/分辨率设置 &amp;lt;Super&amp;gt;r：xfce4-appfinder 打开应用程序运行弹窗 &amp;lt;Super&amp;gt;t：exo-open --launch TerminalEmulator 打开模拟终端 &amp;lt;Super&amp;gt;w：exo-open --launch WebBrowser 打开默认浏览器 defalut &amp;lt;Alt&amp;gt;F1：xfce4-popup-applicationsmenu 打开右键菜单 &amp;lt;Alt&amp;gt;F2：xfrun4 打开应用程序运行窗口，同&amp;lt;Alt&amp;gt;F3差不多 &amp;lt;Alt&amp;gt;F3：xfce4-appfinder 打开应用程序查找器 &amp;lt;Alt&amp;gt;Print：xfce4-screenshooter -w 窗口截图 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Delete：xflock4 锁屏 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Escape：xkill &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;t：exo-open --launch TerminalEmulator 打开模拟终端 &amp;lt;Primary&amp;gt;Escape：xfce4-popup-whiskermenu 打开启动器菜单，类似windows的开始 Print：xfce4-screenshooter -f 屏幕截图 &amp;lt;Super&amp;gt;1：gmusicbrowser 打开音乐播放器 &amp;lt;Super&amp;gt;2：pidgin 打开pidgin即时通讯软件 &amp;lt;Super&amp;gt;4：gnumeric 打开gnumeric，xfce自带的表格软件 &amp;lt;Super&amp;gt;e：mousepad 打开文本编辑器 &amp;lt;Super&amp;gt;f：exo-open --launch FileManager 打开文件管理器 &amp;lt;Super&amp;gt;m：exo-open --launch MailReader 打开邮件客户端 &amp;lt;Super&amp;gt;p：xfce4-display-settings --minimal 打开显示/分辨率设置 &amp;lt;Super&amp;gt;r：xfce4-appfinder 打开应用程序查找器 &amp;lt;Super&amp;gt;t：exo-open --launch TerminalEmulator 打开模拟终端 &amp;lt;Super&amp;gt;w：exo-open --launch WebBrowser 打开默认浏览器 xfwm4 custom &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;End：move_window_next_workspace_key 把窗口移到下个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;Home：move_window_prev_workspace_key 把窗口移到上个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_1：move_window_workspace_1_key 把窗口移到第1个工作区（KP_1：小键盘数字1，以下同） &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_2：move_window_workspace_2_key 把窗口移到第2个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_3：move_window_workspace_3_key 把窗口移到第3个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_4：move_window_workspace_4_key 把窗口移到第4个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_5：move_window_workspace_5_key 把窗口移到第5个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_6：move_window_workspace_6_key 把窗口移到第6个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_7：move_window_workspace_7_key 把窗口移到第7个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_8：move_window_workspace_8_key 把窗口移到第8个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_9：move_window_workspace_9_key 把窗口移到第9个工作区 &amp;lt;Alt&amp;gt;Delete：del_workspace_key 删除工作区 &amp;lt;Alt&amp;gt;F10：maximize_window_key 窗口最大化/最小化切换 &amp;lt;Alt&amp;gt;F11：fullscreen_key 窗口全屏切换 &amp;lt;Alt&amp;gt;F12：above_key &amp;lt;Alt&amp;gt;F4：close_window_key 关闭窗口 &amp;lt;Alt&amp;gt;F5：maximize_horiz_key 窗口水平最大化 &amp;lt;Alt&amp;gt;F6：maximize_vert_key 窗口垂直最大化 &amp;lt;Alt&amp;gt;F7：maximize_window_key 窗口最大化切换 &amp;lt;Alt&amp;gt;F8：stick_window_key &amp;lt;Alt&amp;gt;F9：hide_window_key 隐藏窗口（最小化） &amp;lt;Alt&amp;gt;Insert：add_workspace_key 添加工作区 &amp;lt;Alt&amp;gt;&amp;lt;Shift&amp;gt;Tab：cycle_reverse_windows_key 反向切换窗口 &amp;lt;Alt&amp;gt;space：popup_menu_key 右键菜单 &amp;lt;Alt&amp;gt;Tab：cycle_windows_key 切换窗口 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;d：show_desktop_key 显示桌面 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Down：down_workspace_key 切换到下边的工作区 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Left：left_workspace_key 切换到左边的工作区 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Right：right_workspace_key 切换到右边的工作区 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Up：up_workspace_key 切换到上边的工作区 &amp;lt;Control&amp;gt;F1：workspace_1_key 切换到第1个工作区 &amp;lt;Control&amp;gt;F2：workspace_2_key 切换到第2个工作区 &amp;lt;Control&amp;gt;F3：workspace_3_key 切换到第3个工作区 &amp;lt;Control&amp;gt;F4：workspace_4_key 切换到第4个工作区 &amp;lt;Control&amp;gt;F5：workspace_5_key 切换到第5个工作区 &amp;lt;Control&amp;gt;F6：workspace_6_key 切换到第6个工作区 &amp;lt;Control&amp;gt;F7：workspace_7_key 切换到第7个工作区 &amp;lt;Control&amp;gt;F8：workspace_8_key 切换到第8个工作区 &amp;lt;Control&amp;gt;F9：workspace_9_key 切换到第9个工作区 &amp;lt;Control&amp;gt;F10：workspace_10_key 切换到第10个工作区 &amp;lt;Control&amp;gt;F11：workspace_11_key 切换到第11个工作区 &amp;lt;Control&amp;gt;F12：workspace_12_key 切换到第12个工作区 &amp;lt;Control&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Left：move_window_left_key 移动窗口到左边工作区 &amp;lt;Control&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Right：move_window_right_key 移动窗口到右边工作区 &amp;lt;Control&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Up：move_window_up_key 移动窗口到上边工作区 Down：down_key 向下 Escape：cancel_key 取消 Left：left_key 向左 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;d：show_desktop_key 显示桌面 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Down：down_workspace_key 切换到下边的工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;End：move_window_next_workspace_key 把窗口移到下个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Home：move_window_prev_workspace_key 把窗口移到上个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_1：move_window_workspace_1_key 把窗口移到第1个工作区（KP_1：小键盘数字1，以下同） &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_2：move_window_workspace_2_key 把窗口移到第2个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_3：move_window_workspace_3_key 把窗口移到第3个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_4：move_window_workspace_4_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_5：move_window_workspace_5_key 把窗口移到第5个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_6：move_window_workspace_6_key 把窗口移到第6个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_7：move_window_workspace_7_key 把窗口移到第7个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_8：move_window_workspace_8_key 把窗口移到第8个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_9：move_window_workspace_9_key 把窗口移到第9个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Left：left_workspace_key 切换到左边的工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Right：right_workspace_key 切换到右边的工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Up：up_workspace_key 切换到上边的工作区 &amp;lt;Primary&amp;gt;F1：workspace_1_key 切换到第1个工作区 &amp;lt;Primary&amp;gt;F2：workspace_2_key 切换到第2个工作区 &amp;lt;Primary&amp;gt;F3：workspace_3_key 切换到第3个工作区 &amp;lt;Primary&amp;gt;F4：workspace_4_key 切换到第4个工作区 &amp;lt;Primary&amp;gt;F5：workspace_5_key 切换到第5个工作区 &amp;lt;Primary&amp;gt;F6：workspace_6_key 切换到第6个工作区 &amp;lt;Primary&amp;gt;F7：workspace_7_key 切换到第7个工作区 &amp;lt;Primary&amp;gt;F8：workspace_8_key 切换到第8个工作区 &amp;lt;Primary&amp;gt;F9：workspace_9_key 切换到第9个工作区 &amp;lt;Primary&amp;gt;F10：workspace_10_key 切换到第10个工作区 &amp;lt;Primary&amp;gt;F11：workspace_11_key 切换到第11个工作区 &amp;lt;Primary&amp;gt;F12：workspace_12_key 切换到第12个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Left：move_window_left_key 移动窗口到左边工作区 &amp;lt;Primary&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Right：move_window_right_key 移动窗口到右边工作区 &amp;lt;Primary&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Up：move_window_up_key 移动窗口到上边工作区 Right：right_key 向右 &amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Page_Down：lower_window_key &amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Page_Up：raise_window_key &amp;lt;Super&amp;gt;Tab：switch_window_key 切换窗口 Up：up_key defalut &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;End：move_window_next_workspace_key 把窗口移到下个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;Home：move_window_prev_workspace_key 把窗口移到上个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_1：move_window_workspace_1_key 把窗口移到第1个工作区（KP_1：小键盘数字1，以下同） &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_2：move_window_workspace_2_key 把窗口移到第2个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_3：move_window_workspace_3_key 把窗口移到第3个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_4：move_window_workspace_4_key 把窗口移到第4个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_5：move_window_workspace_5_key 把窗口移到第5个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_6：move_window_workspace_6_key 把窗口移到第6个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_7：move_window_workspace_7_key 把窗口移到第7个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_8：move_window_workspace_8_key 把窗口移到第8个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_9：move_window_workspace_9_key 把窗口移到第9个工作区 &amp;lt;Alt&amp;gt;Delete：del_workspace_key 删除工作区 &amp;lt;Alt&amp;gt;F10：maximize_window_key 窗口最大化/最小化切换 &amp;lt;Alt&amp;gt;F11：fullscreen_key 窗口全屏切换 &amp;lt;Alt&amp;gt;F12：above_key &amp;lt;Alt&amp;gt;F4：close_window_key 关闭窗口 &amp;lt;Alt&amp;gt;F5：maximize_horiz_key 窗口水平最大化 &amp;lt;Alt&amp;gt;F6：maximize_vert_key 窗口垂直最大化 &amp;lt;Alt&amp;gt;F7：maximize_window_key 窗口最大化切换 &amp;lt;Alt&amp;gt;F8：stick_window_key &amp;lt;Alt&amp;gt;F9：hide_window_key 隐藏窗口（最小化） &amp;lt;Alt&amp;gt;Insert：add_workspace_key 添加工作区 &amp;lt;Alt&amp;gt;&amp;lt;Shift&amp;gt;Tab：cycle_reverse_windows_key 反向切换窗口t&amp;gt; &amp;lt;Alt&amp;gt;space：popup_menu_key 右键菜单 &amp;lt;Alt&amp;gt;Tab：cycle_windows_key 切换窗口 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;d：show_desktop_key 显示桌面 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Down：down_workspace_key 切换到下边的工作区 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Left：left_workspace_key 切换到左边的工作区 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Right：right_workspace_key 切换到右边的工作区 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Up：up_workspace_key 切换到上边的工作区 &amp;lt;Control&amp;gt;F1：workspace_1_key 切换到第1个工作区 &amp;lt;Control&amp;gt;F2：workspace_2_key 切换到第2个工作区 &amp;lt;Control&amp;gt;F3：workspace_3_key 切换到第3个工作区 &amp;lt;Control&amp;gt;F4：workspace_4_key 切换到第4个工作区 &amp;lt;Control&amp;gt;F5：workspace_5_key 切换到第5个工作区 &amp;lt;Control&amp;gt;F6：workspace_6_key 切换到第6个工作区 &amp;lt;Control&amp;gt;F7：workspace_7_key 切换到第7个工作区 &amp;lt;Control&amp;gt;F8：workspace_8_key 切换到第8个工作区 &amp;lt;Control&amp;gt;F9：workspace_9_key 切换到第9个工作区 &amp;lt;Control&amp;gt;F10：workspace_10_key 切换到第10个工作区 &amp;lt;Control&amp;gt;F11：workspace_11_key 切换到第11个工作区 &amp;lt;Control&amp;gt;F12：workspace_12_key 切换到第12个工作区 &amp;lt;Control&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Left：move_window_left_key 移动窗口到左边工作区 &amp;lt;Control&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Right：move_window_right_key 移动窗口到右边工作区 &amp;lt;Control&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Up：move_window_up_key 移动窗口到上边工作区 Down：down_key 向下 Escape：cancel_key 取消 Left：left_key 向左 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;d：show_desktop_key 显示桌面 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Down：down_workspace_key 切换到下边的工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;End：move_window_next_workspace_key 把窗口移到下个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Home：move_window_prev_workspace_key 把窗口移到上个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_1：move_window_workspace_1_key 把窗口移到第1个工作区（KP_1：小键盘数字1，以下同） &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_2：move_window_workspace_2_key 把窗口移到第2个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_3：move_window_workspace_3_key 把窗口移到第3个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_4：move_window_workspace_4_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_5：move_window_workspace_5_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_6：move_window_workspace_6_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_7：move_window_workspace_7_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_8：move_window_workspace_8_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_9：move_window_workspace_9_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Left：left_workspace_key &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Right：right_workspace_key 切换到右边的工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Up：up_workspace_key 切换到上边的工作区 &amp;lt;Primary&amp;gt;F1：workspace_1_key 切换到第1个工作区 &amp;lt;Primary&amp;gt;F2：workspace_2_key 切换到第2个工作区 &amp;lt;Primary&amp;gt;F3：workspace_3_key 切换到第3个工作区 &amp;lt;Primary&amp;gt;F4：workspace_4_key 切换到第4个工作区 &amp;lt;Primary&amp;gt;F5：workspace_5_key 切换到第5个工作区 &amp;lt;Primary&amp;gt;F6：workspace_6_key 切换到第6个工作区 &amp;lt;Primary&amp;gt;F7：workspace_7_key 切换到第7个工作区 &amp;lt;Primary&amp;gt;F8：workspace_8_key 切换到第8个工作区 &amp;lt;Primary&amp;gt;F9：workspace_9_key 切换到第9个工作区 &amp;lt;Primary&amp;gt;F10：workspace_10_key 切换到第10个工作区 &amp;lt;Primary&amp;gt;F11：workspace_11_key 切换到第11个工作区 &amp;lt;Primary&amp;gt;F12：workspace_12_key 切换到第12个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Left：move_window_left_key 移动窗口到左边工作区 &amp;lt;Primary&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Right：move_window_right_key 移动窗口到右边工作区 &amp;lt;Primary&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Up：move_window_up_key 移动窗口到上边工作区 Right：right_key 向右 &amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Page_Down：lower_window_key &amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Page_Up：raise_window_key &amp;lt;Super&amp;gt;Tab：switch_window_key 切换窗口 Up：up_key 向上 详情来自：xfce 快捷键</description>
-    </item>
-    
-    <item>
-      <title>Shell命令一般格式</title>
-      <link>https://www.liut.xyz/posts/cli/shell%E5%91%BD%E4%BB%A4%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F/</link>
-      <pubDate>Fri, 27 Oct 2017 16:35:26 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/cli/shell%E5%91%BD%E4%BB%A4%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F/</guid>
-      <description>尽管一些命令可以通过简单地输入一个字来输入，但其它命令使用标志和参数。每个命令都具有语法，指定要求的和可选的标志和参数。命令的一般格式如下：
-CommandName flag(s) parameter(s)  以下是有关命令的一些一般规则：
-* 命令、标志和参数间的空格是有意义的。 * 通过用分号（;）分隔命令，两个命令可在同一行上输入。例如： $ CommandOne;CommandTwo shell 顺序地运行命令。 * 命令是区分大小写的。shell 区别大写字母和小写字母。对于 shell，print 不同于 PRINT 或 Print。 * 很长的命令可以通过使用反斜杠 (\) 字符在不止一行上输入。反斜杠向 shell 标识行继续。以下示例是一个跨两行的命令： $ ls Mail info temp \ (按 Enter 键) &amp;gt; diary （出现 &amp;gt; 提示符） &amp;gt; 字符是次提示符（$ 是非 root 用户的缺省主提示符），表示当前行是前一行的继续。请注意 csh（C shell）不给出次提示符，并且断行必须在字边界，且其主提示符是 %。    命令名
-每个命令的第一个字是命令名。一些命令只有命令名。
-  命令标志
-命令名后可能有很多标志。标志修改命令的操作，并且有时称为选项。标志由空格或制表符分开，并且通常以破折号（-）开始。例外为 ps、tar 和 ar，这些命令在一些标志前不要求破折号。例如，在以下命令中：
- ls -a -F ls 是命令名，-a -F 是标志。 当命令使用标志时，标志直接跟在命令名后。命令中的单字符标志可与一个破折号组合。例如，前一命令还可写成如下： ls -aF 存在参数实际上以破折号（-）开始的一些情况。在此情况下，请在参数前使用定界符破折号（--）。-- 告诉命令后面跟的不是标志，而是参数。 例如，如果想要创建名为 -tmp 的目录，并输入以下命令： mkdir -tmp 系统显示类似于以下的错误消息： mkdir：非识别的标志：t 用法：mkdir [-p] [-m mode] Directory .</description>
-    </item>
-    
-    <item>
-      <title>ubuntu安装nodejs</title>
-      <link>https://www.liut.xyz/posts/os/linux%E5%AE%89%E8%A3%85nodejs/</link>
-      <pubDate>Fri, 27 Oct 2017 16:26:30 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/linux%E5%AE%89%E8%A3%85nodejs/</guid>
-      <description> 通过命令行安装：
-  官网安装方法：
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - sudo apt-get install -y nodejs   通过包管理器 apt 直接安装再通过一个第三方工具n来管理node版本：
-# 直接安装可能会安装到旧的版本 sudo apt-get install -y nodejs # 全局安装插件 n ; sudo npm install -g n # 更新到最新版 sudo n latest	# 更新到稳定版 sudo n stable     官网下载二进制安装：略。
-  编译安装：略。
-  </description>
-    </item>
-    
-    <item>
-      <title>常用ADB命令</title>
-      <link>https://www.liut.xyz/posts/android/%E5%B8%B8%E7%94%A8adb%E5%91%BD%E4%BB%A4/</link>
-      <pubDate>Fri, 27 Oct 2017 16:17:36 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/android/%E5%B8%B8%E7%94%A8adb%E5%91%BD%E4%BB%A4/</guid>
-      <description># 显示已连接的设备 adb devices # 显示结果如下所示： # List of devices attached # 6e070d91 device # 其中6e070d91是设备的id，device是设备的状态。 # 设备状态有3种：offline表示设备离线，device表示设备连接正常，no device表示没有设备连接 # 如果有多台手机连接到电脑，则需要用 -s 指定adb调用的手机，如 # adb -s 6e070d91 install helloWorld.apk # 获取手机序列号 adb get-serialno # 获取手机连接的状态即offline、device和no device adb get-state # 在手机状态变成device后执行install helloWorld.apk adb wait-for-device install helloWorld.apk # 安装helloWorld.apk到手机上，如果手机里已经安装该应用，可加 -r 重新安装并保留应用的数据 adb install helloWorld.apk # 卸载包名为com.example.test的应用，可加 -k 在卸载时保留配置和缓存文件 adb uninstall com.example.test # 显示logcat，可使用grep过滤log，如adb logcat | grep debug adb logcat # 复制手机的/sdcard/foo.txt文件到本地并命名为foo.txt adb pull /sdcard/foo.</description>
-    </item>
-    
-    <item>
-      <title>Shadowsocks使用kcptun加速</title>
-      <link>https://www.liut.xyz/posts/net/shadowsocks%E4%BD%BF%E7%94%A8kcptun%E5%8A%A0%E9%80%9F/</link>
-      <pubDate>Thu, 26 Oct 2017 21:00:02 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/net/shadowsocks%E4%BD%BF%E7%94%A8kcptun%E5%8A%A0%E9%80%9F/</guid>
-      <description>常用加速软件有 NetSpeed 、KcpTun 、锐速（Server Speeder） 等，其中，NetSpeed 最为粗暴，直接双倍发包，能大大降低丢包率，当然，流量也会双倍消耗；kcptun ，双边加速（服务端和客户端都需要配置），基于 KCP 协议的 UDP 隧道，它可以将 TCP 流转换为 KCP+UDP 流。而 KCP 是一个快速可靠协议，要求配置低，效果明显；锐速，单边加速，收费，官方已破产，有破解版，需配置内核。以下为 kcptun 配置记录。
-  准备
-Linux 服务器一台（已安装好shadowsocks）; windows 电脑一台（本文以windows配置为例）； kcptun_gclient(windows) kcptun_gclient 客户端； kcptun kcptun 客户端；
-  获取一键安装脚本并执行
-  wget https://github.com/kuoruan/shell-scripts/raw/master/kcptun/kcptun.sh chmod +x ./kcptun.sh ./kcptun.sh 执行后，会启动一键安装程序，中文界面，基本都按默认来，其中 kcptun 加速 IP （ss的IP127.0.0.1）和加速端口（ss的端口）要注意下，安装完成之后，会把所有的配置输出在终端，这些信息很重要，把它copy下来，留在下一步用。
- 配置kcptun客户端
-客户端就是上面那两个kcptun_gclient和kcptun 客户端，kcptun 客户端是纯命令行工具，用起来不太方便，kcptun_gclient则提供了GUI界面，打开kcptun_gclient，配置kcptun客户端软件client_windows_amd64.exe；然后建议使用配置文件，即从第二步里输出的客户端配置文件，把它单独保存在一个文件里面，如
-{ &amp;#34;localaddr&amp;#34;: &amp;#34;:***&amp;#34;, &amp;#34;remoteaddr&amp;#34;: &amp;#34;****:***&amp;#34;, &amp;#34;key&amp;#34;: &amp;#34;***&amp;#34;, &amp;#34;crypt&amp;#34;: &amp;#34;aes&amp;#34;, &amp;#34;mode&amp;#34;: &amp;#34;fast2&amp;#34;, &amp;#34;mtu&amp;#34;: 1350, &amp;#34;sndwnd&amp;#34;: 512, &amp;#34;rcvwnd&amp;#34;: 512, &amp;#34;datashard&amp;#34;: 10, &amp;#34;parityshard&amp;#34;: 3, &amp;#34;dscp&amp;#34;: 0, &amp;#34;nocomp&amp;#34;: false } 然后再kcptun_gclient里面选中此文件并启动即可。</description>
-    </item>
-    
-    <item>
-      <title>关于NAT的理解</title>
-      <link>https://www.liut.xyz/posts/net/%E5%85%B3%E4%BA%8Enat%E7%9A%84%E7%90%86%E8%A7%A3/</link>
-      <pubDate>Wed, 25 Oct 2017 15:32:02 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/net/%E5%85%B3%E4%BA%8Enat%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
-      <description>定义 网络地址转换(NAT,Network Address Translation)属接入广域网(WAN)技术，是一种将私有（保留）地址转化为合法IP地址的转换技术。 以下仅分析目前最常用的端口多路复用NAPT(Network Address/Port Translators)中的Cone NAT型（圆锥型）。
-  原理 客户机（内网终端）访问公网服务时，其IP和端口会被映射为网关的一个端口，客户机所有访问外网的流量均通过此端口，同时，此端口收到的所有数据包都会返回到客户机。在网关时，两个不同session但**端口号相同 ** 。
-  案例 通常，家用网络终端通过家用路由器访问互联网就是通过NAT技术，家用路由器会被DHCP服务器分配一个临时的公网IP，用以访问公网；其它终端如手机、电脑和路由器组建一个私网，其中，路由器为网关（NAT服务器）,终端设备访问外网服务时，其IP和端口会被映射为网关的一个端口。
-  以上仅个人理解。</description>
-    </item>
-    
-    <item>
-      <title>从简书迁hugo Jianshu2hugo</title>
-      <link>https://www.liut.xyz/posts/jianshu2hugo/</link>
-      <pubDate>Tue, 26 Sep 2017 10:41:56 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/jianshu2hugo/</guid>
-      <description>体验了一把hugo，感觉很良好，就迁过来了。。。
+问题 在安装WPS后，Tim等wine应用的字体特糊，简直不看入目，以下有两个解决办法：</description></item><item><title>xfce 桌面快捷键配置</title><link>https://www.liut.xyz/posts/os/xfce%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E9%94%AE%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 20 Aug 2018 22:23:36 +0800</pubDate><guid>https://www.liut.xyz/posts/os/xfce%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E9%94%AE%E9%85%8D%E7%BD%AE/</guid><description>xfce 桌面默认快捷键很多，很容易与其他软件冲突， 而且没有GUI的设置快捷键程序（manjaro xfce）, 可通过修改以下文件解决冲突，重新登录后生效。
+配置路径 # 用户配置 ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml # 全局配置 /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml 修改说明 建议修改用户目录的配置文件，修改前先做好备份， 其中文件中是有转义的，按照原格式转义就行。
+commands custom &amp;lt;Alt&amp;gt;F1：xfce4-popup-applicationsmenu 打开右键菜单 &amp;lt;Alt&amp;gt;F2：xfrun4 打开应用程序运行窗口，同&amp;lt;Alt&amp;gt;F3差不多 &amp;lt;Alt&amp;gt;F3：xfce4-appfinder 打开应用程序查找器 &amp;lt;Alt&amp;gt;Print：xfce4-screenshooter -w 窗口截图 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Delete：xflock4 锁屏 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Escape：xkill &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;t：exo-open --launch TerminalEmulator 打开模拟终端 &amp;lt;Primary&amp;gt;Escape：xfce4-popup-whiskermenu 打开启动器菜单，类似windows的开始 Print：xfce4-screenshooter -f 屏幕截图 &amp;lt;Super&amp;gt;1：gmusicbrowser 打开音乐播放器 &amp;lt;Super&amp;gt;2：pidgin 打开pidgin即时通讯软件 &amp;lt;Super&amp;gt;4：gnumeric 打开gnumeric，xfce自带的表格软件 &amp;lt;Super&amp;gt;e：mousepad 打开文本编辑器 &amp;lt;Super&amp;gt;f：exo-open --launch FileManager 打开文件管理器 &amp;lt;Super&amp;gt;m：exo-open --launch MailReader 打开邮件客户端 &amp;lt;Super&amp;gt;p：xfce4-display-settings --minimal 打开显示/分辨率设置 &amp;lt;Super&amp;gt;r：xfce4-appfinder 打开应用程序运行弹窗 &amp;lt;Super&amp;gt;t：exo-open --launch TerminalEmulator 打开模拟终端 &amp;lt;Super&amp;gt;w：exo-open --launch WebBrowser 打开默认浏览器 defalut &amp;lt;Alt&amp;gt;F1：xfce4-popup-applicationsmenu 打开右键菜单 &amp;lt;Alt&amp;gt;F2：xfrun4 打开应用程序运行窗口，同&amp;lt;Alt&amp;gt;F3差不多 &amp;lt;Alt&amp;gt;F3：xfce4-appfinder 打开应用程序查找器 &amp;lt;Alt&amp;gt;Print：xfce4-screenshooter -w 窗口截图 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Delete：xflock4 锁屏 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Escape：xkill &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;t：exo-open --launch TerminalEmulator 打开模拟终端 &amp;lt;Primary&amp;gt;Escape：xfce4-popup-whiskermenu 打开启动器菜单，类似windows的开始 Print：xfce4-screenshooter -f 屏幕截图 &amp;lt;Super&amp;gt;1：gmusicbrowser 打开音乐播放器 &amp;lt;Super&amp;gt;2：pidgin 打开pidgin即时通讯软件 &amp;lt;Super&amp;gt;4：gnumeric 打开gnumeric，xfce自带的表格软件 &amp;lt;Super&amp;gt;e：mousepad 打开文本编辑器 &amp;lt;Super&amp;gt;f：exo-open --launch FileManager 打开文件管理器 &amp;lt;Super&amp;gt;m：exo-open --launch MailReader 打开邮件客户端 &amp;lt;Super&amp;gt;p：xfce4-display-settings --minimal 打开显示/分辨率设置 &amp;lt;Super&amp;gt;r：xfce4-appfinder 打开应用程序查找器 &amp;lt;Super&amp;gt;t：exo-open --launch TerminalEmulator 打开模拟终端 &amp;lt;Super&amp;gt;w：exo-open --launch WebBrowser 打开默认浏览器 xfwm4 custom &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;End：move_window_next_workspace_key 把窗口移到下个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;Home：move_window_prev_workspace_key 把窗口移到上个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_1：move_window_workspace_1_key 把窗口移到第1个工作区（KP_1：小键盘数字1，以下同） &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_2：move_window_workspace_2_key 把窗口移到第2个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_3：move_window_workspace_3_key 把窗口移到第3个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_4：move_window_workspace_4_key 把窗口移到第4个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_5：move_window_workspace_5_key 把窗口移到第5个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_6：move_window_workspace_6_key 把窗口移到第6个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_7：move_window_workspace_7_key 把窗口移到第7个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_8：move_window_workspace_8_key 把窗口移到第8个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_9：move_window_workspace_9_key 把窗口移到第9个工作区 &amp;lt;Alt&amp;gt;Delete：del_workspace_key 删除工作区 &amp;lt;Alt&amp;gt;F10：maximize_window_key 窗口最大化/最小化切换 &amp;lt;Alt&amp;gt;F11：fullscreen_key 窗口全屏切换 &amp;lt;Alt&amp;gt;F12：above_key &amp;lt;Alt&amp;gt;F4：close_window_key 关闭窗口 &amp;lt;Alt&amp;gt;F5：maximize_horiz_key 窗口水平最大化 &amp;lt;Alt&amp;gt;F6：maximize_vert_key 窗口垂直最大化 &amp;lt;Alt&amp;gt;F7：maximize_window_key 窗口最大化切换 &amp;lt;Alt&amp;gt;F8：stick_window_key &amp;lt;Alt&amp;gt;F9：hide_window_key 隐藏窗口（最小化） &amp;lt;Alt&amp;gt;Insert：add_workspace_key 添加工作区 &amp;lt;Alt&amp;gt;&amp;lt;Shift&amp;gt;Tab：cycle_reverse_windows_key 反向切换窗口 &amp;lt;Alt&amp;gt;space：popup_menu_key 右键菜单 &amp;lt;Alt&amp;gt;Tab：cycle_windows_key 切换窗口 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;d：show_desktop_key 显示桌面 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Down：down_workspace_key 切换到下边的工作区 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Left：left_workspace_key 切换到左边的工作区 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Right：right_workspace_key 切换到右边的工作区 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Up：up_workspace_key 切换到上边的工作区 &amp;lt;Control&amp;gt;F1：workspace_1_key 切换到第1个工作区 &amp;lt;Control&amp;gt;F2：workspace_2_key 切换到第2个工作区 &amp;lt;Control&amp;gt;F3：workspace_3_key 切换到第3个工作区 &amp;lt;Control&amp;gt;F4：workspace_4_key 切换到第4个工作区 &amp;lt;Control&amp;gt;F5：workspace_5_key 切换到第5个工作区 &amp;lt;Control&amp;gt;F6：workspace_6_key 切换到第6个工作区 &amp;lt;Control&amp;gt;F7：workspace_7_key 切换到第7个工作区 &amp;lt;Control&amp;gt;F8：workspace_8_key 切换到第8个工作区 &amp;lt;Control&amp;gt;F9：workspace_9_key 切换到第9个工作区 &amp;lt;Control&amp;gt;F10：workspace_10_key 切换到第10个工作区 &amp;lt;Control&amp;gt;F11：workspace_11_key 切换到第11个工作区 &amp;lt;Control&amp;gt;F12：workspace_12_key 切换到第12个工作区 &amp;lt;Control&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Left：move_window_left_key 移动窗口到左边工作区 &amp;lt;Control&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Right：move_window_right_key 移动窗口到右边工作区 &amp;lt;Control&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Up：move_window_up_key 移动窗口到上边工作区 Down：down_key 向下 Escape：cancel_key 取消 Left：left_key 向左 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;d：show_desktop_key 显示桌面 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Down：down_workspace_key 切换到下边的工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;End：move_window_next_workspace_key 把窗口移到下个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Home：move_window_prev_workspace_key 把窗口移到上个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_1：move_window_workspace_1_key 把窗口移到第1个工作区（KP_1：小键盘数字1，以下同） &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_2：move_window_workspace_2_key 把窗口移到第2个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_3：move_window_workspace_3_key 把窗口移到第3个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_4：move_window_workspace_4_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_5：move_window_workspace_5_key 把窗口移到第5个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_6：move_window_workspace_6_key 把窗口移到第6个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_7：move_window_workspace_7_key 把窗口移到第7个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_8：move_window_workspace_8_key 把窗口移到第8个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_9：move_window_workspace_9_key 把窗口移到第9个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Left：left_workspace_key 切换到左边的工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Right：right_workspace_key 切换到右边的工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Up：up_workspace_key 切换到上边的工作区 &amp;lt;Primary&amp;gt;F1：workspace_1_key 切换到第1个工作区 &amp;lt;Primary&amp;gt;F2：workspace_2_key 切换到第2个工作区 &amp;lt;Primary&amp;gt;F3：workspace_3_key 切换到第3个工作区 &amp;lt;Primary&amp;gt;F4：workspace_4_key 切换到第4个工作区 &amp;lt;Primary&amp;gt;F5：workspace_5_key 切换到第5个工作区 &amp;lt;Primary&amp;gt;F6：workspace_6_key 切换到第6个工作区 &amp;lt;Primary&amp;gt;F7：workspace_7_key 切换到第7个工作区 &amp;lt;Primary&amp;gt;F8：workspace_8_key 切换到第8个工作区 &amp;lt;Primary&amp;gt;F9：workspace_9_key 切换到第9个工作区 &amp;lt;Primary&amp;gt;F10：workspace_10_key 切换到第10个工作区 &amp;lt;Primary&amp;gt;F11：workspace_11_key 切换到第11个工作区 &amp;lt;Primary&amp;gt;F12：workspace_12_key 切换到第12个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Left：move_window_left_key 移动窗口到左边工作区 &amp;lt;Primary&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Right：move_window_right_key 移动窗口到右边工作区 &amp;lt;Primary&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Up：move_window_up_key 移动窗口到上边工作区 Right：right_key 向右 &amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Page_Down：lower_window_key &amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Page_Up：raise_window_key &amp;lt;Super&amp;gt;Tab：switch_window_key 切换窗口 Up：up_key defalut &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;End：move_window_next_workspace_key 把窗口移到下个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;Home：move_window_prev_workspace_key 把窗口移到上个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_1：move_window_workspace_1_key 把窗口移到第1个工作区（KP_1：小键盘数字1，以下同） &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_2：move_window_workspace_2_key 把窗口移到第2个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_3：move_window_workspace_3_key 把窗口移到第3个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_4：move_window_workspace_4_key 把窗口移到第4个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_5：move_window_workspace_5_key 把窗口移到第5个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_6：move_window_workspace_6_key 把窗口移到第6个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_7：move_window_workspace_7_key 把窗口移到第7个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_8：move_window_workspace_8_key 把窗口移到第8个工作区 &amp;lt;Alt&amp;gt;&amp;lt;Control&amp;gt;KP_9：move_window_workspace_9_key 把窗口移到第9个工作区 &amp;lt;Alt&amp;gt;Delete：del_workspace_key 删除工作区 &amp;lt;Alt&amp;gt;F10：maximize_window_key 窗口最大化/最小化切换 &amp;lt;Alt&amp;gt;F11：fullscreen_key 窗口全屏切换 &amp;lt;Alt&amp;gt;F12：above_key &amp;lt;Alt&amp;gt;F4：close_window_key 关闭窗口 &amp;lt;Alt&amp;gt;F5：maximize_horiz_key 窗口水平最大化 &amp;lt;Alt&amp;gt;F6：maximize_vert_key 窗口垂直最大化 &amp;lt;Alt&amp;gt;F7：maximize_window_key 窗口最大化切换 &amp;lt;Alt&amp;gt;F8：stick_window_key &amp;lt;Alt&amp;gt;F9：hide_window_key 隐藏窗口（最小化） &amp;lt;Alt&amp;gt;Insert：add_workspace_key 添加工作区 &amp;lt;Alt&amp;gt;&amp;lt;Shift&amp;gt;Tab：cycle_reverse_windows_key 反向切换窗口t&amp;gt; &amp;lt;Alt&amp;gt;space：popup_menu_key 右键菜单 &amp;lt;Alt&amp;gt;Tab：cycle_windows_key 切换窗口 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;d：show_desktop_key 显示桌面 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Down：down_workspace_key 切换到下边的工作区 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Left：left_workspace_key 切换到左边的工作区 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Right：right_workspace_key 切换到右边的工作区 &amp;lt;Control&amp;gt;&amp;lt;Alt&amp;gt;Up：up_workspace_key 切换到上边的工作区 &amp;lt;Control&amp;gt;F1：workspace_1_key 切换到第1个工作区 &amp;lt;Control&amp;gt;F2：workspace_2_key 切换到第2个工作区 &amp;lt;Control&amp;gt;F3：workspace_3_key 切换到第3个工作区 &amp;lt;Control&amp;gt;F4：workspace_4_key 切换到第4个工作区 &amp;lt;Control&amp;gt;F5：workspace_5_key 切换到第5个工作区 &amp;lt;Control&amp;gt;F6：workspace_6_key 切换到第6个工作区 &amp;lt;Control&amp;gt;F7：workspace_7_key 切换到第7个工作区 &amp;lt;Control&amp;gt;F8：workspace_8_key 切换到第8个工作区 &amp;lt;Control&amp;gt;F9：workspace_9_key 切换到第9个工作区 &amp;lt;Control&amp;gt;F10：workspace_10_key 切换到第10个工作区 &amp;lt;Control&amp;gt;F11：workspace_11_key 切换到第11个工作区 &amp;lt;Control&amp;gt;F12：workspace_12_key 切换到第12个工作区 &amp;lt;Control&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Left：move_window_left_key 移动窗口到左边工作区 &amp;lt;Control&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Right：move_window_right_key 移动窗口到右边工作区 &amp;lt;Control&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Up：move_window_up_key 移动窗口到上边工作区 Down：down_key 向下 Escape：cancel_key 取消 Left：left_key 向左 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;d：show_desktop_key 显示桌面 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Down：down_workspace_key 切换到下边的工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;End：move_window_next_workspace_key 把窗口移到下个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Home：move_window_prev_workspace_key 把窗口移到上个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_1：move_window_workspace_1_key 把窗口移到第1个工作区（KP_1：小键盘数字1，以下同） &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_2：move_window_workspace_2_key 把窗口移到第2个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_3：move_window_workspace_3_key 把窗口移到第3个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_4：move_window_workspace_4_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_5：move_window_workspace_5_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_6：move_window_workspace_6_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_7：move_window_workspace_7_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_8：move_window_workspace_8_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;KP_9：move_window_workspace_9_key 把窗口移到第4个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Left：left_workspace_key &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Right：right_workspace_key 切换到右边的工作区 &amp;lt;Primary&amp;gt;&amp;lt;Alt&amp;gt;Up：up_workspace_key 切换到上边的工作区 &amp;lt;Primary&amp;gt;F1：workspace_1_key 切换到第1个工作区 &amp;lt;Primary&amp;gt;F2：workspace_2_key 切换到第2个工作区 &amp;lt;Primary&amp;gt;F3：workspace_3_key 切换到第3个工作区 &amp;lt;Primary&amp;gt;F4：workspace_4_key 切换到第4个工作区 &amp;lt;Primary&amp;gt;F5：workspace_5_key 切换到第5个工作区 &amp;lt;Primary&amp;gt;F6：workspace_6_key 切换到第6个工作区 &amp;lt;Primary&amp;gt;F7：workspace_7_key 切换到第7个工作区 &amp;lt;Primary&amp;gt;F8：workspace_8_key 切换到第8个工作区 &amp;lt;Primary&amp;gt;F9：workspace_9_key 切换到第9个工作区 &amp;lt;Primary&amp;gt;F10：workspace_10_key 切换到第10个工作区 &amp;lt;Primary&amp;gt;F11：workspace_11_key 切换到第11个工作区 &amp;lt;Primary&amp;gt;F12：workspace_12_key 切换到第12个工作区 &amp;lt;Primary&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Left：move_window_left_key 移动窗口到左边工作区 &amp;lt;Primary&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Right：move_window_right_key 移动窗口到右边工作区 &amp;lt;Primary&amp;gt;&amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Up：move_window_up_key 移动窗口到上边工作区 Right：right_key 向右 &amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Page_Down：lower_window_key &amp;lt;Shift&amp;gt;&amp;lt;Alt&amp;gt;Page_Up：raise_window_key &amp;lt;Super&amp;gt;Tab：switch_window_key 切换窗口 Up：up_key 向上 详情来自：xfce 快捷键</description></item><item><title>Shell命令一般格式</title><link>https://www.liut.xyz/posts/cli/shell%E5%91%BD%E4%BB%A4%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F/</link><pubDate>Fri, 27 Oct 2017 16:35:26 +0800</pubDate><guid>https://www.liut.xyz/posts/cli/shell%E5%91%BD%E4%BB%A4%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F/</guid><description>尽管一些命令可以通过简单地输入一个字来输入，但其它命令使用标志和参数。每个命令都具有语法，指定要求的和可选的标志和参数。命令的一般格式如下：
+CommandName flag(s) parameter(s) 以下是有关命令的一些一般规则：
+* 命令、标志和参数间的空格是有意义的。 * 通过用分号（;）分隔命令，两个命令可在同一行上输入。例如： $ CommandOne;CommandTwo shell 顺序地运行命令。 * 命令是区分大小写的。shell 区别大写字母和小写字母。对于 shell，print 不同于 PRINT 或 Print。 * 很长的命令可以通过使用反斜杠 (\) 字符在不止一行上输入。反斜杠向 shell 标识行继续。以下示例是一个跨两行的命令： $ ls Mail info temp \ (按 Enter 键) &amp;gt; diary （出现 &amp;gt; 提示符） &amp;gt; 字符是次提示符（$ 是非 root 用户的缺省主提示符），表示当前行是前一行的继续。请注意 csh（C shell）不给出次提示符，并且断行必须在字边界，且其主提示符是 %。 命令名</description></item><item><title>ubuntu安装nodejs</title><link>https://www.liut.xyz/posts/os/linux%E5%AE%89%E8%A3%85nodejs/</link><pubDate>Fri, 27 Oct 2017 16:26:30 +0800</pubDate><guid>https://www.liut.xyz/posts/os/linux%E5%AE%89%E8%A3%85nodejs/</guid><description>通过命令行安装：
+官网安装方法：
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - sudo apt-get install -y nodejs 通过包管理器 apt 直接安装再通过一个第三方工具n来管理node版本：</description></item><item><title>常用ADB命令</title><link>https://www.liut.xyz/posts/android/%E5%B8%B8%E7%94%A8adb%E5%91%BD%E4%BB%A4/</link><pubDate>Fri, 27 Oct 2017 16:17:36 +0800</pubDate><guid>https://www.liut.xyz/posts/android/%E5%B8%B8%E7%94%A8adb%E5%91%BD%E4%BB%A4/</guid><description># 显示已连接的设备 adb devices # 显示结果如下所示： # List of devices attached # 6e070d91 device # 其中6e070d91是设备的id，device是设备的状态。 # 设备状态有3种：offline表示设备离线，device表示设备连接正常，no device表示没有设备连接 # 如果有多台手机连接到电脑，则需要用 -s 指定adb调用的手机，如 # adb -s 6e070d91 install helloWorld.</description></item><item><title>Shadowsocks使用kcptun加速</title><link>https://www.liut.xyz/posts/net/shadowsocks%E4%BD%BF%E7%94%A8kcptun%E5%8A%A0%E9%80%9F/</link><pubDate>Thu, 26 Oct 2017 21:00:02 +0800</pubDate><guid>https://www.liut.xyz/posts/net/shadowsocks%E4%BD%BF%E7%94%A8kcptun%E5%8A%A0%E9%80%9F/</guid><description>常用加速软件有 NetSpeed 、KcpTun 、锐速（Server Speeder） 等，其中，NetSpeed 最为粗暴，直接双倍发包，能大大降低丢包率，当然，流量也会双倍消耗；kcptun ，双边加速（服务端和客户端都需要配置），基于 KCP 协议的 UDP 隧道，它可以将 TCP 流转换为 KCP+UDP 流。而 KCP 是一个快速可靠协议，要求配置低，效果明显；锐速，单边加速，收费，官方已破产，有破解版，需配置内核。以下为 kcptun 配置记录。</description></item><item><title>关于NAT的理解</title><link>https://www.liut.xyz/posts/net/%E5%85%B3%E4%BA%8Enat%E7%9A%84%E7%90%86%E8%A7%A3/</link><pubDate>Wed, 25 Oct 2017 15:32:02 +0800</pubDate><guid>https://www.liut.xyz/posts/net/%E5%85%B3%E4%BA%8Enat%E7%9A%84%E7%90%86%E8%A7%A3/</guid><description>定义 网络地址转换(NAT,Network Address Translation)属接入广域网(WAN)技术，是一种将私有（保留）地址转化为合法IP地址的转换技术。 以下仅分析目前最常用的端口多路复用NAPT(Network Address/Port Translators)中的Cone NAT型（圆锥型）。
+原理 客户机（内网终端）访问公网服务时，其IP和端口会被映射为网关的一个端口，客户机所有访问外网的流量均通过此端口，同时，此端口收到的所有数据包都会返回到客户机。在网关时，两个不同session但**端口号相同 ** 。
+案例 通常，家用网络终端通过家用路由器访问互联网就是通过NAT技术，家用路由器会被DHCP服务器分配一个临时的公网IP，用以访问公网；其它终端如手机、电脑和路由器组建一个私网，其中，路由器为网关（NAT服务器）,终端设备访问外网服务时，其IP和端口会被映射为网关的一个端口。</description></item><item><title>从简书迁hugo Jianshu2hugo</title><link>https://www.liut.xyz/posts/jianshu2hugo/</link><pubDate>Tue, 26 Sep 2017 10:41:56 +0800</pubDate><guid>https://www.liut.xyz/posts/jianshu2hugo/</guid><description>体验了一把hugo，感觉很良好，就迁过来了。。。
 首先，简书有导出文章功能，很赞！导出后是没办法直接在hugo使用的，因为hugo需要文件头，简书是没有的，就自己动手写了一段 java 代码，给文章加头，如下
-/** * 添加文件头 * 用于简书导出文档转HUGO，具体格式请自调整 * * @author Liut */ @Test public void jianshu2hugo() throws IOException { File sourceDir = new File(&amp;#34;D:/js2hugo/sourceDir&amp;#34;); // 源文件  File outputDir = new File(&amp;#34;D:/js2hugo/outputDir&amp;#34;); // 输出文件  if (!sourceDir.exists()) sourceDir.mkdir(); if (!outputDir.exists()) outputDir.mkdir(); System.out.println(&amp;#34;sourceDir != null &amp;gt;&amp;gt; &amp;#34; + sourceDir != null); for (File sourceFile : sourceDir.listFiles()) { String fileName = sourceFile.getName(); System.out.println(&amp;#34;===============&amp;#34;); // 具体文件头，请根据需要拼装，应该也适用hexo  StringBuilder builder = new StringBuilder(); builder.</description>
-    </item>
-    
-    <item>
-      <title>/etc/rc.d/rc.local 与 /etc/profile .bash_profile .bashrc 文件执行顺序</title>
-      <link>https://www.liut.xyz/posts/os/linux-profilerc.local%E7%AD%89%E6%96%87%E4%BB%B6%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</link>
-      <pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/linux-profilerc.local%E7%AD%89%E6%96%87%E4%BB%B6%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</guid>
-      <description>第一步：通过/boot/vm进行启动 vmlinuz 第二步：init /etc/inittab 第三步：启动相应的脚本，并且打开终端
+/** * 添加文件头 * 用于简书导出文档转HUGO，具体格式请自调整 * * @author Liut */ @Test public void jianshu2hugo() throws IOException { File sourceDir = new File(&amp;#34;D:/js2hugo/sourceDir&amp;#34;); // 源文件 File outputDir = new File(&amp;#34;D:/js2hugo/outputDir&amp;#34;); // 输出文件 if (!</description></item><item><title>/etc/rc.d/rc.local 与 /etc/profile .bash_profile .bashrc 文件执行顺序</title><link>https://www.liut.xyz/posts/os/linux-profilerc.local%E7%AD%89%E6%96%87%E4%BB%B6%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</link><pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate><guid>https://www.liut.xyz/posts/os/linux-profilerc.local%E7%AD%89%E6%96%87%E4%BB%B6%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</guid><description>第一步：通过/boot/vm进行启动 vmlinuz 第二步：init /etc/inittab 第三步：启动相应的脚本，并且打开终端
 rc.sysinit rc.d(里面的脚本） rc.local（以root执行） 第四步：启动login登录界面 login 第五步：在用户登录的时候执行sh脚本的顺序，每次登录的时候都会完全执行的
-/etc/profile.d/file /etc/profile（全局环境变量） /etc/bashrc (debain系为/etc/bash.bashrc) /root/.bashrc /root/.bash_profile 自 http://blog.aizhet.com/Linux/10074.html 拓展 https://wido.me/sunteya/understand-bashrc-and-profile</description>
-    </item>
-    
-    <item>
-      <title>java的几种对象(PO,VO,DAO,BO,POJO，DTO)解释</title>
-      <link>https://www.liut.xyz/posts/java/java%E7%9A%84%E5%87%A0%E7%A7%8D%E5%AF%B9%E8%B1%A1povodaobopojodto%E8%A7%A3%E9%87%8A/</link>
-      <pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/java/java%E7%9A%84%E5%87%A0%E7%A7%8D%E5%AF%B9%E8%B1%A1povodaobopojodto%E8%A7%A3%E9%87%8A/</guid>
-      <description>PO： persistant object持久对象 最形象的理解就是一个PO就是数据库中的一条记录。 好处是可以把一条记录作为一个对象处理，可以方便的转为其它对象。
+/etc/profile.d/file /etc/profile（全局环境变量） /etc/bashrc (debain系为/etc/bash.bashrc) /root/.bashrc /root/.bash_profile 自 http://blog.aizhet.com/Linux/10074.html 拓展 https://wido.</description></item><item><title>aosp-源码下载</title><link>https://www.liut.xyz/posts/note/aosp-%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD/</link><pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate><guid>https://www.liut.xyz/posts/note/aosp-%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD/</guid><description>//TODO 详细
+https://segmentfault.com/a/1190000008428585
+https://mirror.tuna.tsinghua.edu.cn/help/AOSP/</description></item><item><title>java的几种对象(PO,VO,DAO,BO,POJO，DTO)解释</title><link>https://www.liut.xyz/posts/java/java%E7%9A%84%E5%87%A0%E7%A7%8D%E5%AF%B9%E8%B1%A1povodaobopojodto%E8%A7%A3%E9%87%8A/</link><pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate><guid>https://www.liut.xyz/posts/java/java%E7%9A%84%E5%87%A0%E7%A7%8D%E5%AF%B9%E8%B1%A1povodaobopojodto%E8%A7%A3%E9%87%8A/</guid><description>PO： persistant object持久对象 最形象的理解就是一个PO就是数据库中的一条记录。 好处是可以把一条记录作为一个对象处理，可以方便的转为其它对象。
 BO： business object业务对象 主要作用是把业务逻辑封装为一个对象。这个对象可以包括一个或多个其它的对象。 比如一个简历，有教育经历、工作经历、 关系等等。 我们可以把教育经历对应一个PO，工作经历对应一个PO， 关系对应一个PO。 建立一个对应简历的BO对象处理简历，每个BO包含这些PO。 这样处理业务逻辑时，我们就可以针对BO去处理。
-VO ： value object值对象 ViewObject表现层对象 主要对应界面显示的数据对象。对于一个WEB页面，或者SWT、SWING的一个界面，用一个VO对象对应整个界面的值。
-DTO ： Data Transfer Object数据传输对象 主要用于远程调用等需要大量传输对象的地方。 比如我们一张表有100个字段，那么对应的PO就有100个属性。 但是我们界面上只要显示10个字段， 客户端用WEB service来获取数据，没有必要把整个PO对象传递到客户端， 这时我们就可以用只有这10个属性的DTO来传递结果到客户端，这样也不会暴露服务端表结构.到达客户端以后，如果用这个对象来对应界面显示，那此时它的身份就转为VO
-POJO ： plain ordinary java object 简单java对象 个人感觉POJO是最常见最多变的对象，是一个中间对象，也是我们最常打交道的对象。 一个POJO持久化以后就是PO 直接用它传递、传递过程中就是DTO 直接用来对应表示层就是VO
-１．VO是用new关键字创建，由GC回收的。 PO则是向数据库中添加新数据时创建，删除数据库中数据时削除的。并且它只能存活在一个数据库连接中，断开连接即被销毁。 ２．VO是值对象，精确点讲它是业务对象，是存活在业务层的，是业务逻辑使用的，它存活的目的就是为数据提供一个生存的地方。 PO则是有状态的，每个属性代表其当前的状态。它是物理数据的对象表示。使用它，可以使我们的程序与物理数据解耦，并且可以简化对象数据与物理数据之间的转换。 ３．VO的属性是根据当前业务的不同而不同的，也就是说，它的每一个属性都一一对应当前业务逻辑所需要的数据的名称。 PO的属性是跟数据库表的字段一一对应的。PO对象需要实现序列化接口。
-From: http://www.cnblogs.com/firstdream/archive/2012/04/13/2445582.html</description>
-    </item>
-    
-    <item>
-      <title>POST-content-type</title>
-      <link>https://www.liut.xyz/posts/net/post-content-type/</link>
-      <pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/net/post-content-type/</guid>
-      <description>application/x-www-form-urlencoded 常用键值对post方式,为默认的content-type  这应该是最常见的 POST 提交数据的方式了。浏览器的原生 表单，如果不设置 enctype属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这样（无关的请求头在本文中都省略掉了）：
-POST http://www.example.com HTTP/1.1 Content-Type: application/x-www-form-urlencoded;charset=utf-8 title=test&amp;amp;sub%5B%5D=1&amp;amp;sub%5B%5D=2&amp;amp;sub%5B%5D=3  multipart/form-data  这又是一个常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 表单的 enctype等于 multipart/form-data。直接来看一个请求示例：
-POST http://www.example.com HTTP/1.1 Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA ------WebKitFormBoundaryrGKCBY7qhFd3TrwA Content-Disposition: form-data; name=&amp;#34;text&amp;#34; title ------WebKitFormBoundaryrGKCBY7qhFd3TrwA Content-Disposition: form-data; name=&amp;#34;file&amp;#34;; filename=&amp;#34;chrome.png&amp;#34; Content-Type: image/png PNG ... content of chrome.png ... ------WebKitFormBoundaryrGKCBY7qhFd3TrwA-- 这个例子稍微复杂点。首先生成了一个 boundary 用于分割不同的字段，为了避免与正文内容重复，boundary 很长很复杂。然后 Content-Type 里指明了数据是以 multipart/form-data 来编码，本次请求的 boundary 是什么内容。消息主体里按照字段个数又分为多个结构类似的部分，每部分都是以 &amp;ndash;boundary 开始，紧接着是内容描述信息，然后是回车，最后是字段具体内容（文本或二进制）。如果传输的是文件，还要包含文件名和文件类型信息。消息主体最后以 &amp;ndash;boundary&amp;ndash; 标示结束。关于 multipart/form-data 的详细定义，请前往 rfc1867查看。 这种方式一般用来上传文件，各大服务端语言对它也有着良好的支持。 上面提到的这两种 POST 数据的方式，都是浏览器原生支持的，而且现阶段标准中原生 表单也只支持这两种方式（通过 元素的 enctype 属性指定，默认为 application/x-www-form-urlencoded 。其实 enctype 还支持 text/plain，不过用得非常少）。随着越来越多的 Web 站点，尤其是 WebApp，全部使用 Ajax 进行数据交互之后，我们完全可以定义新的数据提交方式，给开发带来更多便利。</description>
-    </item>
-    
-    <item>
-      <title>shadowsocks-配置</title>
-      <link>https://www.liut.xyz/posts/net/shadowsocks-%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/net/shadowsocks-%E9%85%8D%E7%BD%AE/</guid>
-      <description>shadowsocks 手动启动命令   server config
-{ &amp;#34;server&amp;#34;: &amp;#34;1.1.1.1&amp;#34;, &amp;#34;server_port&amp;#34;: 1111, &amp;#34;local_port&amp;#34;: 1123, &amp;#34;password&amp;#34;: &amp;#34;1111111111&amp;#34;, &amp;#34;timeout&amp;#34;: 600, &amp;#34;method&amp;#34;: &amp;#34;aes-256-cfb&amp;#34; } command ssserver -c /etc/shadowsocks.json -d start
-  client config
-{ &amp;#34;server&amp;#34;: &amp;#34;1.1.1.1&amp;#34;, &amp;#34;server_port&amp;#34;: 1111, &amp;#34;local_address&amp;#34;: &amp;#34;127.0.0.1&amp;#34;, &amp;#34;local_port&amp;#34;: 1123, &amp;#34;password&amp;#34;: &amp;#34;1111111111&amp;#34;, &amp;#34;timeout&amp;#34;: 600, &amp;#34;method&amp;#34;: &amp;#34;aes-256-cfb&amp;#34;, &amp;#34;fast_open&amp;#34;: false, &amp;#34;workers&amp;#34;: 1 } command sslocal -c /etc/ssConfig.json
-​
-  附：shadowsocks go版 服务端一键安装脚本 wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-go.sh chmod +x shadowsocks-go.sh ./shadowsocks-go.sh 2&amp;gt;&amp;amp;1 | tee shadowsocks-go.</description>
-    </item>
-    
-    <item>
-      <title>一次作死-rm -rf  /</title>
-      <link>https://www.liut.xyz/posts/os/%E4%B8%80%E6%AC%A1%E4%BD%9C%E6%AD%BB-rm-rf-/</link>
-      <pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/%E4%B8%80%E6%AC%A1%E4%BD%9C%E6%AD%BB-rm-rf-/</guid>
-      <description>前段时间在bandwagon租个低配vps,年费19刀,用以shadowsocks服务器,折腾了段时间最终是弄上了,而且网速尚可,我这大约十兆小水管能四五百K的样子,但后来又发现一个免费的ss,虽然延时高点,但速度还是可以的,而后就申请退货了,既然用不到也就没必要一直养着它,而bandwagon特良心支持一月内无条件退货.
- 既然要退货了, 就测(zuo)试(si)下 著名的 rm -rf / 命令.
+VO ： value object值对象 ViewObject表现层对象 主要对应界面显示的数据对象。对于一个WEB页面，或者SWT、SWING的一个界面，用一个VO对象对应整个界面的值。</description></item><item><title>POST-content-type</title><link>https://www.liut.xyz/posts/net/post-content-type/</link><pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate><guid>https://www.liut.xyz/posts/net/post-content-type/</guid><description>application/x-www-form-urlencoded 常用键值对post方式,为默认的content-type 这应该是最常见的 POST 提交数据的方式了。浏览器的原生 表单，如果不设置 enctype属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这样（无关的请求头在本文中都省略掉了）：
+POST http://www.example.com HTTP/1.1 Content-Type: application/x-www-form-urlencoded;charset=utf-8 title=test&amp;amp;sub%5B%5D=1&amp;amp;sub%5B%5D=2&amp;amp;sub%5B%5D=3 multipart/form-data 这又是一个常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 表单的 enctype等于 multipart/form-data。直接来看一个请求示例：</description></item><item><title>shadowsocks-配置</title><link>https://www.liut.xyz/posts/net/shadowsocks-%E9%85%8D%E7%BD%AE/</link><pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate><guid>https://www.liut.xyz/posts/net/shadowsocks-%E9%85%8D%E7%BD%AE/</guid><description>shadowsocks 手动启动命令 server config
+{ &amp;#34;server&amp;#34;: &amp;#34;1.1.1.1&amp;#34;, &amp;#34;server_port&amp;#34;: 1111, &amp;#34;local_port&amp;#34;: 1123, &amp;#34;password&amp;#34;: &amp;#34;1111111111&amp;#34;, &amp;#34;timeout&amp;#34;: 600, &amp;#34;method&amp;#34;: &amp;#34;aes-256-cfb&amp;#34; } command ssserver -c /etc/shadowsocks.</description></item><item><title>Ubuntu-16-04-编译-LineageOS-4-OnePlus-bacon</title><link>https://www.liut.xyz/posts/note/ubuntu-16-04-%E7%BC%96%E8%AF%91-lineageos-4-oneplus-bacon/</link><pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate><guid>https://www.liut.xyz/posts/note/ubuntu-16-04-%E7%BC%96%E8%AF%91-lineageos-4-oneplus-bacon/</guid><description>lineageOS 编译 准备 一台64位Ubuntu16.04PC，可以是远程服务器或虚拟机 至少8个g的内存，100g以上的空闲硬盘空间（不支持NTFS） 一个好的网络 一台 OnePlus bacon 所需环境 ubuntu 16.04 bc bison build-essential curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev libesd0-dev liblz4-tool libncurses5-dev libsdl1.</description></item><item><title>一次作死-rm -rf /</title><link>https://www.liut.xyz/posts/os/%E4%B8%80%E6%AC%A1%E4%BD%9C%E6%AD%BB-rm-rf-/</link><pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate><guid>https://www.liut.xyz/posts/os/%E4%B8%80%E6%AC%A1%E4%BD%9C%E6%AD%BB-rm-rf-/</guid><description>前段时间在bandwagon租个低配vps,年费19刀,用以shadowsocks服务器,折腾了段时间最终是弄上了,而且网速尚可,我这大约十兆小水管能四五百K的样子,但后来又发现一个免费的ss,虽然延时高点,但速度还是可以的,而后就申请退货了,既然用不到也就没必要一直养着它,而bandwagon特良心支持一月内无条件退货.
+既然要退货了, 就测(zuo)试(si)下 著名的 rm -rf / 命令.
 直接裸敲是又提示的,linux现在越来越智能了,如图,但也是可以强制执行滴.
 执行之后打印出好多cannot remove,难道这样也不行??
 然后执行下ls就明白了,特么没有这条命令&amp;hellip;
 然后 cd 接两下TAB建 就是只剩下这几个文件夹了,貌似是内存的吧?我也不懂.
 然后登出ssh之后,就再也登不上了.
-去后台看一下,状态还在运行,点击reboot 就彻底gg了,开不开机了.
-还能查看下文件
-作死完结
-感谢bandwagon 系统ubuntu 14.04 x86 minimal openvz架构.</description>
-    </item>
-    
-    <item>
-      <title>位运算</title>
-      <link>https://www.liut.xyz/posts/java/%E4%BD%8D%E8%BF%90%E7%AE%97/</link>
-      <pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/java/%E4%BD%8D%E8%BF%90%E7%AE%97/</guid>
-      <description>1. 原码反码补码：
+去后台看一下,状态还在运行,点击reboot 就彻底gg了,开不开机了.</description></item><item><title>位运算</title><link>https://www.liut.xyz/posts/java/%E4%BD%8D%E8%BF%90%E7%AE%97/</link><pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate><guid>https://www.liut.xyz/posts/java/%E4%BD%8D%E8%BF%90%E7%AE%97/</guid><description>1. 原码反码补码：
 计算机存储数据都是以二进制存储
 byte 8位 short 16位 int 32位 long 64位
 其中 最高位为符号位，0代表正数，1为负数，并且负数以补码的形式存在和参与计算,如果两个不同长度的数据进行位运算时，系统会将二者按右端对齐，然后进行位运算。
 关于原码，反码，补码
-原码 即正确的值。 反码 正数不变，负数反码 符号位不变，其余取反。 补码 正数不变，负数为反码+1。
-负数(-2)原码反码例如：
-原码 1000 0010 反码 1111 1101 补码 1111 1110
-2. 位移运算
- a &amp;lt;&amp;lt; b 左移运算 二进制形式的a左移b位，b小于总位数，左端舍去，右端补零，正负可能发生变化。 a &amp;gt;&amp;gt; b 右移运算 二进制形式的a右移b位，b小于总位数，右端舍去，左边正数补0，负数补1。 a &amp;gt;&amp;gt;&amp;gt; b 无符号右移运算 二进制形式的a左移b位，b小于总位数，右端舍去，左端补零  3. 与，或，异或，非
-&amp;amp; 同1则1 | 同0则0 ^ 相同为零，不同为1 ~ 取反
-应用：
- &amp;amp; 取特定位 |某位 置1 ^特定位取反  例如 :</description>
-    </item>
-    
-    <item>
-      <title>markdown 语法</title>
-      <link>https://www.liut.xyz/posts/markdown%E8%AF%AD%E6%B3%95/</link>
-      <pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/markdown%E8%AF%AD%E6%B3%95/</guid>
-      <description>markdown 语法 导航  部分 markdown 风格不支持导航
- 语法： [TOC]
+原码 即正确的值。 反码 正数不变，负数反码 符号位不变，其余取反。 补码 正数不变，负数为反码+1。</description></item><item><title>markdown 语法</title><link>https://www.liut.xyz/posts/markdown%E8%AF%AD%E6%B3%95/</link><pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate><guid>https://www.liut.xyz/posts/markdown%E8%AF%AD%E6%B3%95/</guid><description>markdown 语法 导航 部分 markdown 风格不支持导航
+语法： [TOC]
 效果演示：
 [TOC]
-分割线： * * * *** ***** - - - --- ---------------------------------------  效果演示：
-      有些 markdown 风格 *** 是粗分割线， --- 是细分割线。
-标题： # 这是一级标题	字最大 ## 这是二级标题	二级标题下会有条细线 ### 这是三级标题 #### 这是四级标题 ##### 这是五级标题 ###### 这是六级标题	标题就不演示了  区块引用： 语法： &amp;gt; 这是区块引用 行首加上 &amp;gt; 即可. &amp;gt; &amp;gt; 区块引用是可以嵌套的，就像这样. &amp;gt; &amp;gt; 区块引用内也可以有一些其它 markdown 语法 &amp;gt; &amp;gt; ### 这是标题</description>
-    </item>
-    
-    <item>
-      <title>为 CMD 设置别名</title>
-      <link>https://www.liut.xyz/posts/os/win%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D/</link>
-      <pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/win%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D/</guid>
-      <description>最近，在工作上，经常使用 cmd 来执行某些命令，有些命令很长很固定，就想，win 的 cmd 能不能像 Linux 终端一样去设置别名（alias）呢？在网上搜下，果然可以！就整理一下贴出来，以备查阅。
- win 下有个 doskey 命令，就相当于Linux中的alias，可以用来设置别名：
-# 设置 ls = dir doskey ls=dir # ls = dir $*表示后面可以接参数 doskey d=dir $* 嗯，别以为这么简单，因为这些命令仅对当前窗口有效，也就是说，关掉 cmd 窗口，下次打开就没了。
-使别名永久有效 若要永久有效，那只能让 cmd 在启动的时候去执行一些命令（doskey），修改注册表可以实现这一功能。以下是实现 win 设置别名的具体步鄹：
-建立命令映射文件 新建文件，文件名随意，这里我们叫 alias.ini ,内容如下：
-ls=dir /ONE $* cat=type $* rm=del $* cd=cd /d $* pwd=cd mkdir=md $* lt=dir /OD $* py=python $* dev=adb devices adbstop=adb kill-server adbstart=adb start-server ins=adb install $* un=adb uninstall $* topa=adb shell dumpsys activity | findstr &amp;#34;mFocusedActivity&amp;#34; 上面即是需要设置的别名列表，可根据需要自行修改。</description>
-    </item>
-    
-    <item>
-      <title>优雅地用 Android Studio 打开 eclipse 项目</title>
-      <link>https://www.liut.xyz/posts/android/%E4%BC%98%E9%9B%85%E5%9C%B0%E7%94%A8-android-studio-%E6%89%93%E5%BC%80-eclipse-%E9%A1%B9%E7%9B%AE/</link>
-      <pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/android/%E4%BC%98%E9%9B%85%E5%9C%B0%E7%94%A8-android-studio-%E6%89%93%E5%BC%80-eclipse-%E9%A1%B9%E7%9B%AE/</guid>
-      <description>注：本脚本近适用于单 project 项目，如果有其他 project 依赖，请自使用 eclipse 的导出 gradle 项目功能。
-痛点 一些老旧的 Android 项目是 eclipse 的， 而且 eclipse 早就放弃了对 Android 的支持， 需要自行配置或使用旧版本。 如果使用 as 导入功能， 会破坏原有的目录结构， eclipse 有导出为 gradle 项目功能， 导出后还需要二次手动修改、更新等。
-解决办法 在项目根目录新建 build.gradle 如下，而后用 Android studio 打开此文件即可 （注意，就是打开，不是导入）。
-// 把此文件放在 eclipse 项目的跟目录，用 as 打开此文件即可。第一次可能会稍慢。 apply plugin: &amp;#39;com.android.application&amp;#39; android { // 可按需修改  compileSdkVersion 21 buildToolsVersion &amp;#34;25.0.3&amp;#34; // 可按需修改或删除  defaultConfig { versionCode 1 versionName &amp;#39;88888&amp;#39; } // 设置 sourceSets 为 eclipse 结构  sourceSets { main { manifest.</description>
-    </item>
-    
-    <item>
-      <title>在 win10 中使用 zsh、fish </title>
-      <link>https://www.liut.xyz/posts/os/%E5%9C%A8-win10-%E4%B8%AD%E4%BD%BF%E7%94%A8-zsh/</link>
-      <pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/%E5%9C%A8-win10-%E4%B8%AD%E4%BD%BF%E7%94%A8-zsh/</guid>
-      <description>如今 win10 可启用 Linux（ubuntu） 子系统，带来的极大的方便，但 zsh 用户只能通过 bash 命令进入bash，还要再手动 zsh 才能进入 zsh ，这确实有点不太方便，以下步鄹可使直接进入 zsh。
-   安装 zsh （废话），可选装 oh-my-zsh ,大牛亦可自行调教。
-  修改 ~/.bashrc ，改为以下：
-# Launch Zsh if [ -t 1 ]; then exec zsh fi   为 bash 设置别名为zsh：
-powershell 请：
-Set-Alias -Name bash -Value zsh cmd 请参考为 CMD 设置别名 ，甚至可以做到打开 cmd 即进入 zsh 。
-  好，输入 zsh 试试看？
-fish 等也同理。</description>
-    </item>
-    
-    <item>
-      <title>基于 Html&#43;css&#43;js 的混合开发</title>
-      <link>https://www.liut.xyz/posts/android/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/</link>
-      <pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/android/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/</guid>
-      <description>[TOC]
+分割线： * * * *** ***** - - - --- --------------------------------------- 效果演示：</description></item><item><title>为 CMD 设置别名</title><link>https://www.liut.xyz/posts/os/win%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D/</link><pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate><guid>https://www.liut.xyz/posts/os/win%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D/</guid><description>最近，在工作上，经常使用 cmd 来执行某些命令，有些命令很长很固定，就想，win 的 cmd 能不能像 Linux 终端一样去设置别名（alias）呢？在网上搜下，果然可以！就整理一下贴出来，以备查阅。
+win 下有个 doskey 命令，就相当于Linux中的alias，可以用来设置别名：
+# 设置 ls = dir doskey ls=dir # ls = dir $*表示后面可以接参数 doskey d=dir $* 嗯，别以为这么简单，因为这些命令仅对当前窗口有效，也就是说，关掉 cmd 窗口，下次打开就没了。</description></item><item><title>优雅地用 Android Studio 打开 eclipse 项目</title><link>https://www.liut.xyz/posts/android/%E4%BC%98%E9%9B%85%E5%9C%B0%E7%94%A8-android-studio-%E6%89%93%E5%BC%80-eclipse-%E9%A1%B9%E7%9B%AE/</link><pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate><guid>https://www.liut.xyz/posts/android/%E4%BC%98%E9%9B%85%E5%9C%B0%E7%94%A8-android-studio-%E6%89%93%E5%BC%80-eclipse-%E9%A1%B9%E7%9B%AE/</guid><description>注：本脚本近适用于单 project 项目，如果有其他 project 依赖，请自使用 eclipse 的导出 gradle 项目功能。
+痛点 一些老旧的 Android 项目是 eclipse 的， 而且 eclipse 早就放弃了对 Android 的支持， 需要自行配置或使用旧版本。 如果使用 as 导入功能， 会破坏原有的目录结构， eclipse 有导出为 gradle 项目功能， 导出后还需要二次手动修改、更新等。</description></item><item><title>在 win10 中使用 zsh、fish</title><link>https://www.liut.xyz/posts/os/%E5%9C%A8-win10-%E4%B8%AD%E4%BD%BF%E7%94%A8-zsh/</link><pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate><guid>https://www.liut.xyz/posts/os/%E5%9C%A8-win10-%E4%B8%AD%E4%BD%BF%E7%94%A8-zsh/</guid><description>如今 win10 可启用 Linux（ubuntu） 子系统，带来的极大的方便，但 zsh 用户只能通过 bash 命令进入bash，还要再手动 zsh 才能进入 zsh ，这确实有点不太方便，以下步鄹可使直接进入 zsh。
+安装 zsh （废话），可选装 oh-my-zsh ,大牛亦可自行调教。</description></item><item><title>基于 Html+css+js 的混合开发</title><link>https://www.liut.xyz/posts/android/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/</link><pubDate>Sat, 20 May 2017 11:58:06 +0200</pubDate><guid>https://www.liut.xyz/posts/android/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/</guid><description>[TOC]
 关于混合开发 混合开发有多种实现方式，最简单的就是 web 网页加壳， 不过这种方式体验较差； 另外比较高级点的就是采用一些混合开发框架， 如 ionic 等； 还有就是 react native,weex 这种框架，同样是用前端代码，却能构建出 native application，极大提高了性能、兼容性。
-现代的混合开发框架的选择 经过了解，现在比较流行的框架有 react native、 ionic、cordova 以及国内的 weex、wex5、mui 等，就百度、知乎以及请教前端工作的朋友等途径对它们进行了了解，初步选定了React Native，weex，ionic 以及 Mobile Angular UI。
-相关数据：
-   items javascript 框架 界面 发布者 github star     React Native react native facebook 49k   weex vue.js native alibaba 14k   ionic AngularJS html ionic-team 29k   Mobile Angular UI AngularJS html mcasimir 2k    从 github star 来看，无疑， react native 是最火爆的，百度指数（截止05.</description>
-    </item>
-    
-  </channel>
-</rss>
+现代的混合开发框架的选择 经过了解，现在比较流行的框架有 react native、 ionic、cordova 以及国内的 weex、wex5、mui 等，就百度、知乎以及请教前端工作的朋友等途径对它们进行了了解，初步选定了React Native，weex，ionic 以及 Mobile Angular UI。</description></item></channel></rss>

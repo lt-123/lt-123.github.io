@@ -1,207 +1,82 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>位运算 - Liut</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="位运算" />
-<meta property="og:description" content="欲知详情，请点击标题" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.liut.xyz/posts/java/%E4%BD%8D%E8%BF%90%E7%AE%97/" />
-<meta property="article:published_time" content="2017-09-23T15:15:15+08:00" />
-<meta property="article:modified_time" content="2017-09-23T15:15:15+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="位运算"/>
-<meta name="twitter:description" content="欲知详情，请点击标题"/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
-
-	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/main.css" />
-
-	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<script src="https://www.liut.xyz/js/main.js"></script>
-</head>
-
-<body>
-	<div class="container wrapper post">
-		<div class="header">
-	<h1 class="site-title"><a href="https://www.liut.xyz/">Liut</a></h1>
-	<div class="site-description"><h2>liut.xyz</h2><nav class="nav social">
-			<ul class="flat"><a href="https://github.com/lt-123/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
-		</nav>
-	</div>
-
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/">Home</a>
-			</li>
-			
-			<li>
-				<a href="/posts">All posts</a>
-			</li>
-			
-			<li>
-				<a href="/about">About</a>
-			</li>
-			
-			<li>
-				<a href="/tags">Tags</a>
-			</li>
-			
-		</ul>
-	</nav>
-</div>
-
-
-		<div class="post-header">
-			<h1 class="title">位运算</h1>
-			<div class="meta">Posted at &mdash; Sep 23, 2017</div>
-		</div>
-
-		<div class="markdown">
-			<p><strong>1. 原码反码补码：</strong></p>
-<p>计算机存储数据都是以二进制存储</p>
-<p><code>byte</code> 8位
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>位运算 - liut</title><link rel=icon type=image/png href=icons/myicon.png><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:title" content="位运算"><meta property="og:description" content="欲知详情，请点击标题"><meta property="og:type" content="article"><meta property="og:url" content="https://www.liut.xyz/posts/java/%E4%BD%8D%E8%BF%90%E7%AE%97/"><meta property="article:published_time" content="2017-09-23T15:15:15+08:00"><meta property="article:modified_time" content="2017-09-23T15:15:15+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="位运算"><meta name=twitter:description content="欲知详情，请点击标题"><link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link rel=stylesheet type=text/css media=screen href=https://www.liut.xyz/css/normalize.css><link rel=stylesheet type=text/css media=screen href=https://www.liut.xyz/css/main.css><link rel=stylesheet type=text/css href=https://www.liut.xyz/css/dark.css media="(prefers-color-scheme: dark)"><script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script><script src=https://www.liut.xyz/js/main.js></script></head><body><div class="container wrapper post"><div class=header><base href=https://www.liut.xyz/><h1 class=site-title><a href=https://www.liut.xyz/>liut</a></h1><div class=site-description><h2>liut.xyz</h2><nav class="nav social"><ul class=flat><a href=https://github.com/lt-123/ title=Github><i data-feather=github></i></a><a href=/index.xml title=RSS><i data-feather=rss></i></a></ul></nav></div><nav class=nav><ul class=flat><li><a href=/>Home</a></li><li><a href=/posts>All posts</a></li><li><a href=/about>About</a></li><li><a href=/tags>Tags</a></li></ul></nav></div><div class=post-header><h1 class=title>位运算</h1><div class=meta>Posted at &mdash; Sep 23, 2017</div></div><div class=markdown><p><strong>1. 原码反码补码：</strong></p><p>计算机存储数据都是以二进制存储</p><p><code>byte</code> 8位
 <code>short</code> 16位
 <code>int</code> 32位
-<code>long</code> 64位</p>
-<p>其中 最高位为符号位，0代表正数，1为负数，<strong>并且负数以补码的形式存在和参与计算</strong>,如果两个不同长度的数据进行位运算时，系统会将二者按右端对齐，然后进行位运算。</p>
-<p>关于原码，反码，补码</p>
-<p><strong>原码</strong> 即正确的值。
+<code>long</code> 64位</p><p>其中 最高位为符号位，0代表正数，1为负数，<strong>并且负数以补码的形式存在和参与计算</strong>,如果两个不同长度的数据进行位运算时，系统会将二者按右端对齐，然后进行位运算。</p><p>关于原码，反码，补码</p><p><strong>原码</strong> 即正确的值。
 <strong>反码</strong> 正数不变，负数反码 符号位不变，其余取反。
-<strong>补码</strong> 正数不变，负数为反码+1。</p>
-<p>负数(-2)原码反码例如：<br>
-原码  <code>1000 0010</code>
-反码  <code>1111 1101</code>
-补码  <code>1111 1110</code></p>
-<p><strong>2. 位移运算</strong></p>
-<ul>
-<li><code>a &lt;&lt; b</code>  左移运算
-二进制形式的a左移b位，b小于总位数，左端舍去，右端补零，正负可能发生变化。</li>
-<li><code>a &gt;&gt; b</code> 右移运算
-二进制形式的a右移b位，b小于总位数，右端舍去，左边正数补0，负数补1。</li>
-<li><code>a &gt;&gt;&gt; b</code> 无符号右移运算
-二进制形式的a左移b位，b小于总位数，右端舍去，左端补零</li>
-</ul>
-<p><strong>3. 与，或，异或，非</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/702375-bca3ac6ea4d9676f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="位运算.png"></p>
-<p><code>&amp;</code> 同1则1
-<code>|</code>   同0则0
-<code>^</code>  相同为零，不同为1
-<code>~</code>  取反</p>
-<p><strong>应用</strong>：</p>
-<ul>
-<li><code>&amp;</code> 取特定位</li>
-<li><code>|</code>某位 置1</li>
-<li><code>^</code>特定位取反</li>
-</ul>
-<p>例如 :</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
-    <span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#2b91af">void</span> main(String[] args) {
+<strong>补码</strong> 正数不变，负数为反码+1。</p><p>负数(-2)原码反码例如：<br>原码 <code>1000 0010</code>
+反码 <code>1111 1101</code>
+补码 <code>1111 1110</code></p><p><strong>2. 位移运算</strong></p><ul><li><code>a &lt;&lt; b</code> 左移运算
+二进制形式的a左移b位，b小于总位数，左端舍去，右端补零，正负可能发生变化。</li><li><code>a >> b</code> 右移运算
+二进制形式的a右移b位，b小于总位数，右端舍去，左边正数补0，负数补1。</li><li><code>a >>> b</code> 无符号右移运算
+二进制形式的a左移b位，b小于总位数，右端舍去，左端补零</li></ul><p><strong>3. 与，或，异或，非</strong></p><p><img src=http://upload-images.jianshu.io/upload_images/702375-bca3ac6ea4d9676f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt=位运算.png></p><p><code>&</code> 同1则1
+<code>|</code> 同0则0
+<code>^</code> 相同为零，不同为1
+<code>~</code> 取反</p><p><strong>应用</strong>：</p><ul><li><code>&</code> 取特定位</li><li><code>|</code>某位 置1</li><li><code>^</code>特定位取反</li></ul><p>例如 :</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>
+    <span style=color:#268bd2>public</span> <span style=color:#268bd2>static</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>main</span><span style=color:#719e07>(</span>String<span style=color:#719e07>[]</span> args<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
 
-        <span style="color:#2b91af">int</span> b = -7;
+        <span style=color:#dc322f>int</span> b <span style=color:#719e07>=</span> <span style=color:#719e07>-</span>7<span style=color:#719e07>;</span>
 
-        <span style="color:#008000">/**
-</span><span style="color:#008000">         * 取特定位
-</span><span style="color:#008000">         * 假设要取b的低四位
-</span><span style="color:#008000">         * 则需要低四位全为1，其余为0
-</span><span style="color:#008000">         * 即 0000 0000 0000 0000 0000 0000 0000 1111
-</span><span style="color:#008000">         * 即0xf
-</span><span style="color:#008000">         */</span>
+        <span style=color:#586e75>/**
+</span><span style=color:#586e75>         * 取特定位
+</span><span style=color:#586e75>         * 假设要取b的低四位
+</span><span style=color:#586e75>         * 则需要低四位全为1，其余为0
+</span><span style=color:#586e75>         * 即 0000 0000 0000 0000 0000 0000 0000 1111
+</span><span style=color:#586e75>         * 即0xf
+</span><span style=color:#586e75>         */</span>
 
-        System.out.println(Integer.toBinaryString(b));			<span style="color:#008000">//1111 1111 1111 1111 1111 1111 1111 1001
-</span><span style="color:#008000"></span>        System.out.println(Integer.toBinaryString(b&amp;0xf));		<span style="color:#008000">//1001
-</span><span style="color:#008000"></span>        <span style="color:#008000">/**
-</span><span style="color:#008000">         * 取特定位  某位置0
-</span><span style="color:#008000">         * 假设要取b的第五位
-</span><span style="color:#008000">         * 则需要第五位为1，其余为0
-</span><span style="color:#008000">         * 即 0000 0000 0000 0000 0000 0000 0001 0000
-</span><span style="color:#008000">         * 即0x10
-</span><span style="color:#008000">         * 右移 5-1 &gt;&gt;&gt; 4
-</span><span style="color:#008000">         */</span>
-        System.out.println(Integer.toBinaryString(b));			<span style="color:#008000">//1111 1111 1111 1111 1111 1111 1111 1001
-</span><span style="color:#008000"></span>        System.out.println(Integer.toBinaryString(b&amp;0x10&gt;&gt;&gt;4));		<span style="color:#008000">//1
-</span><span style="color:#008000"></span>
-        <span style="color:#008000">//--------------------------------------------------------------
-</span><span style="color:#008000"></span>
+        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span>Integer<span style=color:#719e07>.</span>toBinaryString<span style=color:#719e07>(</span>b<span style=color:#719e07>));</span>			<span style=color:#586e75>//1111 1111 1111 1111 1111 1111 1111 1001
+</span><span style=color:#586e75></span>        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span>Integer<span style=color:#719e07>.</span>toBinaryString<span style=color:#719e07>(</span>b<span style=color:#719e07>&amp;</span>0xf<span style=color:#719e07>));</span>		<span style=color:#586e75>//1001
+</span><span style=color:#586e75></span>        <span style=color:#586e75>/**
+</span><span style=color:#586e75>         * 取特定位  某位置0
+</span><span style=color:#586e75>         * 假设要取b的第五位
+</span><span style=color:#586e75>         * 则需要第五位为1，其余为0
+</span><span style=color:#586e75>         * 即 0000 0000 0000 0000 0000 0000 0001 0000
+</span><span style=color:#586e75>         * 即0x10
+</span><span style=color:#586e75>         * 右移 5-1 &gt;&gt;&gt; 4
+</span><span style=color:#586e75>         */</span>
+        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span>Integer<span style=color:#719e07>.</span>toBinaryString<span style=color:#719e07>(</span>b<span style=color:#719e07>));</span>			<span style=color:#586e75>//1111 1111 1111 1111 1111 1111 1111 1001
+</span><span style=color:#586e75></span>        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span>Integer<span style=color:#719e07>.</span>toBinaryString<span style=color:#719e07>(</span>b<span style=color:#719e07>&amp;</span>0x10<span style=color:#719e07>&gt;&gt;&gt;</span>4<span style=color:#719e07>));</span>		<span style=color:#586e75>//1
+</span><span style=color:#586e75></span>
+        <span style=color:#586e75>//--------------------------------------------------------------
+</span><span style=color:#586e75></span>
 
 
-        <span style="color:#008000">/**
-</span><span style="color:#008000">         * | 某位 置1;
-</span><span style="color:#008000">         * 假设要b的第3位 置1
-</span><span style="color:#008000">         * 则需要一个 该位为1，其余为0的数
-</span><span style="color:#008000">         * 即0000 0000 0000 0000 0000 0000 0000 0100
-</span><span style="color:#008000">         * 即0x4
-</span><span style="color:#008000">         */</span>
-        System.out.println(Integer.toBinaryString(b));			<span style="color:#008000">//1111 1111 1111 1111 1111 1111 1111 1001
-</span><span style="color:#008000"></span>        System.out.println(Integer.toBinaryString(b|0x4));		<span style="color:#008000">//1111 1111 1111 1111 1111 1111 1111 1101
-</span><span style="color:#008000"></span>
-        <span style="color:#008000">//----------------------------------------------------------------
-</span><span style="color:#008000"></span>
-        <span style="color:#008000">/**
-</span><span style="color:#008000">         * ^ 使特定位取反
-</span><span style="color:#008000">         * 假设需要b低4位取反
-</span><span style="color:#008000">         * 则需要 一个低四位为1，其余为0的数
-</span><span style="color:#008000">         * 即 0000 0000 0000 0000 0000 0000 0000 1111
-</span><span style="color:#008000">         * 即 0xf
-</span><span style="color:#008000">         */</span>
-        System.out.println(Integer.toBinaryString(b));				<span style="color:#008000">//1111 1111 1111 1111 1111 1111 1111 1001
-</span><span style="color:#008000"></span>        System.out.println(Integer.toBinaryString(b^0xf));			<span style="color:#008000">//1111 1111 1111 1111 1111 1111 1111 0110
-</span><span style="color:#008000"></span>        <span style="color:#008000">/**
-</span><span style="color:#008000">         * 假设需要b第2位取反
-</span><span style="color:#008000">         * 则需要 一个第3位为1，其余为0的数
-</span><span style="color:#008000">         * 即 0000 0000 0000 0000 0000 0000 0000 0010
-</span><span style="color:#008000">         * 即 0x2
-</span><span style="color:#008000">         */</span>
-        System.out.println(Integer.toBinaryString(b));				<span style="color:#008000">//1111 1111 1111 1111 1111 1111 1111 1001
-</span><span style="color:#008000"></span>        System.out.println(Integer.toBinaryString(b^0x2));			<span style="color:#008000">//1111 1111 1111 1111 1111 1111 1111 1011
-</span><span style="color:#008000"></span>
-    }
+        <span style=color:#586e75>/**
+</span><span style=color:#586e75>         * | 某位 置1;
+</span><span style=color:#586e75>         * 假设要b的第3位 置1
+</span><span style=color:#586e75>         * 则需要一个 该位为1，其余为0的数
+</span><span style=color:#586e75>         * 即0000 0000 0000 0000 0000 0000 0000 0100
+</span><span style=color:#586e75>         * 即0x4
+</span><span style=color:#586e75>         */</span>
+        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span>Integer<span style=color:#719e07>.</span>toBinaryString<span style=color:#719e07>(</span>b<span style=color:#719e07>));</span>			<span style=color:#586e75>//1111 1111 1111 1111 1111 1111 1111 1001
+</span><span style=color:#586e75></span>        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span>Integer<span style=color:#719e07>.</span>toBinaryString<span style=color:#719e07>(</span>b<span style=color:#719e07>|</span>0x4<span style=color:#719e07>));</span>		<span style=color:#586e75>//1111 1111 1111 1111 1111 1111 1111 1101
+</span><span style=color:#586e75></span>
+        <span style=color:#586e75>//----------------------------------------------------------------
+</span><span style=color:#586e75></span>
+        <span style=color:#586e75>/**
+</span><span style=color:#586e75>         * ^ 使特定位取反
+</span><span style=color:#586e75>         * 假设需要b低4位取反
+</span><span style=color:#586e75>         * 则需要 一个低四位为1，其余为0的数
+</span><span style=color:#586e75>         * 即 0000 0000 0000 0000 0000 0000 0000 1111
+</span><span style=color:#586e75>         * 即 0xf
+</span><span style=color:#586e75>         */</span>
+        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span>Integer<span style=color:#719e07>.</span>toBinaryString<span style=color:#719e07>(</span>b<span style=color:#719e07>));</span>				<span style=color:#586e75>//1111 1111 1111 1111 1111 1111 1111 1001
+</span><span style=color:#586e75></span>        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span>Integer<span style=color:#719e07>.</span>toBinaryString<span style=color:#719e07>(</span>b<span style=color:#719e07>^</span>0xf<span style=color:#719e07>));</span>			<span style=color:#586e75>//1111 1111 1111 1111 1111 1111 1111 0110
+</span><span style=color:#586e75></span>        <span style=color:#586e75>/**
+</span><span style=color:#586e75>         * 假设需要b第2位取反
+</span><span style=color:#586e75>         * 则需要 一个第3位为1，其余为0的数
+</span><span style=color:#586e75>         * 即 0000 0000 0000 0000 0000 0000 0000 0010
+</span><span style=color:#586e75>         * 即 0x2
+</span><span style=color:#586e75>         */</span>
+        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span>Integer<span style=color:#719e07>.</span>toBinaryString<span style=color:#719e07>(</span>b<span style=color:#719e07>));</span>				<span style=color:#586e75>//1111 1111 1111 1111 1111 1111 1111 1001
+</span><span style=color:#586e75></span>        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span>Integer<span style=color:#719e07>.</span>toBinaryString<span style=color:#719e07>(</span>b<span style=color:#719e07>^</span>0x2<span style=color:#719e07>));</span>			<span style=color:#586e75>//1111 1111 1111 1111 1111 1111 1111 1011
+</span><span style=color:#586e75></span>
+    <span style=color:#719e07>}</span>
 
-</code></pre></div><p><strong>4.复合赋值运算符</strong></p>
-<p>位运算符与赋值运算符结合，组成新的复合赋值运算符，它们是：</p>
-<p><code>&amp;=</code>例：<code>a &amp;= b</code>相当于<code>a=a &amp; b</code>
+</code></pre></div><p><strong>4.复合赋值运算符</strong></p><p>位运算符与赋值运算符结合，组成新的复合赋值运算符，它们是：</p><p><code>&=</code>例：<code>a &= b</code>相当于<code>a=a & b</code>
 <code>|=</code> 例：<code>a |= b</code>相当于<code>a=a | b</code>
-<code>&gt;&gt;=</code> 例：<code>a &gt;&gt;= b</code> 相当于<code>a=a &gt;&gt; b</code>
+<code>>>=</code> 例：<code>a >>= b</code> 相当于<code>a=a >> b</code>
 <code>&lt;&lt;=</code> 例：<code>a &lt;&lt;= b</code> 相当于<code>a=a &lt;&lt; b</code>
-<code>^=</code> 例：<code>a ^= b</code> 相当于<code>a=a ^ b</code></p>
-
-		</div>
-
-		<div class="post-tags">
-			
-				
-					<nav class="nav tags">
-							<ul class="flat">
-								
-								<li><a href="/tags/java">java</a></li>
-								
-							</ul>
-					</nav>
-				
-			
-		</div>
-		</div>
-	<div class="footer wrapper">
-	<nav class="nav">
-		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
-	</nav>
-</div>
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-146893441-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-<script>feather.replace()</script>
-</body>
-</html>
+<code>^=</code> 例：<code>a ^= b</code> 相当于<code>a=a ^ b</code></p></div><div class=post-tags><nav class="nav tags"><ul class=flat><li><a href=/tags/java>java</a></li></ul></nav></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
+return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='liut-2017';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="footer wrapper"><nav class=nav><div>© Copyright notice | <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146893441-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><script>feather.replace()</script></body></html>

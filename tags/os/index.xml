@@ -1,48 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>os on Liut</title>
-    <link>https://www.liut.xyz/tags/os/</link>
-    <description>Recent content in os on Liut</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 27 Oct 2017 16:26:30 +0800</lastBuildDate>
-    
-	<atom:link href="https://www.liut.xyz/tags/os/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>ubuntu安装nodejs</title>
-      <link>https://www.liut.xyz/posts/os/linux%E5%AE%89%E8%A3%85nodejs/</link>
-      <pubDate>Fri, 27 Oct 2017 16:26:30 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/linux%E5%AE%89%E8%A3%85nodejs/</guid>
-      <description> 通过命令行安装：
-  官网安装方法：
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - sudo apt-get install -y nodejs   通过包管理器 apt 直接安装再通过一个第三方工具n来管理node版本：
-# 直接安装可能会安装到旧的版本 sudo apt-get install -y nodejs # 全局安装插件 n ; sudo npm install -g n # 更新到最新版 sudo n latest	# 更新到稳定版 sudo n stable     官网下载二进制安装：略。
-  编译安装：略。
-  </description>
-    </item>
-    
-    <item>
-      <title>一次作死-rm -rf  /</title>
-      <link>https://www.liut.xyz/posts/os/%E4%B8%80%E6%AC%A1%E4%BD%9C%E6%AD%BB-rm-rf-/</link>
-      <pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate>
-      
-      <guid>https://www.liut.xyz/posts/os/%E4%B8%80%E6%AC%A1%E4%BD%9C%E6%AD%BB-rm-rf-/</guid>
-      <description>前段时间在bandwagon租个低配vps,年费19刀,用以shadowsocks服务器,折腾了段时间最终是弄上了,而且网速尚可,我这大约十兆小水管能四五百K的样子,但后来又发现一个免费的ss,虽然延时高点,但速度还是可以的,而后就申请退货了,既然用不到也就没必要一直养着它,而bandwagon特良心支持一月内无条件退货.
- 既然要退货了, 就测(zuo)试(si)下 著名的 rm -rf / 命令.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>os on liut</title><link>https://www.liut.xyz/tags/os/</link><description>Recent content in os on liut</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>© Copyright notice</copyright><lastBuildDate>Fri, 27 Oct 2017 16:26:30 +0800</lastBuildDate><atom:link href="https://www.liut.xyz/tags/os/index.xml" rel="self" type="application/rss+xml"/><item><title>ubuntu安装nodejs</title><link>https://www.liut.xyz/posts/os/linux%E5%AE%89%E8%A3%85nodejs/</link><pubDate>Fri, 27 Oct 2017 16:26:30 +0800</pubDate><guid>https://www.liut.xyz/posts/os/linux%E5%AE%89%E8%A3%85nodejs/</guid><description>通过命令行安装：
+官网安装方法：
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - sudo apt-get install -y nodejs 通过包管理器 apt 直接安装再通过一个第三方工具n来管理node版本：</description></item><item><title>一次作死-rm -rf /</title><link>https://www.liut.xyz/posts/os/%E4%B8%80%E6%AC%A1%E4%BD%9C%E6%AD%BB-rm-rf-/</link><pubDate>Sat, 23 Sep 2017 15:15:15 +0800</pubDate><guid>https://www.liut.xyz/posts/os/%E4%B8%80%E6%AC%A1%E4%BD%9C%E6%AD%BB-rm-rf-/</guid><description>前段时间在bandwagon租个低配vps,年费19刀,用以shadowsocks服务器,折腾了段时间最终是弄上了,而且网速尚可,我这大约十兆小水管能四五百K的样子,但后来又发现一个免费的ss,虽然延时高点,但速度还是可以的,而后就申请退货了,既然用不到也就没必要一直养着它,而bandwagon特良心支持一月内无条件退货.
+既然要退货了, 就测(zuo)试(si)下 著名的 rm -rf / 命令.
 直接裸敲是又提示的,linux现在越来越智能了,如图,但也是可以强制执行滴.
 执行之后打印出好多cannot remove,难道这样也不行??
 然后执行下ls就明白了,特么没有这条命令&amp;hellip;
 然后 cd 接两下TAB建 就是只剩下这几个文件夹了,貌似是内存的吧?我也不懂.
 然后登出ssh之后,就再也登不上了.
-去后台看一下,状态还在运行,点击reboot 就彻底gg了,开不开机了.
-还能查看下文件
-作死完结
-感谢bandwagon 系统ubuntu 14.04 x86 minimal openvz架构.</description>
-    </item>
-    
-  </channel>
-</rss>
+去后台看一下,状态还在运行,点击reboot 就彻底gg了,开不开机了.</description></item></channel></rss>

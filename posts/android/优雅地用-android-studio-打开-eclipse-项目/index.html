@@ -1,171 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>优雅地用 Android Studio 打开 eclipse 项目 - Liut</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="优雅地用 Android Studio 打开 eclipse 项目" />
-<meta property="og:description" content="如题" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.liut.xyz/posts/android/%E4%BC%98%E9%9B%85%E5%9C%B0%E7%94%A8-android-studio-%E6%89%93%E5%BC%80-eclipse-%E9%A1%B9%E7%9B%AE/" />
-<meta property="article:published_time" content="2017-05-20T11:58:06+02:00" />
-<meta property="article:modified_time" content="2017-05-20T11:58:06+02:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="优雅地用 Android Studio 打开 eclipse 项目"/>
-<meta name="twitter:description" content="如题"/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>优雅地用 Android Studio 打开 eclipse 项目 - liut</title><link rel=icon type=image/png href=icons/myicon.png><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:title" content="优雅地用 Android Studio 打开 eclipse 项目"><meta property="og:description" content="如题"><meta property="og:type" content="article"><meta property="og:url" content="https://www.liut.xyz/posts/android/%E4%BC%98%E9%9B%85%E5%9C%B0%E7%94%A8-android-studio-%E6%89%93%E5%BC%80-eclipse-%E9%A1%B9%E7%9B%AE/"><meta property="article:published_time" content="2017-05-20T11:58:06+02:00"><meta property="article:modified_time" content="2017-05-20T11:58:06+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="优雅地用 Android Studio 打开 eclipse 项目"><meta name=twitter:description content="如题"><link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link rel=stylesheet type=text/css media=screen href=https://www.liut.xyz/css/normalize.css><link rel=stylesheet type=text/css media=screen href=https://www.liut.xyz/css/main.css><link rel=stylesheet type=text/css href=https://www.liut.xyz/css/dark.css media="(prefers-color-scheme: dark)"><script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script><script src=https://www.liut.xyz/js/main.js></script></head><body><div class="container wrapper post"><div class=header><base href=https://www.liut.xyz/><h1 class=site-title><a href=https://www.liut.xyz/>liut</a></h1><div class=site-description><h2>liut.xyz</h2><nav class="nav social"><ul class=flat><a href=https://github.com/lt-123/ title=Github><i data-feather=github></i></a><a href=/index.xml title=RSS><i data-feather=rss></i></a></ul></nav></div><nav class=nav><ul class=flat><li><a href=/>Home</a></li><li><a href=/posts>All posts</a></li><li><a href=/about>About</a></li><li><a href=/tags>Tags</a></li></ul></nav></div><div class=post-header><h1 class=title>优雅地用 Android Studio 打开 eclipse 项目</h1><div class=meta>Posted at &mdash; May 20, 2017</div></div><div class=markdown><p><strong>注</strong>：本脚本近适用于单 project 项目，如果有其他 project 依赖，请自使用 eclipse 的导出 gradle 项目功能。</p><h2 id=痛点>痛点</h2><p>一些老旧的 Android 项目是 eclipse 的， 而且 eclipse 早就放弃了对 Android 的支持， 需要自行配置或使用旧版本。 如果使用 as 导入功能， 会破坏原有的目录结构， eclipse 有导出为 gradle 项目功能， 导出后还需要二次手动修改、更新等。</p><h2 id=解决办法>解决办法</h2><p>在项目根目录新建 <code>build.gradle</code> 如下，而后用 Android studio 打开此文件即可 （注意，就是打开，不是导入）。</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy><span style=color:#586e75>// 把此文件放在 eclipse 项目的跟目录，用 as 打开此文件即可。第一次可能会稍慢。
+</span><span style=color:#586e75></span>apply plugin: <span style=color:#2aa198>&#39;com.android.application&#39;</span>
 
-	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://www.liut.xyz/css/main.css" />
+android <span style=color:#719e07>{</span>
+  	<span style=color:#586e75>// 可按需修改
+</span><span style=color:#586e75></span>    compileSdkVersion <span style=color:#2aa198>21</span>
+    buildToolsVersion <span style=color:#2aa198>&#34;25.0.3&#34;</span>
 
-	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<script src="https://www.liut.xyz/js/main.js"></script>
-</head>
+	<span style=color:#586e75>// 可按需修改或删除
+</span><span style=color:#586e75></span>    defaultConfig <span style=color:#719e07>{</span>
+        versionCode <span style=color:#2aa198>1</span>
+        versionName <span style=color:#2aa198>&#39;88888&#39;</span>
+    <span style=color:#719e07>}</span>
 
-<body>
-	<div class="container wrapper post">
-		<div class="header">
-	<h1 class="site-title"><a href="https://www.liut.xyz/">Liut</a></h1>
-	<div class="site-description"><h2>liut.xyz</h2><nav class="nav social">
-			<ul class="flat"><a href="https://github.com/lt-123/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
-		</nav>
-	</div>
+	<span style=color:#586e75>// 设置 sourceSets 为 eclipse 结构
+</span><span style=color:#586e75></span>    sourceSets <span style=color:#719e07>{</span>
+        main <span style=color:#719e07>{</span>
+            manifest<span style=color:#719e07>.</span>srcFile <span style=color:#2aa198>&#39;AndroidManifest.xml&#39;</span>
+            java<span style=color:#719e07>.</span>srcDirs <span style=color:#719e07>=</span> <span style=color:#719e07>[</span><span style=color:#2aa198>&#39;src&#39;</span><span style=color:#719e07>]</span>
+            resources<span style=color:#719e07>.</span>srcDirs <span style=color:#719e07>=</span> <span style=color:#719e07>[</span><span style=color:#2aa198>&#39;src&#39;</span><span style=color:#719e07>]</span>
+            aidl<span style=color:#719e07>.</span>srcDirs <span style=color:#719e07>=</span> <span style=color:#719e07>[</span><span style=color:#2aa198>&#39;src&#39;</span><span style=color:#719e07>]</span>
+            renderscript<span style=color:#719e07>.</span>srcDirs <span style=color:#719e07>=</span> <span style=color:#719e07>[</span><span style=color:#2aa198>&#39;src&#39;</span><span style=color:#719e07>]</span>
+            res<span style=color:#719e07>.</span>srcDirs <span style=color:#719e07>=</span> <span style=color:#719e07>[</span><span style=color:#2aa198>&#39;res&#39;</span><span style=color:#719e07>]</span>
+            assets<span style=color:#719e07>.</span>srcDirs <span style=color:#719e07>=</span> <span style=color:#719e07>[</span><span style=color:#2aa198>&#39;assets&#39;</span><span style=color:#719e07>]</span>
+            jniLibs<span style=color:#719e07>.</span>srcDirs <span style=color:#719e07>=</span> <span style=color:#719e07>[</span><span style=color:#2aa198>&#39;libs&#39;</span><span style=color:#719e07>]</span>
+        <span style=color:#719e07>}</span>
+        androidTest<span style=color:#719e07>.</span>setRoot<span style=color:#719e07>(</span><span style=color:#2aa198>&#39;tests&#39;</span><span style=color:#719e07>)</span>
+        instrumentTest<span style=color:#719e07>.</span>setRoot<span style=color:#719e07>(</span><span style=color:#2aa198>&#39;tests&#39;</span><span style=color:#719e07>)</span>
+        debug<span style=color:#719e07>.</span>setRoot<span style=color:#719e07>(</span><span style=color:#2aa198>&#39;build-types/debug&#39;</span><span style=color:#719e07>)</span>
+        release<span style=color:#719e07>.</span>setRoot<span style=color:#719e07>(</span><span style=color:#2aa198>&#39;build-types/release&#39;</span><span style=color:#719e07>)</span>
+    <span style=color:#719e07>}</span>
 
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/">Home</a>
-			</li>
-			
-			<li>
-				<a href="/posts">All posts</a>
-			</li>
-			
-			<li>
-				<a href="/about">About</a>
-			</li>
-			
-			<li>
-				<a href="/tags">Tags</a>
-			</li>
-			
-		</ul>
-	</nav>
-</div>
+<span style=color:#586e75>//	  // 禁用 lint 检查
+</span><span style=color:#586e75>//    lintOptions {
+</span><span style=color:#586e75>//        checkReleaseBuilds false
+</span><span style=color:#586e75>//        abortOnError false
+</span><span style=color:#586e75>//    }
+</span><span style=color:#586e75></span>
+<span style=color:#586e75>//	// 设置 Java 版本，可按需修改或删除
+</span><span style=color:#586e75>//    compileOptions {
+</span><span style=color:#586e75>//        sourceCompatibility JavaVersion.VERSION_1_6
+</span><span style=color:#586e75>//        targetCompatibility JavaVersion.VERSION_1_6
+</span><span style=color:#586e75>//    }
+</span><span style=color:#586e75></span>
+<span style=color:#719e07>}</span>
 
+<span style=color:#586e75>// 构建脚本仓库和依赖
+</span><span style=color:#586e75></span>buildscript <span style=color:#719e07>{</span>
+    repositories <span style=color:#719e07>{</span>
+        jcenter<span style=color:#719e07>()</span>
+    <span style=color:#719e07>}</span>
+    dependencies <span style=color:#719e07>{</span>
+        classpath <span style=color:#2aa198>&#39;com.android.tools.build:gradle:2.3.3&#39;</span>
+    <span style=color:#719e07>}</span>
+<span style=color:#719e07>}</span>
 
-		<div class="post-header">
-			<h1 class="title">优雅地用 Android Studio 打开 eclipse 项目</h1>
-			<div class="meta">Posted at &mdash; May 20, 2017</div>
-		</div>
+<span style=color:#586e75>// 仓库
+</span><span style=color:#586e75></span>repositories <span style=color:#719e07>{</span>
+    jcenter<span style=color:#719e07>()</span>
+<span style=color:#719e07>}</span>
 
-		<div class="markdown">
-			<p><strong>注</strong>：本脚本近适用于单 project 项目，如果有其他 project 依赖，请自使用 eclipse 的导出 gradle 项目功能。</p>
-<h2 id="痛点">痛点</h2>
-<p>一些老旧的 Android 项目是 eclipse 的， 而且 eclipse 早就放弃了对 Android 的支持， 需要自行配置或使用旧版本。 如果使用 as 导入功能， 会破坏原有的目录结构， eclipse 有导出为 gradle 项目功能， 导出后还需要二次手动修改、更新等。</p>
-<h2 id="解决办法">解决办法</h2>
-<p>在项目根目录新建 <code>build.gradle</code> 如下，而后用 Android studio 打开此文件即可 （注意，就是打开，不是导入）。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy"><span style="color:#008000">// 把此文件放在 eclipse 项目的跟目录，用 as 打开此文件即可。第一次可能会稍慢。
-</span><span style="color:#008000"></span>apply plugin: <span style="color:#a31515">&#39;com.android.application&#39;</span>
-
-android {
-  	<span style="color:#008000">// 可按需修改
-</span><span style="color:#008000"></span>    compileSdkVersion 21
-    buildToolsVersion <span style="color:#a31515">&#34;25.0.3&#34;</span>
-
-	<span style="color:#008000">// 可按需修改或删除
-</span><span style="color:#008000"></span>    defaultConfig {
-        versionCode 1
-        versionName <span style="color:#a31515">&#39;88888&#39;</span>
-    }
-
-	<span style="color:#008000">// 设置 sourceSets 为 eclipse 结构
-</span><span style="color:#008000"></span>    sourceSets {
-        main {
-            manifest.srcFile <span style="color:#a31515">&#39;AndroidManifest.xml&#39;</span>
-            java.srcDirs = [<span style="color:#a31515">&#39;src&#39;</span>]
-            resources.srcDirs = [<span style="color:#a31515">&#39;src&#39;</span>]
-            aidl.srcDirs = [<span style="color:#a31515">&#39;src&#39;</span>]
-            renderscript.srcDirs = [<span style="color:#a31515">&#39;src&#39;</span>]
-            res.srcDirs = [<span style="color:#a31515">&#39;res&#39;</span>]
-            assets.srcDirs = [<span style="color:#a31515">&#39;assets&#39;</span>]
-            jniLibs.srcDirs = [<span style="color:#a31515">&#39;libs&#39;</span>]
-        }
-        androidTest.setRoot(<span style="color:#a31515">&#39;tests&#39;</span>)
-        instrumentTest.setRoot(<span style="color:#a31515">&#39;tests&#39;</span>)
-        debug.setRoot(<span style="color:#a31515">&#39;build-types/debug&#39;</span>)
-        release.setRoot(<span style="color:#a31515">&#39;build-types/release&#39;</span>)
-    }
-
-<span style="color:#008000">//	  // 禁用 lint 检查
-</span><span style="color:#008000">//    lintOptions {
-</span><span style="color:#008000">//        checkReleaseBuilds false
-</span><span style="color:#008000">//        abortOnError false
-</span><span style="color:#008000">//    }
-</span><span style="color:#008000"></span>
-<span style="color:#008000">//	// 设置 Java 版本，可按需修改或删除
-</span><span style="color:#008000">//    compileOptions {
-</span><span style="color:#008000">//        sourceCompatibility JavaVersion.VERSION_1_6
-</span><span style="color:#008000">//        targetCompatibility JavaVersion.VERSION_1_6
-</span><span style="color:#008000">//    }
-</span><span style="color:#008000"></span>
-}
-
-<span style="color:#008000">// 构建脚本仓库和依赖
-</span><span style="color:#008000"></span>buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath <span style="color:#a31515">&#39;com.android.tools.build:gradle:2.3.3&#39;</span>
-    }
-}
-
-<span style="color:#008000">// 仓库
-</span><span style="color:#008000"></span>repositories {
-    jcenter()
-}
-
-<span style="color:#008000">// 依赖
-</span><span style="color:#008000"></span>dependencies {
-    compile fileTree(dir: <span style="color:#a31515">&#39;libs&#39;</span>, include: [<span style="color:#a31515">&#39;*.jar&#39;</span>])
-}
-</code></pre></div>
-		</div>
-
-		<div class="post-tags">
-			
-				
-					<nav class="nav tags">
-							<ul class="flat">
-								
-								<li><a href="/tags/android">Android</a></li>
-								
-							</ul>
-					</nav>
-				
-			
-		</div>
-		</div>
-	<div class="footer wrapper">
-	<nav class="nav">
-		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
-	</nav>
-</div>
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-146893441-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-<script>feather.replace()</script>
-</body>
-</html>
+<span style=color:#586e75>// 依赖
+</span><span style=color:#586e75></span>dependencies <span style=color:#719e07>{</span>
+    compile <span style=color:#268bd2>fileTree</span><span style=color:#719e07>(</span>dir: <span style=color:#2aa198>&#39;libs&#39;</span><span style=color:#719e07>,</span> include: <span style=color:#719e07>[</span><span style=color:#2aa198>&#39;*.jar&#39;</span><span style=color:#719e07>])</span>
+<span style=color:#719e07>}</span>
+</code></pre></div></div><div class=post-tags><nav class="nav tags"><ul class=flat><li><a href=/tags/android>Android</a></li></ul></nav></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
+return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='liut-2017';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="footer wrapper"><nav class=nav><div>© Copyright notice | <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146893441-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><script>feather.replace()</script></body></html>
