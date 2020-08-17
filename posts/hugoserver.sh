@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 cd ../..
-hugo server
+hugo server -D
