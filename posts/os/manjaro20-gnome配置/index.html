@@ -1,0 +1,49 @@
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Manjaro-20-Gnome配置 - liut</title><link rel=icon type=image/png href=icons/myicon.png><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:title" content="Manjaro-20-Gnome配置"><meta property="og:description" content="Manjaro20 安装后的一些配置"><meta property="og:type" content="article"><meta property="og:url" content="https://www.liut.xyz/posts/os/manjaro20-gnome%E9%85%8D%E7%BD%AE/"><meta property="article:published_time" content="2020-08-14T19:03:52+08:00"><meta property="article:modified_time" content="2020-08-14T19:03:52+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Manjaro-20-Gnome配置"><meta name=twitter:description content="Manjaro20 安装后的一些配置"><link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link rel=stylesheet type=text/css media=screen href=https://www.liut.xyz/css/normalize.css><link rel=stylesheet type=text/css media=screen href=https://www.liut.xyz/css/main.css><link rel=stylesheet type=text/css href=https://www.liut.xyz/css/dark.css media="(prefers-color-scheme: dark)"><script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script><script src=https://www.liut.xyz/js/main.js></script></head><body><div class="container wrapper post"><div class=header><base href=https://www.liut.xyz/><h1 class=site-title><a href=https://www.liut.xyz/>liut</a></h1><div class=site-description><h2>liut.xyz</h2><nav class="nav social"><ul class=flat><a href=https://github.com/lt-123/ title=Github><i data-feather=github></i></a><a href=/index.xml title=RSS><i data-feather=rss></i></a></ul></nav></div><nav class=nav><ul class=flat><li><a href=/>Home</a></li><li><a href=/posts>All posts</a></li><li><a href=/about>About</a></li><li><a href=/tags>Tags</a></li></ul></nav></div><div class=post-header><h1 class=title>Manjaro-20-Gnome配置</h1><div class=meta>Posted at &mdash; Aug 14, 2020</div></div><div class=markdown><h2 id=源的选择和添加>源的选择和添加</h2><h3 id=选择最佳源>选择最佳源</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#586e75># 选择一个速度最好的源， 可以多选</span>
+sudo pacman-mirrors -i -c China -m rank
+<span style=color:#586e75># 更新系统 这步操作会很耗时</span>
+sudo pacman -Syyu
+</code></pre></div><h3 id=添加-archlinuxcn-源>添加 archlinuxcn 源</h3><p>archlinuxcn 是针对国内的一个源，内含一些内置源没有的软件包。</p><p>修改 <code>/etc/pacman.conf</code> 在最后添加</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#586e75># 清华源</span>
+<span style=color:#719e07>[</span>archlinuxcn<span style=color:#719e07>]</span>
+<span style=color:#268bd2>Server</span> <span style=color:#719e07>=</span> https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/<span style=color:#268bd2>$arch</span>
+</code></pre></div><p>导入 GPG key</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo pacman -Sy archlinuxcn-keyring
+sudo pacman -Syyu
+</code></pre></div><h2 id=安装-base-devel>安装 base-devel</h2><p>base-devel 是一篮子软件包，含各种工具，建议全部安装，不然接下来的操作会遇到问题。</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo pacman -Sy base-devel
+</code></pre></div><h2 id=搜狗输入法>搜狗输入法</h2><h3 id=安装>安装</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#586e75># 卸载 ibus</span>
+sudo pacman -R ibus
+
+<span style=color:#586e75># yay 是一个安装 aur 仓库包的工具， 用法和 pacman 一致。搜狗和一些依赖在 aur 中， 可使用 yay 安装它。</span>
+sudo pacman -Sy yay
+
+yay -Sy fcitx-sogoupinyin
+yay -Sy fcitx-qt4 fcitx-qt5 fcitx-gtk2 fcitx-gtk3 fcitx-configtool
+</code></pre></div><p>设置 fcitx 为默认输入法,修改 ~/.xprofile （如果没有就新建，该文件在 x 启动的时候会执行）</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#b58900>export</span> <span style=color:#268bd2>GTK_IM_MODULE</span><span style=color:#719e07>=</span>fcitx
+<span style=color:#b58900>export</span> <span style=color:#268bd2>QT_IM_MODULE</span><span style=color:#719e07>=</span>fcitx
+<span style=color:#b58900>export</span> <span style=color:#268bd2>XMODIFIERS</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;@im=fcitx&#34;</span>
+</code></pre></div><p>安装完成后需重新登录系统或重启。</p><h3 id=候选词乱码问题>候选词乱码问题</h3><p>打开 fcitx 配置界面（fcitx-configtool），将<code>搜狗输入法</code>下移，不要放在首位，如果当前只有搜狗输入法，请再添加一个英文输入，并将它调到搜狗的上面。</p><h2 id=tim-和-wechat>TIM 和 WeChat</h2><p>使用 countstarlight 维护的 deepin-wine 版应用，安装方式见详情。</p><ul><li>TIM
+<a href=https://github.com/countstarlight/deepin-wine-tim-arch>https://github.com/countstarlight/deepin-wine-tim-arch</a></li><li>WeChat
+<a href=https://github.com/countstarlight/deepin-wine-wechat-arch>https://github.com/countstarlight/deepin-wine-wechat-arch</a></li></ul><h2 id=安装-topicons-plus>安装 TopIcons-plus</h2><p>Tim 或 WeChat 登录后，状态栏中并没有出现图标，其实不止 Tim 和 WeChat， 一些原生应用也会如此，如 guake。 可通过安装一个 gnome 插件解决该问题。</p><h3 id=gnome-插件安装方式>Gnome 插件安装方式</h3><p>先简单说下插件安装的方式： 之前，安装 Gnome 插件都是通过 tweaks（gnome-tweaks） 的扩展功能，需要先安装 tweaks, 现在安装方式变化了不少， 不再使用 tweaks, 而是 Extensions（其实就是从 tweaks 中独立出来的，本系统内置了 tweaks 和 Extensions, 无需手动安装）。
+而且还支持<strong>在线安装插件功能</strong>, 打开 <a href=https://extensions.gnome.org/>Gnome 插件网</a> 按照提示安装一个浏览器插件，即可进行在线安装。在线安装的插件， 可以在 Extensions 中手动对插件配置。</p><h3 id=topicons-plus-插件>TopIcons-plus 插件</h3><p>插件主页 <a href=https://github.com/phocean/TopIcons-plus>https://github.com/phocean/TopIcons-plus</a></p><p>在线安装 <a href=https://extensions.gnome.org/extension/1031/topicons/>https://extensions.gnome.org/extension/1031/topicons/</a></p><h2 id=wps>WPS</h2><p>WPS Office for Linux 分为国内版和国际版</p><p>国内版：wps-office-cn</p><p>国际版：wps-office</p><p>中文版还需要安装中文语言包：wps-office-mui-zh-cn</p><p>此外可选安装 WPS 需要的符号字体：ttf-wps-fonts</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#586e75># 中文 wps</span>
+sudo pacman -Sy wps-office-cn wps-office-mui-zh-cn ttf-wps-fonts
+</code></pre></div><h2 id=其它>其它</h2><h3 id=安装-virtualbox>安装 VirtualBox</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#586e75># 安装 virtualbox</span>
+sudo pacman -S virtualbox
+
+<span style=color:#586e75># 查看当然内核版本</span>
+mhwd-kernel -li
+
+<span style=color:#586e75># 这个包一定要装，不然虚拟机无法正常启动， 其中 ** 是你的内核版本， 我的是56</span>
+sudo pacman -S linux**-virtualbox-host-modules
+
+<span style=color:#586e75># 无法桥接网络时使用这个命令</span>
+sudo modprobe vboxnetflt
+</code></pre></div><p>详情请查看 <a href="https://wiki.manjaro.org/index.php?title=VirtualBox">manjaro 官方文档 virtualbox 部分</a></p><h3 id=x509-ca-证书-和-pkcs12-秘钥库>x509 CA 证书 和 pkcs#12 秘钥库</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#586e75># CA 设置</span>
+/etc/ca-certificates/trust-source/anchors
+sudo trust extract-compat
+
+<span style=color:#586e75># 导入 pkcs#12</span>
+pk12util -d sql:<span style=color:#268bd2>$HOME</span>/.pki/nssdb -i XXXX.pfx
+
+<span style=color:#586e75># 查看 pkcs#12</span>
+certutil -d sql:<span style=color:#268bd2>$HOME</span>/.pki/nssdb -L
+</code></pre></div></div><div class=post-tags><nav class="nav tags"><ul class=flat><li><a href=/tags/linux>linux</a></li></ul></nav></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
+return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='liut-2017';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="footer wrapper"><nav class=nav><div>© Copyright notice | <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146893441-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><script>feather.replace()</script></body></html>
