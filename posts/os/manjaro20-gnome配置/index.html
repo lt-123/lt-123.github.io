@@ -16,15 +16,22 @@ sudo pacman -Sy yay
 
 yay -Sy fcitx-sogoupinyin
 yay -Sy fcitx-qt4 fcitx-qt5 fcitx-gtk2 fcitx-gtk3 fcitx-configtool
-</code></pre></div><p>设置 fcitx 为默认输入法,修改 ~/.xprofile （如果没有就新建，该文件在 x 启动的时候会执行）</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#b58900>export</span> <span style=color:#268bd2>GTK_IM_MODULE</span><span style=color:#719e07>=</span>fcitx
+</code></pre></div><h3 id=设置默认输入法>设置默认输入法</h3><p>先判断自己的窗口管理器是<code>x-window</code>还是<code>wayland</code>，两种方式有区别, 判断方式</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#586e75># 如果输出 x11 则是 x-window, 输出 wayland 则是 wayland</span>
+<span style=color:#b58900>echo</span> <span style=color:#268bd2>$XDG_SESSION_TYPE</span>
+</code></pre></div><h4 id=x-window>x-window</h4><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#586e75># 修改 ~/.xprofile （如果没有就新建，该文件在 x 启动的时候会执行）</span>
+<span style=color:#b58900>export</span> <span style=color:#268bd2>GTK_IM_MODULE</span><span style=color:#719e07>=</span>fcitx
 <span style=color:#b58900>export</span> <span style=color:#268bd2>QT_IM_MODULE</span><span style=color:#719e07>=</span>fcitx
 <span style=color:#b58900>export</span> <span style=color:#268bd2>XMODIFIERS</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;@im=fcitx&#34;</span>
+</code></pre></div><h4 id=wayland>wayland</h4><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#586e75># 修改 ~/.pam_environment （如果没有就新建）, 并加入以下，注意没有 export</span>
+<span style=color:#268bd2>GTK_IM_MODULE</span><span style=color:#719e07>=</span>fcitx
+<span style=color:#268bd2>QT_IM_MODULE</span><span style=color:#719e07>=</span>fcitx
+<span style=color:#268bd2>XMODIFIERS</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;@im=fcitx&#34;</span>
 </code></pre></div><p>安装完成后需重新登录系统或重启。</p><h3 id=候选词乱码问题>候选词乱码问题</h3><p>打开 fcitx 配置界面（fcitx-configtool），将<code>搜狗输入法</code>下移，不要放在首位，如果当前只有搜狗输入法，请再添加一个英文输入，并将它调到搜狗的上面。</p><h2 id=tim-和-wechat>TIM 和 WeChat</h2><p>使用 countstarlight 维护的 deepin-wine 版应用，安装方式见详情。</p><ul><li>TIM
 <a href=https://github.com/countstarlight/deepin-wine-tim-arch>https://github.com/countstarlight/deepin-wine-tim-arch</a></li><li>WeChat
 <a href=https://github.com/countstarlight/deepin-wine-wechat-arch>https://github.com/countstarlight/deepin-wine-wechat-arch</a></li></ul><h2 id=安装-topicons-plus>安装 TopIcons-plus</h2><p>Tim 或 WeChat 登录后，状态栏中并没有出现图标，其实不止 Tim 和 WeChat， 一些原生应用也会如此，如 guake。 可通过安装一个 gnome 插件解决该问题。</p><h3 id=gnome-插件安装方式>Gnome 插件安装方式</h3><p>先简单说下插件安装的方式： 之前，安装 Gnome 插件都是通过 tweaks（gnome-tweaks） 的扩展功能，需要先安装 tweaks, 现在安装方式变化了不少， 不再使用 tweaks, 而是 Extensions（其实就是从 tweaks 中独立出来的，本系统内置了 tweaks 和 Extensions, 无需手动安装）。
 而且还支持<strong>在线安装插件功能</strong>, 打开 <a href=https://extensions.gnome.org/>Gnome 插件网</a> 按照提示安装一个浏览器插件，即可进行在线安装。在线安装的插件， 可以在 Extensions 中手动对插件配置。</p><h3 id=topicons-plus-插件>TopIcons-plus 插件</h3><p>插件主页 <a href=https://github.com/phocean/TopIcons-plus>https://github.com/phocean/TopIcons-plus</a></p><p>在线安装 <a href=https://extensions.gnome.org/extension/1031/topicons/>https://extensions.gnome.org/extension/1031/topicons/</a></p><h2 id=wps>WPS</h2><p>WPS Office for Linux 分为国内版和国际版</p><p>国内版：wps-office-cn</p><p>国际版：wps-office</p><p>中文版还需要安装中文语言包：wps-office-mui-zh-cn</p><p>此外可选安装 WPS 需要的符号字体：ttf-wps-fonts</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#586e75># 中文 wps</span>
-sudo pacman -Sy wps-office-cn wps-office-mui-zh-cn ttf-wps-fonts
-</code></pre></div><h2 id=其它>其它</h2><h3 id=安装-virtualbox>安装 VirtualBox</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#586e75># 安装 virtualbox</span>
+yay -Sy wps-office-cn wps-office-mui-zh-cn ttf-wps-fonts
+</code></pre></div><h2 id=其它问题>其它问题</h2><h3 id=安装-virtualbox>安装 VirtualBox</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#586e75># 安装 virtualbox</span>
 sudo pacman -S virtualbox
 
 <span style=color:#586e75># 查看当然内核版本</span>
@@ -44,6 +51,6 @@ pk12util -d sql:<span style=color:#268bd2>$HOME</span>/.pki/nssdb -i XXXX.pfx
 
 <span style=color:#586e75># 查看 pkcs#12</span>
 certutil -d sql:<span style=color:#268bd2>$HOME</span>/.pki/nssdb -L
-</code></pre></div></div><div class=post-tags><nav class="nav tags"><ul class=flat><li><a href=/tags/linux>linux</a></li></ul></nav></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
+</code></pre></div><h3 id=guake-在-wayland-下无法使用快捷键解决办法>guake 在 wayland 下无法使用快捷键解决办法</h3><p>在设置中手动添加快捷键</p><ul><li>名称: 随意</li><li>命令: <code>guake-toggle</code></li><li>快捷键: F12(随意)</li></ul></div><div class=post-tags><nav class="nav tags"><ul class=flat><li><a href=/tags/linux>linux</a></li></ul></nav></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
 return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='liut-2017';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
 Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="footer wrapper"><nav class=nav><div>© Copyright notice | <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146893441-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><script>feather.replace()</script></body></html>
