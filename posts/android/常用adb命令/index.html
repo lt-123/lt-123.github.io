@@ -8,6 +8,11 @@ adb devices
 <span style=color:#586e75># 如果有多台手机连接到电脑，则需要用 -s 指定adb调用的手机，如</span>
 <span style=color:#586e75># adb -s 6e070d91 install helloWorld.apk</span>
 
+<span style=color:#586e75># 显示当前顶端 Activity 方法一</span>
+adb shell dumpsys activity top | grep ACTIVITY
+<span style=color:#586e75># 显示当前顶端 Activity 方法二</span>
+adb shell dumpsys activity activities | grep Resumed
+
 <span style=color:#586e75># 获取手机序列号</span>
 adb get-serialno
 
