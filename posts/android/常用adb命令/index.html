@@ -13,6 +13,9 @@ adb shell dumpsys activity top | grep ACTIVITY
 <span style=color:#586e75># 显示当前顶端 Activity 方法二</span>
 adb shell dumpsys activity activities | grep Resumed
 
+<span style=color:#586e75># adb 按键</span>
+adb shell input keyevent <span style=color:#2aa198>4</span> 详见：<span style=color:#719e07>[</span>adb-shell-input-events<span style=color:#719e07>](</span>https://stackoverflow.com/questions/7789826/adb-shell-input-events<span style=color:#719e07>)</span>
+
 <span style=color:#586e75># 获取手机序列号</span>
 adb get-serialno
 
@@ -50,7 +53,9 @@ adb shell
 adb shell shellCommand
 
 <span style=color:#586e75># 启动包名为com.example.test的应用入口activity即com.example.test.Helloworld</span>
+<span style=color:#586e75># 被启动的 Activity 必须要有 Main action</span>
 adb shell am start -n com.example.test/.Helloworld
+启动带有 extras 见：<span style=color:#719e07>[</span>gityuan Am命令用法<span style=color:#719e07>](</span>http://gityuan.com/2016/02/27/am-command/#242-extra%E5%8F%82%E6%95%B0<span style=color:#719e07>)</span>
 
 <span style=color:#586e75># 强制关闭包名为com.example.test的应用</span>
 adb shell am force-stop com.example.test
@@ -90,9 +95,6 @@ adb shell pm get-install-location
 
 <span style=color:#586e75># 录制屏幕并保存为demo.mp4。该功能只能在Android 4.4(API level 19)或更高的版本运行。按Ctrl-C停止录制，否则在3分钟后自动停止录制。可通过--time-limit 30设置录制时间为30秒。</span>
 adb shell screenrecord /sdcard/demo.mp4
-
-<span style=color:#586e75># 启动 Activity</span>
-adb shell am start -n com.test.test/.test.MainActivity
 
 <span style=color:#586e75># run-as 进入 可调试应用的/data/data目录</span>
 adb shell run-as com.test.test
