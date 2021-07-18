@@ -1,0 +1,103 @@
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>ArchLinux Install - liut</title><link rel=icon type=image/png href=icons/myicon.png><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:title" content="ArchLinux Install"><meta property="og:description" content="Arch 安装记录"><meta property="og:type" content="article"><meta property="og:url" content="https://www.liut.xyz/posts/os/arch-install/"><meta property="article:published_time" content="2021-07-18T14:43:08+08:00"><meta property="article:modified_time" content="2021-07-18T14:43:08+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="ArchLinux Install"><meta name=twitter:description content="Arch 安装记录"><link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link rel=stylesheet type=text/css media=screen href=https://www.liut.xyz/css/normalize.css><link rel=stylesheet type=text/css media=screen href=https://www.liut.xyz/css/main.css><link rel=stylesheet type=text/css href=https://www.liut.xyz/css/dark.css media="(prefers-color-scheme: dark)"><script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script><script src=https://www.liut.xyz/js/main.js></script></head><body><div class="container wrapper post"><div class=header><base href=https://www.liut.xyz/><h1 class=site-title><a href=https://www.liut.xyz/>liut</a></h1><div class=site-description><h2>liut.xyz</h2><nav class="nav social"><ul class=flat><a href=https://github.com/lt-123/ title=Github><i data-feather=github></i></a><a href=/index.xml title=RSS><i data-feather=rss></i></a></ul></nav></div><nav class=nav><ul class=flat><li><a href=/>Home</a></li><li><a href=/posts>All posts</a></li><li><a href=/about>About</a></li><li><a href=/tags>Tags</a></li></ul></nav></div><div class=post-header><h1 class=title>ArchLinux Install</h1><div class=meta>Posted at &mdash; Jul 18, 2021</div></div><div class=markdown><h2 id=准备>准备</h2><p><a href=https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)>官方安装引导 Installation_guide</a></p><p><a href=https://www.archlinux.org/download/>镜像下载地址</a></p><p>下载镜像并刻盘，开启主板 uefi，启动到 arch iso</p><h2 id=启动到-iso>启动到 ISO</h2><p>进入到系统后，先确定有没有联网， 联网是必须的，不然没有办法进行安装， ping baidu.com</p><p>默认情况下，如果接入了互联网并开启了 DHCP，会自动联网，如果是使用我无线网，可以使用 iwctl 命令进行联网</p><p>联网后，可以使用 Installation_guide 命令在线查看官方安装向导</p><h2 id=硬盘分区>硬盘分区</h2><blockquote><p>使用 uefi 启动系统，需要额外的 esp 分区，建议<code>先在 Windows 下使用 GUI 工具分区完成并格式化</code>，可以跳过本步骤。</p></blockquote><p>linux 下分区工具有很多，这里采用 parted</p><h3 id=进入交互模式>进入交互模式</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#586e75># 遍历所有硬盘以及分区</span>
+parted -l
+
+<span style=color:#586e75># 选择操作硬盘 (这里是 /dev/sda)</span>
+parted /dev/sda
+</code></pre></div><h3 id=交互模式内>交互模式内</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#586e75># 帮助</span>
+<span style=color:#b58900>help</span>
+
+<span style=color:#586e75># 查看指定操作的帮助 如：</span>
+<span style=color:#b58900>help</span> mkpart
+
+<span style=color:#586e75># 查看当前分区状态</span>
+print
+
+<span style=color:#586e75>####</span>
+
+<span style=color:#586e75># 设置分区类型 为 gpt （该操作会丢失所有数据）</span>
+mklabel/mktable gpt
+
+<span style=color:#586e75># 创建一个分区，分区名为 ESP， 文件系统为 fat32, 从 1m-513m （从1 开始是为了对其分区，提高性能）</span>
+mkpart ESP fat32 1m 513m
+
+<span style=color:#586e75># 设置为启动启动分区</span>
+<span style=color:#b58900>set</span> <span style=color:#2aa198>1</span> boot on
+
+<span style=color:#586e75># 创建一个分区，分区名为 arch， 文件系统为 ext4, 从 513m-50%</span>
+mkpart arch ext4 513m 50%
+
+<span style=color:#586e75># 创建一个分区，分区名为 home， 文件系统为 ext4, 从 50%-100%</span>
+mkpart home ext4 50% 100%
+
+<span style=color:#586e75># 退出交互操作</span>
+quit
+</code></pre></div><p><a href=https://wiki.archlinux.org/title/Parted_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)>parted 详细说明</a></p><h3 id=格式化分区>格式化分区</h3><blockquote><p>如果不习惯命令行操作，建议在 Windows 下使用 GUI 程序进行操作，避免出错</p></blockquote><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#586e75># ESP 分区</span>
+mkfs.fat -F32 /dev/sd1
+<span style=color:#586e75># / 根</span>
+mkfs.ext4 /dev/sda2
+<span style=color:#586e75># /home 分区</span>
+mkfs.ext4 /dev/sda3
+</code></pre></div><h2 id=系统安装>系统安装</h2><h3 id=挂载分区>挂载分区</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>mount /dev/sda2 /mnt
+mkdir /mnt/home
+mount /dev/sda3 /mnt/home
+</code></pre></div><h3 id=安装>安装</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#586e75># 安装</span>
+pacstrap /mnt base linux linux-firmware
+<span style=color:#586e75># 更新 fstab</span>
+genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+<span style=color:#586e75># 查看生成的 fstable 是否正常</span>
+cat /mnt/etc/fstab
+</code></pre></div><h3 id=chroot-进入新系统>chroot 进入新系统</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#586e75># chroot 进新系统</span>
+arch-chroot /mnt
+
+<span style=color:#586e75># 先给 root 用户设置个密码</span>
+passwd
+
+<span style=color:#586e75># 安装 base-devel 程序组 和 vim (或 nano 后续的操作会用到)</span>
+pacman -Sy base-devel vim
+</code></pre></div><h3 id=时区>时区</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>ln -sf /usr/share/zoneinfo/Region（地区名）/City（城市名） /etc/localtime
+hwclock --systohc
+</code></pre></div><h3 id=本地化>本地化</h3><blockquote><p>本地化操作不建议跳过，如果不配置或配置的有问题，进入系统后，可能有些程序不能正常运行，如 gnome-terminal 等</p></blockquote><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#586e75># 将 en_US.UTF-8 UTF-8 前面的井号去掉，如果需要也可以多取消几个。</span>
+vim /etc/locale.gen
+<span style=color:#586e75># 生成 locale</span>
+locale-gen
+<span style=color:#586e75># 新建该文件，内容为： LANG=en_US.UTF-8</span>
+vim /etc/locale.conf
+</code></pre></div><h3 id=安装引导程序-grub>安装引导程序 GRUB</h3><blockquote><p>linux 可用的引导程序有很多，这里使用 GRUB</p></blockquote><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#586e75># 安装 grub 和 efibootmgr 程序包</span>
+pacman -S grub efibootmgr
+
+<span style=color:#586e75># 安装 grub 引导到 /efi (这个路上是最初挂载的 esp 分区的路径)</span>
+grub-install --target<span style=color:#719e07>=</span>x86_64-efi --efi-directory<span style=color:#719e07>=</span>/efi --bootloader-id<span style=color:#719e07>=</span>GRUB
+
+<span style=color:#586e75># 自动生成配置</span>
+ grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre></div><p>详情见 <a href=https://wiki.archlinux.org/title/GRUB_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)>GRUB ArchWiki</a></p><h2 id=重启之前>重启之前</h2><blockquote><p>操作到这里已经算是基本完成了，重启即可进入到系统了</p></blockquote><h3 id=安装网络管理工具>安装网络管理工具</h3><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#586e75># 安装网络管理器，不然重启进入系统后会无法连接到互联网 (arch 可用的网络管理工具有很多，这里选择 networkmanager 是因为它可以和 gnome 一起使用)</span>
+pacman -S networkmanager
+<span style=color:#586e75># 启用该服务</span>
+systemctl <span style=color:#b58900>enable</span> NetworkManager
+</code></pre></div><h3 id=安装-gnome-桌面>安装 gnome 桌面</h3><blockquote><p>如果是不喜欢 gnome 桌面就不必往下看了</p></blockquote><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#586e75># 安装桌面，顺便也一起把 gdm 一起安装了</span>
+pacman -S gnome gnome-extra gdm
+
+<span style=color:#586e75># 启用 gdm，如果不需要开机启动 桌面环境，则不必启用了</span>
+systemctl <span style=color:#b58900>enable</span> gdm
+</code></pre></div><h3 id=重启进入系统>重启进入系统</h3><p>如果不出意外的话，是可以进入到系统了</p><p>注意：一些老旧的主板可能无法正常启动系统，这是因为 grub 没有配置 ESP分区/EFI/Boot/bootx64.efi，需要从 /EFI/GRUB/grubx64.efi 手动复制一个即可</p><p>进入系统后，使用 root 用户登录系统， 并在设置中创建一个用户</p><h3 id=安装-sudo>安装 sudo</h3><p>打开 terminal，如果 terminal 无法启动，可能是 locale 没配置好，需要重新进入 ISO 重新配置</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>pacman -S sudo
+
+<span style=color:#586e75># 在 root ALL=(ALL) ALL 这行之下添加 xxx ALL=(ALL) ALL, xxx 为新创建的用户名，这样它就可以通过 sudo 使用 root 权限了</span>
+vim /etc/sudoers
+</code></pre></div><h3 id=添加中文社区仓库-archlinuxcn>添加中文社区仓库 archlinuxcn</h3><p><a href=https://www.archlinuxcn.org/archlinux-cn-repo-and-mirror/>archlinuxcn 官网</a></p><p>建议使用国内镜像源，但不建议使用 垃圾 tuna</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#586e75># 163 源</span>
+
+vim /etc/pacman.conf
+
+<span style=color:#586e75># 在 /etc/pacman.conf 最后添加</span>
+
+<span style=color:#719e07>[</span>archlinuxcn<span style=color:#719e07>]</span>
+<span style=color:#268bd2>Server</span> <span style=color:#719e07>=</span> http://mirrors.163.com/archlinux-cn/<span style=color:#268bd2>$arch</span>
+
+<span style=color:#586e75># 然后更新 安装秘钥环</span>
+
+pacman -Sy archlinuxcn-keyring
+pacman -Syyu
+
+</code></pre></div><h3 id=中文字体>中文字体</h3><p><a href=https://wiki.archlinux.org/title/Fonts_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E4%B8%AD%E6%97%A5%E9%9F%A9%E8%B6%8A%E6%96%87%E5%AD%97>中文字体</a></p><p>我个人使用的是思源字体</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>sudo pacman -S adobe-source-han-sans-otc-fonts adobe-source-han-serif-otc-fonts 
+</code></pre></div><h2 id=附>附</h2><ul><li>[gnome 美化] (<a href=https://www.gnome-look.org/p/1166289>https://www.gnome-look.org/p/1166289</a>)</li><li><a href=https://extensions.gnome.org/>gnome 插件在线安装</a></li></ul></div><div class=post-tags><nav class="nav tags"><ul class=flat><li><a href=/tags/linux>linux</a></li></ul></nav></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
+return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='liut-2017';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="footer wrapper"><nav class=nav><div>© Copyright notice | <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146893441-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><script>feather.replace()</script></body></html>
